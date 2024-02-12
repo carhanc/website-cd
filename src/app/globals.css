@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background-color: black;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(93deg,#00d1ff 27.79%,#0085ff 97.02%);
+}

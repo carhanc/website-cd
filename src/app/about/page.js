@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from "/Users/alexcismaru/Documents/GitHub/website-cd/src/components/nav.js";
+import Nav from "../../components/nav";
 
 const page = () => {
   return (

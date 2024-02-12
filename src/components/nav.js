@@ -29,7 +29,7 @@ const Nav = () => {
                 
                 <Link href='/' className="gap-2 sm:flex text-[22px] rounded-md p-2 
                 font-semibold hover:scale-105 cursor-pointer ease-linear duration-150 bg-gradient-to-r from-indigo-400 to-cyan-400 text-transparent bg-clip-text">
-                    <p className="my-auto sm:block hidden font-bold">Business Name</p>
+                    <p className="my-auto sm:block hidden font-extrabold">Business Name</p>
                     <p className=" text-2xl">[-]</p> {/*space for logo*/}
                 </Link>
 
@@ -42,7 +42,7 @@ const Nav = () => {
                 {/* Desktop Links */}
                 <div className="hidden gap-x-12 sm:flex text-[22px] my-auto rounded-md p-2 font-semibold bg-gradient-to-r from-blue-600 via-violet-500 to-indigo-400 text-transparent bg-clip-text">
 
-                  <Link href="/about" className="mr-1 hover:text-blue-500 hover:font-extrabold ease-linear duration-200">
+                  <Link href="/about" className="mr-1 hover:text-blue-500 hover:font-bold ease-linear duration-200">
                       About
                   </Link>
 

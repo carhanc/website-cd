@@ -1,11 +1,10 @@
 import React from 'react'
-import Nav from "../components/nav";
+import Nav from "/Users/alexcismaru/Documents/GitHub/website-cd/src/components/nav.js";
 
 const page = () => {
   return (
     <div>
       <Nav />
-      about
     </div>
   )
 }

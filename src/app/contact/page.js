@@ -2,7 +2,9 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>contact</div>
+    <div>
+      <Nav />
+      contact</div>
   )
 }
 

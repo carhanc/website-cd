@@ -1,8 +1,10 @@
 "use client"
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Disclosure, Transition } from "@headlessui/react";
+import logo from "../../public/logo.png"
 
 import { Divide as Hamburger1 } from 'hamburger-react'
 import { useState } from 'react'
@@ -29,8 +31,14 @@ const Nav = () => {
                 
                 <Link href='/' className="gap-2 sm:flex text-[22px] rounded-md p-2 
                 font-semibold hover:scale-105 cursor-pointer ease-linear duration-150 bg-gradient-to-r from-indigo-400 to-cyan-400 text-transparent bg-clip-text">
-                    <p className="my-auto sm:block hidden font-extrabold">Business Name</p>
-                    <p className=" text-2xl">[-]</p> {/*space for logo*/}
+                  <Image
+                    className="relative w-14 lg:mt-[-4px] mt-[-2px]"
+                    alt="NextGen Logo"
+                    placeholder="blur"
+                    draggable="false"
+                    src={logo}
+                  />
+                    <p className="my-auto sm:block hidden font-extrabold">NextGen Solutions</p>
                 </Link>
 
                 {/* Mobile Open/Close Btn */}
@@ -59,7 +67,16 @@ const Nav = () => {
 
 
             {/* Mobile Links */}
-              <Transition>
+            <Transition
+                show={open}
+                enter="transition duration-500 ease-out"
+                enterFrom="transform scale-95 opacity-100"
+                enterTo="transform scale-100"
+                leave="transition duration-250 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+                className="relative"
+              >                
                 <div
                   className="mt-2 mb-4 border-t border-gray-800/40 sm:hidden h-[120px] py-4"
                 >

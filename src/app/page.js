@@ -11,7 +11,7 @@ export default function Home() {
       
       <main className="lg:flex flex-cols-2 justify-evenly text-[#00E0FF]">
           <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[25vh] pt-[10vh] lg:h-[50vh] lg:mb-0 mb-14 lg:min-h-[80vh] md:px-20 space-y-6">
-            <h1 className="text-4xl lg:text-6xl font-bold">NextGen Solutions</h1>
+            <h1 className="text-4xl lg:text-6xl font-bold">DataManiancs</h1>
             <p className="text-xl lg:text-3xl font-semibold bg-gradient-to-r from-sky-300 to-sky-400 bg-clip-text text-transparent lg:mx-0 mx-10 lg:pb-4 pb-2">
               Turning Dreams into Pixels: Your Idea, Our Expertise.
             </p>

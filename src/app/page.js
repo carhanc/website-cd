@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Nav from "../components/nav";
 import { BiRightArrowAlt } from "react-icons/bi";
-import arhan from "../../public/img.jpg"
+import arhan from "../../public/img.jpeg"
 
 export default function Home() {
   return (
@@ -11,9 +11,9 @@ export default function Home() {
       
       <main className="lg:flex flex-cols-2 justify-evenly text-[#00E0FF]">
           <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[25vh] pt-[10vh] lg:h-[50vh] lg:mb-0 mb-14 lg:min-h-[80vh] md:px-20 space-y-6">
-            <h1 className="text-4xl lg:text-6xl font-bold">DataManiancs</h1>
+            <h1 className="text-4xl lg:text-6xl font-bold">Join our Voyage.</h1>
             <p className="text-xl lg:text-3xl font-semibold bg-gradient-to-r from-sky-300 to-sky-400 bg-clip-text text-transparent lg:mx-0 mx-10 lg:pb-4 pb-2">
-              Turning Dreams into Pixels: Your Idea, Our Expertise.
+              Dive into the data deluge with DataVoyagers. Where curiosity meets innovation.
             </p>
             <Link
               className="rounded-md lg:ml-4 border-blue-400 border-2 w-fit px-4 py-2 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"

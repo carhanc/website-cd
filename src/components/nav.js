@@ -18,7 +18,7 @@ const Nav = () => {
       initial={{ y: -5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="sticky top-0 z-40 rounded-t-none ease-linear duration-200 p-5 border-b border-gray-800/40"
+      className="sticky top-0 z-40 rounded-t-none ease-linear duration-200 p-5 border-b-2 border-gray-800 opacity-75"
     >
       <Disclosure
         as="nav"
@@ -38,7 +38,7 @@ const Nav = () => {
                     draggable="false"
                     src={logo}
                   />
-                    <p className="my-auto sm:block hidden font-extrabold">NextGen Solutions</p>
+                    <p className="my-auto sm:block hidden font-extrabold">DataVoyagers</p>
                 </Link>
 
                 {/* Mobile Open/Close Btn */}

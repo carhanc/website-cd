@@ -1,6 +1,5 @@
-
-
 const Job = () => {
+    
     return (
         <>
             

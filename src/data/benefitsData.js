@@ -5,7 +5,7 @@ const benefits = [
     },
     {
         "title": "Comprehensive Health Coverage",
-        "desc": "premium health, dental, and vision insurance plans designed to cover you and your entire family."
+        "desc": "Premium health, dental, and vision insurance plans designed to cover you and your entire family."
     },
     {
         "title": "Remote and Hybrid Work Options",
@@ -24,7 +24,7 @@ const benefits = [
         "desc": "Share in our success with stock options and performance-based bonuses that reflect your contributions."
     },
     {
-        "title": "Innovative Work Environment:",
+        "title": "Innovative Work Environment",
         "desc": "Work with cutting-edge technologies and methodologies that keep you engaged and inspired."
     },
     {

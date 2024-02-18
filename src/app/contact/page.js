@@ -6,6 +6,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { Listbox } from '@headlessui/react'
 import { useState } from 'react'
 import { FaCalendarAlt } from "react-icons/fa";
+import Link from 'next/link';
 
 const tabs = [
   { id: 1, name: 'Personal Information' },
@@ -46,9 +47,10 @@ const Contact = () => {
   const [resume, setResume] = useState('')
 
   const [submittedApp, setSubmittedApp] = useState({})
+  const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = () => {
-    // Compile all state values into a single object
+    setSubmitted(true);
     const submittedData = {
       personalInformation: {
         name,
@@ -95,7 +97,7 @@ const Contact = () => {
   return (
     <div className=''>
       <Nav />
-      <div className='bg-gradient-to-r from-black via-indigo-900/45 to-black h-dvh'>
+      {!submitted && <div className='bg-gradient-to-r from-black via-indigo-900/45 to-black h-dvh'>
         <div className='text-gray-300 font-semibold text-2xl mx-16 pt-12'>
           New Job Application
         </div>
@@ -290,8 +292,52 @@ const Contact = () => {
             </div>
           </div>
         </div>
-      </div>
-      
+      </div>}
+      {submitted && <div>
+        <div className='text-white'>
+          <h1>Your application</h1>
+          {/* <pre>{JSON.stringify(submittedApp, null, 2)}</pre> */}
+          <div>
+            <h2>Personal Information</h2>
+            <p>Name: {submittedApp.personalInformation.name}</p>
+            <p>Date of Birth: {submittedApp.personalInformation.dob}</p>
+            <p>Address: {submittedApp.personalInformation.address}</p>
+            <p>City: {submittedApp.personalInformation.city}</p>
+            <p>State: {submittedApp.personalInformation.state}</p>
+            <p>Zip: {submittedApp.personalInformation.zip}</p>
+          </div>
+          
+          <div>
+            <h2>Contact Information</h2>
+            <p>Email: {submittedApp.contactInformation.email !== '' ? submittedApp.contactInformation.email : 'No Response'}</p>
+            <p>Phone: {submittedApp.contactInformation.phone}</p>
+            <p>Pronouns: {submittedApp.contactInformation.pronoun}</p>
+          </div>
+
+          <div>
+            <h2>Previous Experiences</h2>
+            <p>Work Experience: {submittedApp.previousExperiences.workExperience}</p>
+            <p>Work Experience Qualification: {submittedApp.previousExperiences.workExperienceQualification}</p>
+            <p>Undergraduate Education Information: {submittedApp.previousExperiences.undergrad.institution}</p>
+            <p>Undergraduate Degree: {submittedApp.previousExperiences.undergrad.degree}</p>
+            <p>Graduate Education Information: {submittedApp.previousExperiences.grad.institution}</p>
+            <p>Graduate Degree: {submittedApp.previousExperiences.grad.degree}</p>
+          </div>
+
+          <div>
+            <h2>Skills / Expertise</h2>
+            <p>Skills: {submittedApp.skillsExpertise.skills}</p>
+            <p>Skills Qualification: {submittedApp.skillsExpertise.skillsQualification}</p>
+          </div>
+
+          <div>
+            <h2>Other</h2>
+            <p>Additional Information: {submittedApp.other.additionalInformation}</p>
+            <p>LinkedIn: <Link href={submittedApp.other.linkedin}>{submittedApp.other.linkedin}</Link></p>
+            <p>Resume: <Link href={submittedApp.other.resume}>{submittedApp.other.resume}</Link></p>
+          </div>
+        </div>
+      </div>}
       
     </div>
   )

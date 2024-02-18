@@ -296,48 +296,49 @@ const Contact = () => {
       {submitted && <div>
         <div className='text-white'>
           <h1>Your application</h1>
-          {/* <pre>{JSON.stringify(submittedApp, null, 2)}</pre> */}
           <div>
             <h2>Personal Information</h2>
-            <p>Name: {submittedApp.personalInformation.name}</p>
-            <p>Date of Birth: {submittedApp.personalInformation.dob}</p>
-            <p>Address: {submittedApp.personalInformation.address}</p>
-            <p>City: {submittedApp.personalInformation.city}</p>
-            <p>State: {submittedApp.personalInformation.state}</p>
-            <p>Zip: {submittedApp.personalInformation.zip}</p>
+            <p>Name: {submittedApp.personalInformation.name || 'No response'}</p>
+            <p>Date of Birth: {submittedApp.personalInformation.dob || 'No response'}</p>
+            <p>Address: {submittedApp.personalInformation.address || 'No response'}</p>
+            <p>City: {submittedApp.personalInformation.city || 'No response'}</p>
+            <p>State: {submittedApp.personalInformation.state || 'No response'}</p>
+            <p>Zip: {submittedApp.personalInformation.zip || 'No response'}</p>
           </div>
           
           <div>
             <h2>Contact Information</h2>
-            <p>Email: {submittedApp.contactInformation.email !== '' ? submittedApp.contactInformation.email : 'No Response'}</p>
-            <p>Phone: {submittedApp.contactInformation.phone}</p>
-            <p>Pronouns: {submittedApp.contactInformation.pronoun}</p>
+            <p>Email: {submittedApp.contactInformation.email !== '' ? submittedApp.contactInformation.email : 'No response'}</p>
+            <p>Phone: {submittedApp.contactInformation.phone || 'No response'}</p>
+            <p>Title: {submittedApp.contactInformation.title || 'No response'}</p> {/* Added Title Field */}
+            <p>Pronouns: {submittedApp.contactInformation.pronoun || 'No response'}</p>
           </div>
 
           <div>
             <h2>Previous Experiences</h2>
-            <p>Work Experience: {submittedApp.previousExperiences.workExperience}</p>
-            <p>Work Experience Qualification: {submittedApp.previousExperiences.workExperienceQualification}</p>
-            <p>Undergraduate Education Information: {submittedApp.previousExperiences.undergrad.institution}</p>
-            <p>Undergraduate Degree: {submittedApp.previousExperiences.undergrad.degree}</p>
-            <p>Graduate Education Information: {submittedApp.previousExperiences.grad.institution}</p>
-            <p>Graduate Degree: {submittedApp.previousExperiences.grad.degree}</p>
+            <p>Work Experience: {submittedApp.previousExperiences.workExperience || 'No response'}</p>
+            <p>Work Experience Qualification: {submittedApp.previousExperiences.workExperienceQualification || 'No response'}</p>
+            <p>Undergraduate Education Information: {submittedApp.previousExperiences.undergrad.institution || 'No response'}</p>
+            <p>Undergraduate Degree: {submittedApp.previousExperiences.undergrad.degree || 'No response'}</p>
+            <p>Graduate Education Information: {submittedApp.previousExperiences.grad.institution || 'No response'}</p>
+            <p>Graduate Degree: {submittedApp.previousExperiences.grad.degree || 'No response'}</p>
           </div>
 
           <div>
             <h2>Skills / Expertise</h2>
-            <p>Skills: {submittedApp.skillsExpertise.skills}</p>
-            <p>Skills Qualification: {submittedApp.skillsExpertise.skillsQualification}</p>
+            <p>Skills: {submittedApp.skillsExpertise.skills || 'No response'}</p>
+            <p>Skills Qualification: {submittedApp.skillsExpertise.skillsQualification || 'No response'}</p>
           </div>
 
           <div>
             <h2>Other</h2>
-            <p>Additional Information: {submittedApp.other.additionalInformation}</p>
-            <p>LinkedIn: <Link href={submittedApp.other.linkedin}>{submittedApp.other.linkedin}</Link></p>
-            <p>Resume: <Link href={submittedApp.other.resume}>{submittedApp.other.resume}</Link></p>
+            <p>Additional Information: {submittedApp.other.additionalInformation || 'No response'}</p>
+            <p>LinkedIn: {submittedApp.other.linkedin ? <Link target='_blank' href={submittedApp.other.linkedin}>{submittedApp.other.linkedin}</Link> : 'No response'}</p>
+            <p>Resume: {submittedApp.other.resume ? <Link target='_blank' href={submittedApp.other.resume}>{submittedApp.other.resume}</Link> : 'No response'}</p>
           </div>
         </div>
       </div>}
+
       
     </div>
   )

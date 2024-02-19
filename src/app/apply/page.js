@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { FaCalendarAlt } from "react-icons/fa";
 import Link from 'next/link';
 import Footer from '@/components/footer';
+import jobs from '@/data/jobData';
 
 const tabs = [
   { id: 1, name: 'Personal Information' },
@@ -21,6 +22,7 @@ const Apply = () => {
 
   const [active, setActive] = useState(1)
 
+  const [job, setJob] = useState('')
   const [name, setName] = useState('')
   const [dob, setDob] = useState('')
   const [address, setAddress] = useState('')
@@ -61,6 +63,7 @@ const Apply = () => {
 
     const submittedData = {
       personalInformation: {
+        job,
         name,
         dob,
         address,
@@ -134,6 +137,16 @@ const Apply = () => {
               <span className='text-xl lg:text-3xl font-semibold text-blue-300'>
                 Personal Information
               </span>
+              <select
+                className='bg-black py-2 px-3 rounded-md text-xl border-2 border-indigo-900 lg:mt-0 mt-10 ml-0 lg:ml-5'
+                onChange={(e) => setJob(e.target.value)} 
+                defaultValue="" 
+              >
+                <option value="" disabled>Select a job</option>
+                {jobs.map((job, index) => (
+                  <option key={index} value={job.title}>{job.title}</option>
+                ))}
+              </select>
               <div className='grid grid-cols-1 lg:grid-cols-2 text-white lg:mr-32 lg:p-7 pt-12'>
 
                 <div className='text-gray-300 text-md lg:text-lg flex flex-col lg:mr-10'>
@@ -312,14 +325,13 @@ const Apply = () => {
       {submitted && <div className='lg:bg-gradient-to-r from-black via-indigo-950/40 to-black'>
         <div className='bg-white/5 lg:m-10 lg:p-10 rounded-lg lg:block lg:border-2 lg:border-indigo-900/40'>
           <div className='text-white'>
-            <h1 className='font-bold text-xl lg:text-2xl mb-12 ml-6 mt-4'>Review Your Application</h1>
+            <h1 className='font-bold text-xl lg:text-2xl mb-12 ml-6 mt-4 inline'>Review Your Application: <h1 className='border-2 border-indigo-500 px-2 rounded-md border-dashed text-xl lg:text-2xl inline text-indigo-500'>{submittedApp.personalInformation.job}</h1></h1>
 
             <div className='lg:ml-2'>
 
               <h2 className='font-semibold text-xl lg:text-2xl text-blue-400 ml-7 mt-8'>
                 Personal Information
               </h2>
-
               <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 p-7 lg:ml-7'>
 
                 <div className='text-gray-300 text-md lg:text-lg flex flex-col lg:mr-10'>

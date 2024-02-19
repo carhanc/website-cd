@@ -59,7 +59,7 @@ const Nav = () => {
                   </Link>
 
                   <Link href="/contact" className="hover:text-indigo-300 hover:font-bold ease-linear duration-300">
-                      Contact
+                      Apply
                   </Link>
                 
                 </div>
@@ -105,7 +105,7 @@ const Nav = () => {
                         as="a"
                         className="rounded-md p-2 font-semibold text-gray-300 hover:bg-gray-900/50"
                       >
-                        Contact
+                        Apply
                       </Disclosure.Button>
                     </Link>
 

@@ -134,32 +134,32 @@ const Contact = () => {
 
                 <div className='text-gray-300 text-lg flex flex-col mr-10'>
                   <span className='ml-1'>Full Name</span>
-                  <input placeholder='John Doe' onChange={(e) => setName(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <input value={name} placeholder='John Doe' onChange={(e) => setName(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col'>
                   <span className='ml-1'>Date of Birth</span>
-                  <input placeholder='MM/DD/YYYY' onChange={(e) => setDob(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <input value={dob} placeholder='MM/DD/YYYY' onChange={(e) => setDob(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                   <span className='ml-1'>Address</span>
-                  <input placeholder='123 Example Ave' onChange={(e) => setAddress(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <input value={address} placeholder='123 Example Ave' onChange={(e) => setAddress(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                   <span className='ml-1'>City</span>
-                  <input placeholder='Los Angeles' onChange={(e) => setCity(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <input value={city} placeholder='Los Angeles' onChange={(e) => setCity(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                   <span className='ml-1'>State/Country</span>
-                  <input placeholder='California, USA' onChange={(e) => setState(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <input value={state} placeholder='California, USA' onChange={(e) => setState(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col mt-10'>
                   <span className='ml-1'>Zip Code</span>
-                  <input placeholder='12345' onChange={(e) => setZip(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <input value={zip} placeholder='12345' onChange={(e) => setZip(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
               </div>
@@ -175,22 +175,22 @@ const Contact = () => {
 
                 <div className='text-gray-300 text-lg flex flex-col mr-10'>
                   <span className='ml-1'>Email</span>
-                  <input placeholder='username@email.com' onChange={(e) => setEmail(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <input value={email} placeholder='username@email.com' onChange={(e) => setEmail(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col'>
                   <span className='ml-1'>Phone Number</span>
-                  <input placeholder='123-458-7890' onChange={(e) => setPhone(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <input value={phone} placeholder='123-458-7890' onChange={(e) => setPhone(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                   <span className='ml-1'>Title (opt)</span>
-                  <input placeholder='Mr., Mrs., etc.' onChange={(e) => setTitle(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <input value={title} placeholder='Mr., Mrs., etc.' onChange={(e) => setTitle(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
-                  <span className='ml-1'>Pronoun</span>
-                  <input placeholder='They/them' onChange={(e) => setPronoun(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <span className='ml-1'>Pronouns</span>
+                  <input value={pronoun} placeholder='They/them' onChange={(e) => setPronoun(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
               </div>
@@ -206,35 +206,35 @@ const Contact = () => {
 
                 <div className='text-gray-300 text-lg flex flex-col mr-10'>
                   <span className='ml-1'>List all previous <strong>work</strong> experiences</span>
-                  <textarea placeholder='Company names, years worked, brief role description, etc.' onChange={(e) => setWorkExp(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <textarea value={workExp} placeholder='Company names, years worked, brief role description, etc.' onChange={(e) => setWorkExp(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                   <span className='ml-1'>Why do these experiences qualify you for this position?</span>
-                  <textarea placeholder='Short essay about how your experiences have shaped you...' onChange={(e) => setWorkExpQual(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <textarea value={workExpQual} placeholder='Short essay about how your experiences have shaped you...' onChange={(e) => setWorkExpQual(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='grid grid-cols-2'>
                   <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                     <span className='ml-1'>Undergrad Institution / Graduating Year</span>
-                    <input placeholder='Example University, YYYY' onChange={(e) => setUndergrad(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                    <input value={undergrad} placeholder='Example University, YYYY' onChange={(e) => setUndergrad(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                   </div>
 
                   <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                     <span className='ml-1'>Degree(s) Earned</span>
-                    <input placeholder='Data Science' onChange={(e) => setUndergradDegree(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                    <input value={undergradDegree} placeholder='Data Science' onChange={(e) => setUndergradDegree(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                   </div>
                 </div>
 
                 <div className='grid grid-cols-2'>
                   <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                     <span className='ml-1'>Grad Institution / Graduating Year</span>
-                    <input placeholder='Example University, YYYY' onChange={(e) => setGrad(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                    <input value={grad} placeholder='Example University, YYYY' onChange={(e) => setGrad(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                   </div>
 
                   <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                     <span className='ml-1'>Degree(s) Earned</span>
-                    <input placeholder='Data Science' onChange={(e) => setGradDegree(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                    <input value={gradDegree} placeholder='Data Science' onChange={(e) => setGradDegree(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                   </div>
                 </div>
               </div>
@@ -250,12 +250,12 @@ const Contact = () => {
 
                 <div className='text-gray-300 text-lg flex flex-col mr-10'>
                   <span className='ml-1'>What do you consider to be your top <strong>five</strong> professional skills and why?</span>
-                  <textarea placeholder='List top five skills...' onChange={(e) => setSkills(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <textarea value={skills} placeholder='List top five skills...' onChange={(e) => setSkills(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
                 <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                   <span className='ml-1'>Why do these skills equip you to succeed at DataVoyagers?</span>
-                  <textarea placeholder='Elaborate on your unique skillset and why DV specifically can use your skills' onChange={(e) => setSkillsQual(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <textarea value={skillsQual} placeholder='Elaborate on your unique skillset and why DV specifically can use your skills' onChange={(e) => setSkillsQual(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
               </div>
             </div>
@@ -270,16 +270,16 @@ const Contact = () => {
 
                 <div className='text-gray-300 text-lg flex flex-col mr-10'>
                   <span className='ml-1'>Is there anything else you would like us to know about you?</span>
-                  <textarea placeholder='Why you are the best fit, gaps in your résume, unusual details...' onChange={(e) => setOther(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                  <textarea value={other} placeholder='Why you are the best fit, gaps in your résume, unusual details...' onChange={(e) => setOther(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
                 <div className='grid lg:grid-cols-2 mt-10'>
                   <div className='text-gray-300 text-lg flex flex-col mr-10'>
                     <span className='ml-1'>Link to LinkedIn Profile</span>
-                    <input placeholder='linkedin.com/in/username' onChange={(e) => setLinkedin(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                    <input value={linkedin} placeholder='linkedin.com/in/username' onChange={(e) => setLinkedin(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                   </div>
                   <div className='text-gray-300 text-lg flex flex-col mr-10'>
                     <span className='ml-1'>Link to Résume</span>
-                    <input placeholder='www.example.com/resume' onChange={(e) => setResume(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                    <input value={resume} placeholder='www.example.com/resume' onChange={(e) => setResume(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                   </div>
                 </div>
                 <span className='flex flex-row gap-4'>
@@ -302,7 +302,7 @@ const Contact = () => {
       {submitted && <div className='bg-gradient-to-r from-black via-indigo-900/45 to-black'>
         <div className='bg-white/5 m-10 p-10 rounded-lg lg:block hidden border-2 border-indigo-900/40'>
           <div className='text-white'>
-            <h1 className='font-bold text-3xl mb-12 ml-6 underline mt-4'>Review Your application</h1>
+            <h1 className='font-bold text-3xl mb-12 ml-6 mt-4'>Review Your application</h1>
 
             <div className='ml-2'>
 
@@ -518,7 +518,7 @@ const Contact = () => {
 
             <span className='flex flex-row gap-4 pl-20 mb-6'>
               <button className='flex my-auto items-center text-xl border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear mt-10' 
-              onClick={setSubmitted(false)}>
+              onClick={() => setSubmitted(false)}>
                 Edit Application
               </button>
               <button onClick={handleSubmit} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>

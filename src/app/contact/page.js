@@ -48,9 +48,16 @@ const Contact = () => {
 
   const [submittedApp, setSubmittedApp] = useState({})
   const [submitted, setSubmitted] = useState(false)
+  const [finalSubmit, setFinalSubmit] = useState(false)
 
-  const handleSubmit = () => {
-    setSubmitted(true);
+  const handleSubmit = (status) => {
+    if (status === 'edit') {
+      setSubmitted(true);
+    }
+    if (status === 'submit') {
+      setFinalSubmit(true);
+    }
+
     const submittedData = {
       personalInformation: {
         name,
@@ -284,7 +291,7 @@ const Contact = () => {
                 </div>
                 <span className='flex flex-row gap-4'>
                   <button className='flex my-auto items-center text-xl border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear mt-10'>Save</button>
-                  <button onClick={handleSubmit} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>
+                  <button onClick={() => handleSubmit("edit")} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>
                     Review
                     <span className="text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
                       <MdKeyboardArrowRight />
@@ -299,10 +306,16 @@ const Contact = () => {
         </div>
       </div>}
 
-      {submitted && <div className='bg-gradient-to-r from-black via-indigo-900/45 to-black'>
+      {finalSubmit && 
+        <div className='p-10 border-2 rounded-lg m-10  border-indigo-900/45'>
+          <h1 className='text-xl text-indigo-400 font-semibold'>Thanks for submitting your application!</h1>
+          <p className='inline text-md text-indigo-300 mt-2'>The DataVoyagers team is eager to read your application. Feel free to email our recruitment team with any updates to your application using the email <p className='inline underline'> files@careers.datavoyagers.com</p>. Excpect to receive an email from our hiring team within 7-14 business days with an interview. We will let you know if we are deciding not to move forward with your application over email. Here is to a new potential voyage 🥂🚀</p>
+        </div>}
+
+      {submitted && <div className='bg-gradient-to-r from-black via-indigo-950/40 to-black'>
         <div className='bg-white/5 m-10 p-10 rounded-lg lg:block hidden border-2 border-indigo-900/40'>
           <div className='text-white'>
-            <h1 className='font-bold text-3xl mb-12 ml-6 mt-4'>Review Your application</h1>
+            <h1 className='font-bold text-3xl mb-12 ml-6 mt-4'>Review Your Application</h1>
 
             <div className='ml-2'>
 
@@ -516,18 +529,18 @@ const Contact = () => {
               </div>
             </div>
 
-            <span className='flex flex-row gap-4 pl-20 mb-6'>
+            {!finalSubmit && <span className='flex flex-row gap-4 pl-20 mb-6'>
               <button className='flex my-auto items-center text-xl border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear mt-10' 
               onClick={() => setSubmitted(false)}>
                 Edit Application
               </button>
-              <button onClick={handleSubmit} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>
+              <button onClick={() => handleSubmit("submit")} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>
                 Submit
                 <span className="text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
                   <MdKeyboardArrowRight />
                 </span>
               </button>
-            </span>
+            </span>}
 
           </div>
         </div>

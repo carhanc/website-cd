@@ -8,6 +8,7 @@ import logo from "../../public/logo.png"
 
 import { Divide as Hamburger1 } from 'hamburger-react'
 import { useState } from 'react'
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Nav = () => {
 
@@ -58,8 +59,10 @@ const Nav = () => {
                       Positions
                   </Link>
 
-                  <Link href="/apply" className="hover:text-indigo-300 hover:font-bold ease-linear duration-300 border-2 rounded-md px-4 py-1 border-indigo-900">
-                      Apply &rarr;
+                  <Link href="/apply" className="hover:text-indigo-300 hover:font-semibold ease-linear duration-300 border-[3px] 
+                  rounded-md px-4 py-1 border-indigo-900 hover:bg-indigo-900 flex items-center group">
+                      Apply 
+                      <span className="text-violet-500 group-hover:translate-x-1 transition ease-linear duration-150 ml-3 text-[20px]"><FaArrowRightLong /></span>
                   </Link>
                 
                 </div>

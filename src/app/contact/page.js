@@ -88,9 +88,9 @@ const Contact = () => {
         resume,
       },
     };
-  
+
     console.log(JSON.stringify(submittedData, null, 2));
-  
+
     setSubmittedApp(submittedData);
   };
 
@@ -103,27 +103,27 @@ const Contact = () => {
         </div>
 
         <div className='bg-white/5 m-12 px-6 py-12 rounded-lg lg:block hidden border-2 border-indigo-900/40'>
-          
+
           <div className='flex flex-row space-x-5 text-gray-300'>
             <div className='lg:w-1/4 w-1/4 flex flex-col lg:text-xl font-medium border-r-4 border-gray-900/50'>
 
               {tabs.map((tab) => (
-                <button 
-                className={`${active === tab.id ? "text-indigo-200 bg-indigo-900" : "text-gray-300"} 
+                <button
+                  className={`${active === tab.id ? "text-indigo-200 bg-indigo-900" : "text-gray-300"} 
                 p-4 hover:bg-gray-600/60 transition ease-linear duration-150 rounded-2xl justify-between flex flex-row mx-5 mr-8 group`}
-                onClick={() => setActive(tab.id)}
+                  onClick={() => setActive(tab.id)}
                 >
                   <span>
                     {tab.name}
-                  </span> 
+                  </span>
                   <span className='flex items-center text-[30px] hover:translate-x-3 group-hover:translate-x-1 transition ease-linear duration-100'>
                     <MdKeyboardArrowRight />
                   </span>
                 </button>
-              ))}  
+              ))}
 
             </div>
-            
+
             {/* Personal Information */}
 
             <div className={`${active === 1 ? "block" : "hidden"} lg:w-4/5 w-3/4 pl-10`}>
@@ -146,7 +146,7 @@ const Contact = () => {
                   <span className='ml-1'>Address</span>
                   <input placeholder='123 Example Ave' onChange={(e) => setAddress(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
-                
+
                 <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                   <span className='ml-1'>City</span>
                   <input placeholder='Los Angeles' onChange={(e) => setCity(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
@@ -164,7 +164,7 @@ const Contact = () => {
 
               </div>
             </div>
-            
+
             {/* Contact Information */}
 
             <div className={`${active === 2 ? "block" : "hidden"} lg:w-4/5 w-3/4 pl-10`}>
@@ -187,7 +187,7 @@ const Contact = () => {
                   <span className='ml-1'>Title (opt)</span>
                   <input placeholder='Mr., Mrs., etc.' onChange={(e) => setTitle(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
-                
+
                 <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                   <span className='ml-1'>Pronoun</span>
                   <input placeholder='They/them' onChange={(e) => setPronoun(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
@@ -195,7 +195,7 @@ const Contact = () => {
 
               </div>
             </div>
-            
+
             {/* Academic / Work Experience */}
 
             <div className={`${active === 3 ? "block" : "hidden"} lg:w-4/5 w-3/4 pl-10`}>
@@ -213,7 +213,7 @@ const Contact = () => {
                   <span className='ml-1'>Why do these experiences qualify you for this position?</span>
                   <textarea placeholder='Short essay about how your experiences have shaped you...' onChange={(e) => setWorkExpQual(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
-                
+
                 <div className='grid grid-cols-2'>
                   <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                     <span className='ml-1'>Undergrad Institution / Graduating Year</span>
@@ -234,12 +234,12 @@ const Contact = () => {
 
                   <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
                     <span className='ml-1'>Degree(s) Earned</span>
-                    <input placeholder='Data Science'onChange={(e) => setGradDegree(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
+                    <input placeholder='Data Science' onChange={(e) => setGradDegree(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                   </div>
                 </div>
               </div>
             </div>
-            
+
             {/* Skills & Expertise */}
 
             <div className={`${active === 4 ? "block" : "hidden"} lg:w-4/5 w-3/4 pl-10`}>
@@ -249,7 +249,7 @@ const Contact = () => {
               <div className='grid text-white mr-56 p-7 pt-12'>
 
                 <div className='text-gray-300 text-lg flex flex-col mr-10'>
-                  <span className='ml-1'>What do you consider to be your top <strong>five</strong> professional skills?</span>
+                  <span className='ml-1'>What do you consider to be your top <strong>five</strong> professional skills and why?</span>
                   <textarea placeholder='List top five skills...' onChange={(e) => setSkills(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100' />
                 </div>
 
@@ -284,62 +284,256 @@ const Contact = () => {
                 </div>
                 <span className='flex flex-row gap-4'>
                   <button className='flex my-auto items-center text-xl border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear mt-10'>Save</button>
-                  <button onClick={handleSubmit} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10'>Submit <MdKeyboardArrowRight /></button>
+                  <button onClick={handleSubmit} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>
+                    Review
+                    <span className="text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
+                      <MdKeyboardArrowRight />
+                    </span>
+                  </button>
                 </span>
-                
+
               </div>
-              
+
             </div>
           </div>
         </div>
       </div>}
-      {submitted && <div>
-        <div className='text-white'>
-          <h1>Your application</h1>
-          <div>
-            <h2>Personal Information</h2>
-            <p>Name: {submittedApp.personalInformation.name || 'No response'}</p>
-            <p>Date of Birth: {submittedApp.personalInformation.dob || 'No response'}</p>
-            <p>Address: {submittedApp.personalInformation.address || 'No response'}</p>
-            <p>City: {submittedApp.personalInformation.city || 'No response'}</p>
-            <p>State: {submittedApp.personalInformation.state || 'No response'}</p>
-            <p>Zip: {submittedApp.personalInformation.zip || 'No response'}</p>
-          </div>
-          
-          <div>
-            <h2>Contact Information</h2>
-            <p>Email: {submittedApp.contactInformation.email !== '' ? submittedApp.contactInformation.email : 'No response'}</p>
-            <p>Phone: {submittedApp.contactInformation.phone || 'No response'}</p>
-            <p>Title: {submittedApp.contactInformation.title || 'No response'}</p> {/* Added Title Field */}
-            <p>Pronouns: {submittedApp.contactInformation.pronoun || 'No response'}</p>
-          </div>
 
-          <div>
-            <h2>Previous Experiences</h2>
-            <p>Work Experience: {submittedApp.previousExperiences.workExperience || 'No response'}</p>
-            <p>Work Experience Qualification: {submittedApp.previousExperiences.workExperienceQualification || 'No response'}</p>
-            <p>Undergraduate Education Information: {submittedApp.previousExperiences.undergrad.institution || 'No response'}</p>
-            <p>Undergraduate Degree: {submittedApp.previousExperiences.undergrad.degree || 'No response'}</p>
-            <p>Graduate Education Information: {submittedApp.previousExperiences.grad.institution || 'No response'}</p>
-            <p>Graduate Degree: {submittedApp.previousExperiences.grad.degree || 'No response'}</p>
-          </div>
+      {submitted && <div className='bg-gradient-to-r from-black via-indigo-900/45 to-black'>
+        <div className='bg-white/5 m-10 p-10 rounded-lg lg:block hidden border-2 border-indigo-900/40'>
+          <div className='text-white'>
+            <h1 className='font-bold text-3xl mb-12 ml-6 underline mt-4'>Review Your application</h1>
 
-          <div>
-            <h2>Skills / Expertise</h2>
-            <p>Skills: {submittedApp.skillsExpertise.skills || 'No response'}</p>
-            <p>Skills Qualification: {submittedApp.skillsExpertise.skillsQualification || 'No response'}</p>
-          </div>
+            <div className='ml-2'>
 
-          <div>
-            <h2>Other</h2>
-            <p>Additional Information: {submittedApp.other.additionalInformation || 'No response'}</p>
-            <p>LinkedIn: {submittedApp.other.linkedin ? <Link target='_blank' href={submittedApp.other.linkedin}>{submittedApp.other.linkedin}</Link> : 'No response'}</p>
-            <p>Resume: {submittedApp.other.resume ? <Link target='_blank' href={submittedApp.other.resume}>{submittedApp.other.resume}</Link> : 'No response'}</p>
+              <h2 className='font-semibold text-2xl text-blue-400 ml-10 mt-8'>
+                Personal Information
+              </h2>
+
+              <div className='space-y-6 grid grid-cols-2 text-white mr-56 p-7 ml-7'>
+
+                <div className='text-gray-300 text-lg flex flex-col mr-10'>
+                  <span className='ml-1 mt-6'>Full Name</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.personalInformation.name || 'No response'}
+                  </div>
+                </div>
+
+                <div className='text-gray-300 text-lg flex flex-col'>
+                  <span className='ml-1'>Date of Birth</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.personalInformation.dob || 'No response'}
+                  </div>
+                </div>
+
+                <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
+                  <span className='ml-1'>Address</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.personalInformation.address || 'No response'}
+                  </div>
+                </div>
+
+                <div className='text-gray-300 text-lg flex flex-col mt-10 mr-13'>
+                  <span className='ml-1'>City</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.personalInformation.city || 'No response'}
+                  </div>
+                </div>
+
+                <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
+                  <span className='ml-1'>State/Country</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.personalInformation.state || 'No response'}
+                  </div>
+                </div>
+
+                <div className='text-gray-300 text-lg flex flex-col mt-10'>
+                  <span className='ml-1'>Zip Code</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.personalInformation.zip || 'No response'}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div className='ml-2'>
+
+              <h2 className='font-semibold text-2xl text-blue-400 ml-10 mt-8'>
+                Contact Information
+              </h2>
+
+              <div className='space-y-6 grid grid-cols-2 text-white mr-56 p-7 ml-7'>
+
+                <div className='text-gray-300 text-lg flex flex-col mr-10'>
+                  <span className='ml-1 mt-6'>Email</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.contactInformation.email !== '' ? submittedApp.contactInformation.email : 'No response'}
+                  </div>
+                </div>
+
+                <div className='text-gray-300 text-lg flex flex-col'>
+                  <span className='ml-1'>Phone</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.contactInformation.phone || 'No response'}
+                  </div>
+                </div>
+
+                <div className='text-gray-300 text-lg flex flex-col mt-10 mr-10'>
+                  <span className='ml-1'>Title</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.contactInformation.title || 'No response'}
+                  </div>
+                </div>
+
+                <div className='text-gray-300 text-lg flex flex-col mt-10 mr-13'>
+                  <span className='ml-1'>Pronouns</span>
+                  <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    {submittedApp.contactInformation.pronoun || 'No response'}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div className='ml-2'>
+
+              <h2 className='font-semibold text-2xl text-blue-400 ml-10 mt-8'>
+                Previous Experience
+              </h2>
+
+              <div className='space-y-4 text-white mr-56 p-7 ml-7'>
+
+                <div className='flex flex-col'>
+                  <div className='text-gray-300 text-lg flex flex-col mr-10'>
+                    <span className='ml-1 mt-4'>Work Experience</span>
+                    <div placeholder='John Doe' onChange={(e) => setName(e.target.value)} className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      {submittedApp.previousExperiences.workExperience || 'No response'}
+                    </div>
+                  </div>
+
+                  <div className='text-gray-300 text-lg flex flex-col'>
+                    <span className='ml-1 mt-8'>Work Experience Qualifications</span>
+                    <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      {submittedApp.previousExperiences.workExperienceQualification || 'No response'}
+                    </div>
+                  </div>
+                </div>
+
+                <div className='grid grid-cols-2 space-y-6'>
+                  <div className='text-gray-300 text-lg mt-6 mr-10'>
+                    <span className='ml-1'>Undergraduate Education Information</span>
+                    <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      {submittedApp.previousExperiences.undergrad.institution || 'No response'}
+                    </div>
+                  </div>
+
+                  <div className='text-gray-300 text-lg mt-4 mr-13'>
+                    <span className='ml-1'>Undergraduate Degree(s)</span>
+                    <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      {submittedApp.previousExperiences.undergrad.degree || 'No response'}
+                    </div>
+                  </div>
+
+                  <div className='text-gray-300 text-lg mr-10'>
+                    <span className='ml-1'>Graduate Education Information</span>
+                    <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      {submittedApp.previousExperiences.grad.institution || 'No response'}
+                    </div>
+                  </div>
+
+                  <div className='text-gray-300 text-lg mt-4 mr-13'>
+                    <span className='ml-1'>Graduate Degree(s)</span>
+                    <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      {submittedApp.previousExperiences.grad.institution || 'No response'}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div className='ml-2'>
+
+              <h2 className='font-semibold text-2xl text-blue-400 ml-10 mt-8'>
+                Skills / Expertise
+              </h2>
+
+              <div className='space-y-4 text-white mr-56 p-7 ml-7'>
+
+                <div className='flex flex-col'>
+                  <div className='text-gray-300 text-lg flex flex-col mr-10'>
+                    <span className='ml-1 mt-4'>Skills Acquired</span>
+                    <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      {submittedApp.skillsExpertise.skills || 'No response'}
+                    </div>
+                  </div>
+
+                  <div className='text-gray-300 text-lg flex flex-col'>
+                    <span className='ml-1 mt-8'>Skills Qualifications</span>
+                    <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      {submittedApp.skillsExpertise.skillsQualification || 'No response'}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div className='ml-2'>
+
+              <h2 className='font-semibold text-2xl text-blue-400 ml-10 mt-8'>
+                Other Information
+              </h2>
+
+              <div className='space-y-4 text-white mr-56 p-7 ml-7'>
+
+                <div className='flex flex-col'>
+                  <div className='text-gray-300 text-lg flex flex-col mr-10 mb-2'>
+                    <span className='ml-1 mt-4'>Additional Information</span>
+                    <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      {submittedApp.other.additionalInformation || 'No response'}
+                    </div>
+                  </div>
+
+                  <div className='grid grid-cols-2'>
+                    <div className='text-gray-300 text-lg flex flex-col mr-10'>
+                      <span className='ml-1 mt-4'>LinkedIn</span>
+                      <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                        {submittedApp.other.linkedin ? <Link target='_blank' href={submittedApp.other.linkedin}>{submittedApp.other.linkedin}</Link> : 'No response'}
+                      </div>
+                    </div>
+
+                    <div className='text-gray-300 text-lg flex flex-col mr-10'>
+                      <span className='ml-1 mt-4'>Resume</span>
+                      <div className='p-4 text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                        {submittedApp.other.resume ? <Link target='_blank' href={submittedApp.other.resume}>{submittedApp.other.resume}</Link> : 'No response'}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <span className='flex flex-row gap-4 pl-20 mb-6'>
+              <button className='flex my-auto items-center text-xl border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear mt-10' 
+              onClick={setSubmitted(false)}>
+                Edit Application
+              </button>
+              <button onClick={handleSubmit} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>
+                Submit
+                <span className="text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
+                  <MdKeyboardArrowRight />
+                </span>
+              </button>
+            </span>
+
           </div>
         </div>
       </div>}
 
-      
+
     </div>
   )
 }

@@ -49,10 +49,10 @@ export default function Home() {
             <h1 className="text-white text-2xl font-bold mb-5">Innovation at Every Turn</h1>
             <p className="text-gray-400 text-lg">At DataVoyagers, we believe that innovation isn't just a buzzword; it's the cornerstone of our success. We encourage our team to challenge the status quo, think outside the box, and embrace new ideas. Our culture thrives on creativity and the relentless pursuit of excellence.</p>
           </div>
-          <div className="bg-blue-900/10 rounded-lg">
+          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
             
           </div>
-          <div className="bg-blue-900/10 rounded-lg">
+          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
             
           </div>
           <div>
@@ -63,10 +63,10 @@ export default function Home() {
             <h1 className="text-white text-2xl font-bold mb-5">Innovation at Every Turn</h1>
             <p className="text-gray-400 text-lg">At DataVoyagers, we believe that innovation isn't just a buzzword; it's the cornerstone of our success. We encourage our team to challenge the status quo, think outside the box, and embrace new ideas. Our culture thrives on creativity and the relentless pursuit of excellence.</p>
           </div>
-          <div className="bg-blue-900/10 rounded-lg">
+          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
             
           </div>
-          <div className="bg-blue-900/10 rounded-lg">
+          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
             
           </div>
           <div>

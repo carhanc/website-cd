@@ -7,6 +7,7 @@ import { Listbox } from '@headlessui/react'
 import { useState } from 'react'
 import { FaCalendarAlt } from "react-icons/fa";
 import Link from 'next/link';
+import Footer from '@/components/footer';
 
 const tabs = [
   { id: 1, name: 'Personal Information' },
@@ -16,7 +17,7 @@ const tabs = [
   { id: 5, name: 'Other' },
 ]
 
-const Contact = () => {
+const Apply = () => {
 
   const [active, setActive] = useState(1)
 
@@ -104,11 +105,7 @@ const Contact = () => {
   return (
     <div className=''>
       <Nav />
-      {!submitted && <div className='bg-gradient-to-r from-black via-indigo-900/45 to-black h-dvh'>
-        <div className='text-gray-300 font-semibold text-2xl mx-16 pt-12'>
-          New Job Application
-        </div>
-
+      {!submitted && <div className='bg-gradient-to-r from-black via-indigo-900/10 to-black'>
         <div className='bg-white/5 m-12 px-6 py-12 rounded-lg lg:block hidden border-2 border-indigo-900/40'>
 
           <div className='flex flex-row space-x-5 text-gray-300'>
@@ -545,10 +542,9 @@ const Contact = () => {
           </div>
         </div>
       </div>}
-
-
+      <Footer/>
     </div>
   )
 }
 
-export default Contact
+export default Apply;

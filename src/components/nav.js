@@ -50,16 +50,16 @@ const Nav = () => {
                 {/* Desktop Links */}
                 <div className="hidden gap-x-12 sm:flex text-[22px] my-auto rounded-md p-2 font-semibold bg-gradient-to-r from-blue-600 via-violet-500 to-indigo-400 text-transparent bg-clip-text">
 
-                  <Link href="/about" className="mr-1 hover:text-blue-500 hover:font-bold ease-linear duration-200">
+                  {/* <Link href="/about" className="mr-1 my-auto hover:text-blue-500 hover:font-bold ease-linear duration-200">
                       About
-                  </Link>
+                  </Link> */}
 
-                  <Link href="/positions" className="hover:text-violet-400 hover:font-bold ease-linear duration-300">
+                  <Link href="/positions" className="my-auto hover:text-violet-400 hover:font-bold ease-linear duration-300">
                       Positions
                   </Link>
 
-                  <Link href="/contact" className="hover:text-indigo-300 hover:font-bold ease-linear duration-300">
-                      Apply
+                  <Link href="/apply" className="hover:text-indigo-300 hover:font-bold ease-linear duration-300 border-2 rounded-md px-4 py-1 border-indigo-900">
+                      Apply &rarr;
                   </Link>
                 
                 </div>
@@ -100,10 +100,10 @@ const Nav = () => {
                       </Disclosure.Button>
                     </Link>
 
-                    <Link href="/contact" passHref>
+                    <Link href="/apply" passHref>
                       <Disclosure.Button
                         as="a"
-                        className="rounded-md p-2 font-semibold text-gray-300 hover:bg-gray-900/50"
+                        className="rounded-md p-2 font-semibold text-gray-300 hover:bg-gray-900/50 "
                       >
                         Apply
                       </Disclosure.Button>

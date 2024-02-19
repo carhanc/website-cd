@@ -5,6 +5,7 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import arhan from "../../public/img.jpeg"
 import BenefitsCard from "@/components/BenefitsCard";
 import benefits from "../data/benefitsData"
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
@@ -19,9 +20,9 @@ export default function Home() {
             </p>
             <Link
               className="rounded-md lg:ml-2 border-blue-400 border-2 w-fit px-4 py-2 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
-              href="/about"
+              href="/positions"
             >
-              Learn more here 
+              View Open Positions
               <BiRightArrowAlt className="mt-[5px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
             </Link>
           </div>
@@ -76,7 +77,7 @@ export default function Home() {
         
         
       </div>
-
+      <Footer />  
     </div>
   );
 }

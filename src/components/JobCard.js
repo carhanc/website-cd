@@ -41,7 +41,7 @@ const JobCard = ({ job }) => {
         </>
       )}
 
-      <button onClick={toggleExpanded} className="text-blue-600 hover:text-blue-800 mt-4">
+      <button onClick={toggleExpanded} className="text-blue-600 hover:text-blue-800 transition ease-linear duration-150 mt-4">
         {isExpanded ? 'Show Less' : 'Show More'}
       </button>
     </div>

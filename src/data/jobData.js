@@ -104,7 +104,112 @@ const jobs = [
     "benefits": "Comprehensive health insurance, 401(k) with company match, generous vacation policy, remote work flexibility",
     "location": "Hybrid",
     "experience": "Senior"
-  }
+  },
+  {
+    "title": "Marketing Data Analyst",
+    "pay": "$50,000 - $70,000",
+    "skills": ["SEO/SEM", "Google Analytics", "SQL", "Data Visualization"],
+    "desc": "Analyzes marketing metrics to identify cause-effect relationships between marketing actions and financial outcomes to increase profitability.",
+    "type": "Full Time",
+    "edu": "Bachelor's degree in Marketing, Business, Statistics, or related field",
+    "responsibilities": [
+      "Measure ROI of online and offline advertising campaigns.",
+      "Report on marketing KPIs like leads, conversion rates, website traffic and social media engagement.",
+      "Track email campaign metrics (delivery, open, click-through rates)."
+    ],
+    "qualifications": [
+      "Proven experience in market analysis.",
+      "Familiarity with CRM programs.",
+      "Adept at queries, report writing and presenting findings."
+    ],
+    "benefits": "Remote work options, flexible hours, health insurance, paid time off",
+    "location": "Remote",
+    "experience": "Entry"
+  },
+  {
+    "title": "Junior Data Scientist",
+    "pay": "$55,000 - $75,000",
+    "skills": ["Python", "R", "Machine Learning", "Statistical Analysis"],
+    "desc": "Supports senior data scientists in processing and analyzing large data sets to identify trends, develop charts, and create models.",
+    "type": "Full Time",
+    "edu": "Bachelor's degree in Computer Science, Statistics, Applied Math or related field",
+    "responsibilities": [
+      "Clean and validate data for uniformity and accuracy.",
+      "Perform initial analysis to assess the quality of the data.",
+      "Perform further analysis to determine the meaning of the data."
+    ],
+    "qualifications": [
+      "Strong problem-solving skills with an emphasis on product development.",
+      "Experience using statistical computer languages (R, Python, etc.) to manipulate data and draw insights from large data sets.",
+      "Knowledge of a variety of machine learning techniques."
+    ],
+    "benefits": "Health insurance, paid time off, employee mentoring program, career development courses",
+    "location": "Hybrid",
+    "experience": "Entry"
+  },
+  {
+    "title": "Data Operations Specialist",
+    "pay": "$45,000 - $65,000",
+    "skills": ["Data Management", "SQL", "Scripting", "Process Improvement"],
+    "desc": "Maintains database performance by identifying and resolving issues, supporting users, and ensuring data integrity.",
+    "type": "Full Time",
+    "edu": "Associate's degree in Information Technology, Bachelor's preferred",
+    "responsibilities": [
+      "Monitor databases for proper performance.",
+      "Implement data standards, procedures, and guidelines to ensure data integrity.",
+      "Assist in database design, development, and maintenance as needed."
+    ],
+    "qualifications": [
+      "Understanding of database structures, theories, principles, and practices.",
+      "Working technical experience with designing, building, installing, configuring, and supporting database servers.",
+      "Good communication and documentation skills."
+    ],
+    "benefits": "401(k) plan, health insurance, paid vacation, sick leave, and holidays, employee training programs",
+    "location": "In Person",
+    "experience": "Entry"
+  },
+  {
+    "title": "Customer Data Analyst",
+    "pay": "$60,000 - $80,000",
+    "skills": ["CRM", "Data Mining", "SQL", "Customer Segmentation"],
+    "desc": "Utilizes data analysis techniques to understand customer behavior, improve customer experience, and drive sales.",
+    "type": "Full Time",
+    "edu": "Bachelor's degree in Marketing, Business, Statistics, or related field",
+    "responsibilities": [
+      "Analyze customer data to identify trends and insights.",
+      "Collaborate with the marketing team to develop targeted marketing strategies.",
+      "Prepare reports and dashboards to present findings to management."
+    ],
+    "qualifications": [
+      "Experience with CRM software and database systems.",
+      "Strong analytical skills with a goal-oriented attitude.",
+      "Proven ability to work collaboratively in a team environment."
+    ],
+    "benefits": "Competitive salary, comprehensive health benefits, 401(k) with match, generous PTO",
+    "location": "Hybrid",
+    "experience": "Mid"
+  },
+  {
+    "title": "Product Data Manager",
+    "pay": "$75,000 - $95,000",
+    "skills": ["Product Management", "Data Analysis", "Project Coordination", "Cross-functional Team Leadership"],
+    "desc": "Oversees the data associated with the company's products, ensuring accuracy and accessibility to stakeholders.",
+    "type": "Full Time",
+    "edu": "Bachelor's degree in Business Administration, Data Management, Product Management, or related field",
+    "responsibilities": [
+      "Manage and improve product data management processes.",
+      "Coordinate with IT, sales, and marketing teams to ensure product data integrity and consistency.",
+      "Develop strategies to optimize product data for e-commerce platforms."
+    ],
+    "qualifications": [
+      "Strong understanding of product data management and information systems.",
+      "Proven experience in managing cross-functional teams and projects.",
+      "Excellent communication and leadership skills."
+    ],
+    "benefits": "Flexible working conditions, health and wellness programs, professional development opportunities, team building events",
+    "location": "Hybrid",
+    "experience": "Mid"
+  },
 ]
 
 export default jobs;

@@ -138,7 +138,7 @@ const Apply = () => {
                 Personal Information
               </span>
               <select
-                className='bg-black py-2 px-3 rounded-md text-xl border-2 border-indigo-900 lg:mt-0 mt-10 ml-0 lg:ml-5'
+                className='bg-black py-2 px-3 rounded-md text-md lg:text-xl border-2 border-indigo-900 lg:mt-0 mt-10 ml-0 lg:ml-5'
                 onChange={(e) => setJob(e.target.value)} 
                 defaultValue="" 
               >

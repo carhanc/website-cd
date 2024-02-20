@@ -3,6 +3,10 @@ import Link from "next/link";
 import Nav from "../components/nav";
 import { BiRightArrowAlt } from "react-icons/bi";
 import arhan from "../../public/img.jpeg"
+import collaboration from "../../public/collaboration.jpg"
+import innovation from "../../public/innovation.jpg"
+import bowling from "../../public/bowling.jpg"
+import promotion from "../../public/promotion.jpg"
 import BenefitsCard from "@/components/BenefitsCard";
 import benefits from "../data/benefitsData"
 import Footer from "@/components/footer";
@@ -44,34 +48,34 @@ export default function Home() {
 
       <div className="px-10 xl:px-12 py-10 bg-gradient-to-bl from-indigo-900/45 via-black to-indigo-900/45">
         <h1 className="text-white mb-10 text-3xl font-bold">The Voyager Culture</h1>
-        <div className="grid xl:grid-cols-2 gap-y-10">
-          <div>
-            <h1 className="text-white text-2xl font-bold mb-5">Innovation at Every Turn</h1>
+        <div className="grid lg:grid-cols-2 gap-10">
+          <div className="my-auto">
+            <h1 className="text-white text-2xl font-bold">Innovation at Every Turn</h1>
             <p className="text-gray-400 text-lg">At DataVoyagers, we believe that innovation isn't just a buzzword; it's the cornerstone of our success. We encourage our team to challenge the status quo, think outside the box, and embrace new ideas. Our culture thrives on creativity and the relentless pursuit of excellence.</p>
           </div>
           <div className="hidden lg:block bg-blue-900/10 rounded-lg">
-            
+            <Image src={innovation} className="object-cover max-h-72 rounded-lg" />
           </div>
           <div className="hidden lg:block bg-blue-900/10 rounded-lg">
-            
+            <Image src={collaboration} className="object-cover max-h-72 rounded-lg" />
           </div>
-          <div>
-            <h1 className="text-white text-2xl font-bold mb-5">Innovation at Every Turn</h1>
-            <p className="text-gray-400 text-lg">At DataVoyagers, we believe that innovation isn't just a buzzword; it's the cornerstone of our success. We encourage our team to challenge the status quo, think outside the box, and embrace new ideas. Our culture thrives on creativity and the relentless pursuit of excellence.</p>
+          <div className="my-auto">
+            <h1 className="text-white text-2xl font-bold mb-5">Collaboration and Diversity:</h1>
+            <p className="text-gray-400 text-lg">We know that the best ideas come from the convergence of diverse perspectives. That's why we foster a collaborative environment where everyone's voice is heard and valued. Our team is made up of individuals from various backgrounds, each bringing their unique insights and experiences to the table.</p>
           </div>
-          <div>
-            <h1 className="text-white text-2xl font-bold mb-5">Innovation at Every Turn</h1>
-            <p className="text-gray-400 text-lg">At DataVoyagers, we believe that innovation isn't just a buzzword; it's the cornerstone of our success. We encourage our team to challenge the status quo, think outside the box, and embrace new ideas. Our culture thrives on creativity and the relentless pursuit of excellence.</p>
-          </div>
-          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
-            
+          <div className="my-auto">
+            <h1 className="text-white text-2xl font-bold mb-5">Empowerment and Growth</h1>
+            <p className="text-gray-400 text-lg">Our employees are our greatest asset, and we're committed to their professional and personal growth. We empower our team members with the resources, tools, and support they need to excel in their roles and advance in their careers. At DataVoyagers, you're not just joining a company; you're joining a path to future opportunities.</p>
           </div>
           <div className="hidden lg:block bg-blue-900/10 rounded-lg">
-            
+            <Image src={promotion} className="object-cover max-h-72 rounded-lg" />
           </div>
-          <div>
-            <h1 className="text-white text-2xl font-bold mb-5">Innovation at Every Turn</h1>
-            <p className="text-gray-400 text-lg">At DataVoyagers, we believe that innovation isn't just a buzzword; it's the cornerstone of our success. We encourage our team to challenge the status quo, think outside the box, and embrace new ideas. Our culture thrives on creativity and the relentless pursuit of excellence.</p>
+          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
+            <Image src={bowling} className="object-cover max-h-72 rounded-lg" />
+          </div>
+          <div className="my-auto">
+            <h1 className="text-white text-2xl font-bold mb-5">Work-Life Harmony</h1>
+            <p className="text-gray-400 text-lg">We understand that our employees have lives outside of work, and we believe that balance is essential for long-term happiness and productivity. Whether it's through flexible working arrangements, wellness programs, or social events, we're dedicated to ensuring our team members have the harmony they deserve.</p>
           </div>
         </div>
         

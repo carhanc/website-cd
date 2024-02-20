@@ -1,55 +1,51 @@
-import React from 'react'
+// components/JobCard.js
+import React, { useState } from 'react';
 
-export default function BenefitsCard({ title, pay, skills, desc, type, edu, responsibilities, qualifications, benefits, location, experience }) {
-	return (
+const JobCard = ({ job }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-		<div>
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
 
-			<div className="md:p-8 text-center md:text-left">
-				<div className="font-medium bg-gradient-to-r from-violet-900/15 via-indigo-900/70 to-purple-900/55 p-10 rounded-2xl opacity-70 
-				border-4 border-purple-500/30">
-					<div className='text-md text-gray-400 space-y-3 text-lg'>
+  return (
+    <div className="bg-black p-4 border border-gray-800 rounded-lg shadow-md shadow-gray-900 m-2 text-indigo-500">
+      <h3 className="text-lg font-semibold">{job.title}</h3>
+      <p className="text-sm text-gray-500">{job.pay}</p>
+      <p className="text-sm text-gray-300 mt-2">Type: {job.type}</p>
+      <p className="text-sm text-gray-300">Experience: {job.experience}</p>
+      
+      {/* Toggle between truncated and full description */}
+      {!isExpanded ? (
+        <p className="text-sm text-gray-300 overflow-ellipsis overflow-hidden h-12">{job.desc}</p>
+      ) : (
+        <>
+          <p className="text-sm text-gray-300">{job.desc}</p>
+          <p className="text-sm text-gray-300">Education: {job.edu}</p>
+          <div>
+            <h4 className="text-md font-semibold mt-4">Skills Required:</h4>
+            <ul className="list-disc pl-5">
+              {job.skills.map((skill, index) => (
+                <li key={index} className="text-sm text-gray-300">{skill}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-md font-semibold mt-4">Responsibilities:</h4>
+            <ul className="list-disc pl-5">
+              {job.responsibilities.map((responsibility, index) => (
+                <li key={index} className="text-sm text-gray-300">{responsibility}</li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
 
-						<div className='ml-2'>
-							<div class="text-3xl text-blue-400/80 font-bold mb-6">
-								{title}
-							</div>
-						</div>
-						<div class="text-xl text-blue-200">
-							<span className='font-bold'>Job Description:</span> {desc}
-						</div>
-						<div class=" ">
-							Responsibilities: {responsibilities}
-						</div>
-						<div class=" ">
-							Qualifications: {qualifications}
-						</div>
-						<div class=" ">
-							Education Required: {edu}
-						</div>
-						<div class=" ">
-							Skills Required: {skills}
-						</div>
-						<div class=" ">
-							Benfits: {benefits}
-						</div>
-						<div class="font-bold text-lg text-green-500">
-							Pay Range: {pay}
-						</div>
-						<div class=" ">
-							Job Type: {type}
-						</div>
-						<div class=" ">
-							Work Location: {location}
-						</div>
-						<div class=" ">
-							Experience Level: {experience}
-						</div>
+      <button onClick={toggleExpanded} className="text-blue-600 hover:text-blue-800 mt-4">
+        {isExpanded ? 'Show Less' : 'Show More'}
+      </button>
+    </div>
+  );
+};
 
-					</div>
-				</div>
-			</div>
-
-		</div>
-	)
-}
+export default JobCard;

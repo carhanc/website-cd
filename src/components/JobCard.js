@@ -11,16 +11,9 @@ export default function BenefitsCard({ title, pay, skills, desc, type, edu, resp
 					<div className='text-md text-gray-400 space-y-3 text-lg'>
 
 						<div className='ml-2'>
-							<div className='text-gray-400 font-semibold text-md mb-4'>
-								We are looking for a new...
-							</div>
 							<div class="text-3xl text-blue-400/80 font-bold mb-6">
 								{title}
 							</div>
-						</div>
-
-						<div className='bg-blue-900/30 lg:h-[50vh] h-[40vh] rounded-2xl sm:block hidden'>
-								
 						</div>
 						<div class="text-xl text-blue-200">
 							<span className='font-bold'>Job Description:</span> {desc}

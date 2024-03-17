@@ -4,7 +4,7 @@ import React from 'react'
 import Nav from "../../components/nav";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { Listbox } from '@headlessui/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaCalendarAlt } from "react-icons/fa";
 import Link from 'next/link';
 import Footer from '@/components/footer';
@@ -52,6 +52,25 @@ const Apply = () => {
   const [submittedApp, setSubmittedApp] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [finalSubmit, setFinalSubmit] = useState(false)
+
+  const [backToTop, setBackToTop] = useState(false);
+
+  useEffect(() => {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          setBackToTop(true);
+        } else {
+          setBackToTop(false);
+        }
+      });
+    }, [])
+
+    const scrollUp = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
 
   const handleSubmit = (status) => {
     if (status === 'edit') {
@@ -301,7 +320,7 @@ const Apply = () => {
                 </div>
                 <span className='flex flex-row gap-4'>
                   <button className='flex my-auto items-center text-xl border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear mt-10'>Save</button>
-                  <button onClick={() => handleSubmit("edit")} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>
+                  <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>
                     Review
                     <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
                       <MdKeyboardArrowRight />
@@ -543,12 +562,15 @@ const Apply = () => {
               onClick={() => setSubmitted(false)}>
                 Edit Application
               </button>
-              <button onClick={() => handleSubmit("submit")} className='flex my-auto items-center lg:text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:brightness-75 transition ease-linear mt-10 group'>
-                Submit
-                <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
-                  <MdKeyboardArrowRight />
-                </span>
-              </button>
+              {backToTop && (
+                <button onClick={() => { handleSubmit("submit"); scrollUp(); }} className='flex my-auto items-center lg:text-xl bg-indigo-500 rounded-md px-4 py-2 border-2 border-indigo-500 hover:brightness-75 transition ease-linear mt-10 group'>
+                  Submit
+                  <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
+                    <MdKeyboardArrowRight />
+                  </span>
+                </button>
+              )}
+
             </span>}
 
           </div>

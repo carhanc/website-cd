@@ -19,7 +19,7 @@ const Nav = () => {
       initial={{ y: -5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="sticky top-0 z-40 rounded-t-none ease-linear duration-200 p-5 border-b-2 border-blue-900/40 opacity-95 backdrop-blur-xl"
+      className="sticky top-0 z-40 rounded-t-none ease-linear duration-200 p-5 border-b-2 border-gray-900/40 backdrop-blur-xl"
     >
       <Disclosure
         as="nav"
@@ -31,7 +31,7 @@ const Nav = () => {
               <div className="flex flex-row justify-between xl:mx-16">
                 
                 <Link href='/' className="gap-2 sm:flex text-[22px] rounded-md p-2 
-                font-semibold hover:scale-105 cursor-pointer ease-linear duration-150 bg-gradient-to-r from-indigo-400 to-cyan-400 text-transparent bg-clip-text">
+                font-semibold hover:scale-105 cursor-pointer ease-linear duration-150 text-gray-700 text-transparent bg-clip-text">
                   <Image
                     className="relative w-14 lg:mt-[-4px] mt-[-2px]"
                     alt="NextGen Logo"
@@ -39,7 +39,7 @@ const Nav = () => {
                     draggable="false"
                     src={logo}
                   />
-                    <p className="my-auto sm:block hidden font-extrabold">DataVoyagers Careers</p>
+                    <p className="my-auto sm:block hidden font-extrabold ml-2 text-gray-700">DataVoyagers Careers</p>
                 </Link>
 
                 {/* Mobile Open/Close Btn */}
@@ -49,20 +49,22 @@ const Nav = () => {
                 </Disclosure.Button>
 
                 {/* Desktop Links */}
-                <div className="hidden gap-x-12 sm:flex text-[22px] my-auto rounded-md p-2 font-semibold bg-gradient-to-r from-blue-600 via-violet-500 to-indigo-400 text-transparent bg-clip-text">
+                <div className="hidden gap-x-12 sm:flex text-[22px] my-auto rounded-md p-2 font-semibold text-gray-700 text-transparent bg-clip-text">
 
                   {/* <Link href="/about" className="mr-1 my-auto hover:text-blue-500 hover:font-bold ease-linear duration-200">
                       About
                   </Link> */}
 
-                  <Link href="/positions" className="my-auto hover:text-violet-400 hover:font-bold ease-linear duration-300">
+                  <Link href="/positions" className="my-auto hover:font-bold ease-linear duration-300 hover:text-gray-500 text-gray-700">
                       Positions
                   </Link>
 
-                  <Link href="/apply" className="hover:text-indigo-300 hover:font-semibold ease-linear duration-300 border-[3px] 
-                  rounded-md px-4 py-1 border-indigo-900 hover:bg-indigo-900 flex items-center group">
+                  <Link href="/apply" className="hover:font-bold hover:text-gray-500 ease-linear duration-300 border-[3px] 
+                  rounded-md px-4 py-1 border-gray-700 hover:border-gray-500 flex items-center group text-gray-700">
                       Apply 
-                      <span className="text-violet-500 group-hover:translate-x-1 transition ease-linear duration-150 ml-3 text-[20px]"><FaArrowRightLong /></span>
+                      <span className="text-gray-600 mt-[1px] group-hover:translate-x-1 group-hover:text-gray-500 transition ease-linear duration-150 ml-2 text-[20px]">
+                        <FaArrowRightLong />
+                      </span>
                   </Link>
                 
                 </div>

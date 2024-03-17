@@ -35,16 +35,17 @@ const page = () => {
             </p>
           </div>
       </main>
-      <div className='grid grid-cols-1 lg:grid-cols-4 p-10 justify-center items-center text-center bg-gradient-to-r from-indigo-950/40 via-black to-blue-950 gap-5 text-md lg:text-lg'>
+      <div className='grid grid-cols-1 lg:grid-cols-4 p-10 justify-center items-center text-centergap-5 text-md lg:text-lg 
+      bg-gradient-to-r from-slate-300 to-gray-400 space-x-4'>
         <input
-          className='p-3 bg-white/5 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='p-3 bg-white/60 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
           type="text"
           placeholder="Search job titles..."
           value={titleFilter}
           onChange={(e) => setTitleFilter(e.target.value)}
         />
         <input
-          className='p-3 bg-white/5 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='p-3 bg-white/60 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
           type="text"
           placeholder="Search skills..."
           value={skillFilter}
@@ -53,21 +54,21 @@ const page = () => {
         <select
           value={locationFilter}
           onChange={(e) => setLocationFilter(e.target.value)}
-          className='p-3 bg-white/5 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='p-3 bg-white/60 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
         >
-          <option value="">Select Location</option>
-          <option value="Remote">Remote</option>
-          <option value="Hybrid">Hybrid</option>
+          <option value="" disabled className='text-gray-600'>Select Location</option>
+          <option value="Remote" className='text-black'>Remote</option>
+          <option value="Hybrid" className='text-black'>Hybrid</option>
         </select>
         <select
-          className='p-3 bg-white/5 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='p-3 bg-white/60 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
           value={experienceFilter}
           onChange={(e) => setExperienceFilter(e.target.value)}
         >
-          <option value="">Select Experience</option>
-          <option value="Entry">Entry</option>
-          <option value="Mid">Mid</option>
-          <option value="Senior">Senior</option>
+          <option value="" disabled className='text-gray-600'>Select Experience</option>
+          <option value="Entry" className='text-black'>Entry</option>
+          <option value="Mid" className='text-black'>Mid</option>
+          <option value="Senior" className='text-black'>Senior</option>
         </select>
       </div>
 

@@ -3,7 +3,7 @@ const jobs = [
     "title": "Data Analyst",
     "pay": "$60,000 - $80,000",
     "skills": ["SQL", "Python", "Tableau", "Statistical Analysis"],
-    "desc": "Responsible for interpreting data, analyzing results using statistical techniques, and providing ongoing reports.",
+    "desc": "Responsible for interpreting data, analyzing results using statistical techniques, and providing clear, concise, and actionable ongoing reports.",
     "type": "Full Time",
     "edu": "Bachelor's degree in Mathematics, Economics, Computer Science, Information Management, or Statistics",
     "responsibilities": [
@@ -151,7 +151,7 @@ const jobs = [
     "title": "Data Operations Specialist",
     "pay": "$45,000 - $65,000",
     "skills": ["Data Management", "SQL", "Scripting", "Process Improvement"],
-    "desc": "Maintains database performance by identifying and resolving issues, supporting users, and ensuring data integrity.",
+    "desc": "Maintains database performance by identifying and resolving critical issues, supporting users with data access needs, and ensuring data integrity through monitoring.",
     "type": "Full Time",
     "edu": "Associate's degree in Information Technology, Bachelor's preferred",
     "responsibilities": [
@@ -172,7 +172,7 @@ const jobs = [
     "title": "Customer Data Analyst",
     "pay": "$60,000 - $80,000",
     "skills": ["CRM", "Data Mining", "SQL", "Customer Segmentation"],
-    "desc": "Utilizes data analysis techniques to understand customer behavior, improve customer experience, and drive sales.",
+    "desc": "Utilizes advanced data analysis techniques to uncover hidden customer insights, improve customer experience through personalization, and drive sales with targeted marketing campaigns.",
     "type": "Full Time",
     "edu": "Bachelor's degree in Marketing, Business, Statistics, or related field",
     "responsibilities": [
@@ -193,7 +193,7 @@ const jobs = [
     "title": "Product Data Manager",
     "pay": "$75,000 - $95,000",
     "skills": ["Product Management", "Data Analysis", "Project Coordination", "Cross-functional Team Leadership"],
-    "desc": "Oversees the data associated with the company's products, ensuring accuracy and accessibility to stakeholders.",
+    "desc": "Oversees the data associated with the company's products, ensuring accuracy, accessibility to stakeholders, and compliance with data governance regulations.",
     "type": "Full Time",
     "edu": "Bachelor's degree in Business Administration, Data Management, Product Management, or related field",
     "responsibilities": [

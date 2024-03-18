@@ -321,7 +321,7 @@ const Apply = () => {
                 <span className='flex flex-row gap-4'>
                   <button className='flex my-auto items-center text-xl border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear 
                   mt-10 text-gray-500 font-medium hover:text-gray-100'>Save</button>
-                  <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-110 transition ease-linear mt-10 group font-medium '>
+                  <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-110 transition ease-linear mt-10 group font-medium text-gray-200'>
                     Review
                     <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
                       <MdKeyboardArrowRight />
@@ -343,55 +343,56 @@ const Apply = () => {
         </div>}
 
       {submitted && <div className='bg-white'>
-        <div className='bg-indigo-200/25 lg:m-10 lg:p-10 rounded-lg lg:block lg:border-2 lg:border-indigo-900/40'>
+        <div className='bg-indigo-200/25 lg:m-10 lg:p-10 rounded-lg lg:block lg:border-2 lg:border-indigo-900/40 '>
           <div className='text-white'>
-            <h1 className='font-extrabold text-xl lg:text-2xl mb-12 ml-6 mt-4 inline text-indigo-500'>Review Your Application: <h1 className='border-2 border-indigo-500/90 px-2 rounded-md border-dashed text-xl lg:text-2xl inline text-indigo-500/90'>{submittedApp.personalInformation.job}</h1></h1>
-
+              <h1 className='font-extrabold text-xl lg:text-2xl mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row'>Review Your Application: 
+                <h1 className='border-2 border-indigo-700/90 px-2 rounded-md border-dashed w-fit text-xl lg:text-2xl text-indigo-700/90 text-center lg:ml-2'>{submittedApp.personalInformation.job}</h1>
+              </h1>
             <div className='lg:ml-2'>
 
-              <h2 className='font-semibold text-xl lg:text-2xl text-indigo-400 ml-7 mt-8'>
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 lg:mt-6'>
                 Personal Information
               </h2>
-              <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 p-7 lg:ml-7'>
+              <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 px-7 pb-7 lg:ml-7'>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col lg:mr-10'>
-                  <span className='ml-1 mt-6'>Full Name</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <span className='ml-1 mt-6 font-semibold'>Full Name</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.personalInformation.name || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col'>
-                  <span className='ml-1'>Date of Birth</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col'>
+                  <span className='ml-1 font-semibold'>Date of Birth</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.personalInformation.dob || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                  <span className='ml-1'>Address</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                  <span className='ml-1 font-semibold'>Address</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.personalInformation.address || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col mt-10 mr-13'>
-                  <span className='ml-1'>City</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 mr-13'>
+                  <span className='ml-1 font-semibold'>City</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.personalInformation.city || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                  <span className='ml-1'>State/Country</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                  <span className='ml-1 font-semibold'>State/Country</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.personalInformation.state || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col mt-10'>
-                  <span className='ml-1'>Zip Code</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10'>
+                  <span className='ml-1 font-semibold'>Zip Code</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.personalInformation.zip || 'No response'}
                   </div>
                 </div>
@@ -401,36 +402,36 @@ const Apply = () => {
 
             <div className='ml-2'>
 
-              <h2 className='font-semibold text-xl lg:text-2xl text-blue-400 ml-7 mt-8'>
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>
                 Contact Information
               </h2>
 
-              <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 p-7 lg:ml-7'>
+              <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 px-7 pb-7 lg:ml-7'>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col lg:mr-10'>
-                  <span className='ml-1 mt-6'>Email</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <span className='ml-1 mt-6 font-semibold'>Email</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.contactInformation.email !== '' ? submittedApp.contactInformation.email : 'No response'}
                   </div>
                 </div>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col'>
-                  <span className='ml-1'>Phone</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col'>
+                  <span className='ml-1 font-semibold'>Phone</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.contactInformation.phone || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                  <span className='ml-1'>Title</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                  <span className='ml-1 font-semibold'>Title</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.contactInformation.title || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-gray-300 text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                  <span className='ml-1'>Pronouns</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                  <span className='ml-1 font-semibold'>Pronouns</span>
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                     {submittedApp.contactInformation.pronoun || 'No response'}
                   </div>
                 </div>
@@ -440,53 +441,53 @@ const Apply = () => {
 
             <div className='ml-2'>
 
-              <h2 className='font-semibold text-xl lg:text-2xl text-blue-400 ml-7 mt-8'>
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>
                 Previous Experience
               </h2>
 
-              <div className='space-y-4 text-white lg:mr-56 p-7 lg:ml-7'>
+              <div className='space-y-4 text-white lg:mr-56 px-7 pb-7 pt-3 lg:ml-7'>
 
                 <div className='flex flex-col'>
-                  <div className='text-gray-300 text-md lg:text-lg flex flex-col lg:mr-10'>
-                    <span className='ml-1 mt-4'>Work Experience</span>
-                    <div placeholder='John Doe' onChange={(e) => setName(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <span className='ml-1 mt-4 font-semibold'>Work Experience</span>
+                    <div placeholder='John Doe' onChange={(e) => setName(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                       {submittedApp.previousExperiences.workExperience || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-gray-300 text-md lg:text-lg flex flex-col'>
-                    <span className='ml-1 mt-8'>Work Experience Qualifications</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col'>
+                    <span className='ml-1 mt-8 font-semibold'>Work Experience Qualifications</span>
+                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                       {submittedApp.previousExperiences.workExperienceQualification || 'No response'}
                     </div>
                   </div>
                 </div>
 
                 <div className='grid lg:grid-cols-2 space-y-6'>
-                  <div className='text-gray-300 text-md lg:text-lg mt-6 lg:mr-10'>
-                    <span className='ml-1'>Undergraduate Education Information</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-6 lg:mr-10'>
+                    <span className='ml-1 font-semibold'>Undergraduate Education Information</span>
+                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                       {submittedApp.previousExperiences.undergrad.institution || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-gray-300 text-md lg:text-lg mt-4 lg:mr-10'>
-                    <span className='ml-1'>Undergraduate Degree(s)</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-4 lg:mr-10'>
+                    <span className='ml-1 font-semibold'>Undergraduate Degree(s)</span>
+                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                       {submittedApp.previousExperiences.undergrad.degree || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-gray-300 text-md lg:text-lg lg:mr-10'>
-                    <span className='ml-1'>Graduate Education Information</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <span className='ml-1 font-semibold'>Graduate Education Information</span>
+                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                       {submittedApp.previousExperiences.grad.institution || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-gray-300 text-md lg:text-lg mt-4 lg:mr-10'>
-                    <span className='ml-1'>Graduate Degree(s)</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-4 lg:mr-10'>
+                    <span className='ml-1 font-semibold'>Graduate Degree(s)</span>
+                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                       {submittedApp.previousExperiences.grad.institution || 'No response'}
                     </div>
                   </div>
@@ -497,23 +498,23 @@ const Apply = () => {
 
             <div className='ml-2'>
 
-              <h2 className='font-semibold text-xl lg:text-2xl text-blue-400 ml-7 mt-8'>
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>
                 Skills / Expertise
               </h2>
 
-              <div className='space-y-4 text-white lg:mr-56 p-7 lg:ml-7'>
+              <div className='space-y-4 text-white lg:mr-56 px-7 pb-7 pt-3 lg:ml-7'>
 
                 <div className='flex flex-col'>
-                  <div className='text-gray-300 text-md lg:text-lg flex flex-col lg:mr-10'>
-                    <span className='ml-1 mt-4'>Skills Acquired</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <span className='ml-1 mt-4 font-semibold'>Skills Acquired</span>
+                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                       {submittedApp.skillsExpertise.skills || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-gray-300 text-md lg:text-lg flex flex-col'>
-                    <span className='ml-1 mt-8'>Skills Qualifications</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col'>
+                    <span className='ml-1 mt-8 font-semibold'>Skills Qualifications</span>
+                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                       {submittedApp.skillsExpertise.skillsQualification || 'No response'}
                     </div>
                   </div>
@@ -524,31 +525,31 @@ const Apply = () => {
 
             <div className='ml-2'>
 
-              <h2 className='font-semibold text-xl lg:text-2xl text-blue-400 ml-7 mt-8'>
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>
                 Other Information
               </h2>
 
-              <div className='space-y-4 text-white lg:mr-56 p-7 lg:ml-7'>
+              <div className='space-y-4 text-white lg:mr-56 px-7 pb-7 pt-3 lg:ml-7'>
 
                 <div className='flex flex-col'>
-                  <div className='text-gray-300 text-md lg:text-lg flex flex-col lg:mr-10 mb-2'>
-                    <span className='ml-1 mt-4'>Additional Information</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mb-2'>
+                    <span className='ml-1 mt-4 font-semibold'>Additional Information</span>
+                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none'>
                       {submittedApp.other.additionalInformation || 'No response'}
                     </div>
                   </div>
 
                   <div className='grid lg:grid-cols-2'>
-                    <div className='text-gray-300 text-md lg:text-lg flex flex-col lg:mr-10'>
-                      <span className='ml-1 mt-4'>LinkedIn</span>
-                      <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                      <span className='ml-1 mt-4 font-semibold'>LinkedIn</span>
+                      <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                         {submittedApp.other.linkedin ? <Link target='_blank' href={submittedApp.other.linkedin}>{submittedApp.other.linkedin}</Link> : 'No response'}
                       </div>
                     </div>
 
                     <div className='text-gray-300 text-md lg:text-lg flex flex-col lg:mr-10'>
-                      <span className='ml-1 mt-4'>Resume</span>
-                      <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-900/20 mt-3 outline-none text-gray-100'>
+                      <span className='ml-1 mt-4 font-semibold'>Resume</span>
+                      <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/30 text-indigo-500/80 mt-3 outline-none text-gray-100'>
                         {submittedApp.other.resume ? <Link target='_blank' href={submittedApp.other.resume}>{submittedApp.other.resume}</Link> : 'No response'}
                       </div>
                     </div>
@@ -559,12 +560,13 @@ const Apply = () => {
             </div>
 
             {!finalSubmit && <span className='flex flex-row gap-4 lg:pl-20 ml-7 lg:ml-0 mb-10'>
-              <button className='flex my-auto items-center lg:text-xl border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear mt-10' 
+              <button className='flex my-auto items-center text-xl border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear 
+                  mt-10 text-gray-500 font-medium hover:text-gray-100' 
               onClick={() => setSubmitted(false)}>
                 Edit Application
               </button>
               {backToTop && (
-                <button onClick={() => { handleSubmit("submit"); scrollUp(); }} className='flex my-auto items-center lg:text-xl bg-indigo-500 rounded-md px-4 py-2 border-2 border-indigo-500 hover:brightness-75 transition ease-linear mt-10 group'>
+                <button onClick={() => { handleSubmit("submit"); scrollUp(); }} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-110 transition ease-linear mt-10 group font-medium text-gray-200'>
                   Submit
                   <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
                     <MdKeyboardArrowRight />

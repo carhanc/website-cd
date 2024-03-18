@@ -9,6 +9,7 @@ import logo from "../../public/logo.png"
 import { Divide as Hamburger1 } from 'hamburger-react'
 import { useState } from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const Nav = () => {
 
@@ -39,31 +40,31 @@ const Nav = () => {
                     draggable="false"
                     src={logo}
                   />
-                    <p className="my-auto sm:block hidden font-extrabold ml-2 text-gray-700">DataVoyagers Careers</p>
+                    <p className="my-auto sm:block hidden font-bold ml-2 text-cyan-500">DataVoyagers Careers</p>
                 </Link>
 
                 {/* Mobile Open/Close Btn */}
                 <Disclosure.Button
-                  className="rounded-xl p-2 text-white hover:text-gray-300 sm:hidden scale-90">
+                  className="rounded-xl p-2 text-cyan-500 hover:text-cyan-500 sm:hidden scale-90">
                   <Hamburger1 toggled={isOpen} toggle={setOpen} />
                 </Disclosure.Button>
 
                 {/* Desktop Links */}
-                <div className="hidden gap-x-12 sm:flex text-[22px] my-auto rounded-md p-2 font-semibold text-gray-700 text-transparent bg-clip-text">
+                <div className="hidden gap-x-12 sm:flex text-[22px] my-auto rounded-md p-2 font-semibold text-cyan-700 text-transparent bg-clip-text">
 
                   {/* <Link href="/about" className="mr-1 my-auto hover:text-blue-500 hover:font-bold ease-linear duration-200">
                       About
                   </Link> */}
 
-                  <Link href="/positions" className="my-auto hover:font-bold ease-linear duration-300 hover:text-gray-500 text-gray-700">
+                  <Link href="/positions" className="my-auto hover:scale-105 ease-linear duration-150 hover:text-cyan-500 text-cyan-500/90 hover:brightness-110">
                       Positions
                   </Link>
 
-                  <Link href="/apply" className="hover:font-bold hover:text-gray-500 ease-linear duration-300 border-[3px] 
-                  rounded-md px-4 py-1 border-gray-700 hover:border-gray-500 flex items-center group text-gray-700">
+                  <Link href="/apply" className="hover:font-bold hover:text-white ease-linear duration-200 border-[3px] 
+                  rounded-md pl-4 pr-3 py-1 border-cyan-500/90 hover:bg-cyan-500/90 flex items-center group text-cyan-500/90 hover:brightness-110">
                       Apply 
-                      <span className="text-gray-600 mt-[1px] group-hover:translate-x-1 group-hover:text-gray-500 transition ease-linear duration-150 ml-2 text-[20px]">
-                        <FaArrowRightLong />
+                      <span className="text-cyan-500 mt-[2px] group-hover:translate-x-1 group-hover:text-white font-semibold transition ease-linear duration-150 text-[27px]">
+                        <MdKeyboardArrowRight />
                       </span>
                   </Link>
                 
@@ -83,23 +84,14 @@ const Nav = () => {
                 className="relative"
               >                
                 <div
-                  className="mt-2 mb-4 border-t border-gray-800/40 sm:hidden h-[120px] py-4"
+                  className="mt-4 mb-4 border-t border-cyan-600/40 sm:hidden h-[80px] py-4"
                 >
                   <div className="mt-2 flex flex-col space-y-4">
-
-                    <Link href="/about" passHref>
-                      <Disclosure.Button
-                        as="a"
-                        className="rounded-md p-2 font-semibold text-gray-300 hover:bg-gray-900/50"
-                      >
-                        About
-                      </Disclosure.Button>
-                    </Link>
 
                     <Link href="/positions" passHref>
                       <Disclosure.Button
                         as="a"
-                        className="rounded-md p-2 font-semibold text-gray-300 hover:bg-gray-900/50"
+                        className="rounded-md p-2 font-semibold text-cyan-500 hover:bg-gray-900/50"
                       >
                         Positions
                       </Disclosure.Button>
@@ -108,7 +100,7 @@ const Nav = () => {
                     <Link href="/apply" passHref>
                       <Disclosure.Button
                         as="a"
-                        className="rounded-md p-2 font-semibold text-gray-300 hover:bg-gray-900/50 "
+                        className="rounded-md p-2 font-semibold text-cyan-500 hover:bg-gray-900/50 "
                       >
                         Apply
                       </Disclosure.Button>

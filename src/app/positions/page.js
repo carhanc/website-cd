@@ -26,19 +26,19 @@ const page = () => {
 
   return (
     <div>
-      <div className='bg-gradient-to-br from-slate-200 via-zinc-500 to-gray-300'>
+      <div className=' bg-gradient-to-br from-cyan-200 via-blue-200 to-blue-100 backdrop:blur-3xl'>
         <Nav />
-        <main className="lg:flex flex-cols-2 justify-evenly text-slate-800 bg-gradient-to-br from-slate-200 via-zinc-500 to-gray-300">
+        <main className="lg:flex flex-cols-2 justify-evenly text-slate-800 bg-gradient-to-br from-cyan-200 via-blue-200 to-blue-100">
             <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[16vh] pt-[10vh] lg:h-[50vh] lg:mb-0 mb-14 md:px-20 space-y-6 p-16">
-              <h1 className="text-4xl lg:text-6xl font-bold">Open Positions</h1>
-              <p className="text-slate-700 text-xl lg:text-3xl font-semibold bg-gradient-to-r from-sky-300 to-sky-400 bg-clip-text text-transparent lg:mx-0 lg:pb-4 pb-2">
+              <h1 className="text-4xl lg:text-6xl font-bold text-cyan-600">Open Positions</h1>
+              <p className="text-xl lg:text-3xl font-semibold bg-gradient-to-r from-sky-500 to-sky-600 bg-clip-text text-transparent lg:mx-0 lg:pb-4 pb-2">
                 Check here for frequently updated open positions. Search and filter our list to find the perfect fit for you.
               </p>
             </div>
         </main>
 
-      <div className='grid grid-cols-1 lg:grid-cols-4 p-10 justify-center items-center text-centergap-5 text-md lg:text-lg 
-      bg-gradient-to-r from-slate-300 to-gray-400 space-x-4'>
+      <div className='grid grid-cols-1 lg:grid-cols-4 p-10 justify-center items-center text-centergap-5 text-md lg:text-lg border-t-2 border-gray-400
+       bg-gradient-to-tr from-cyan-200 via-blue-200 to-blue-100 space-x-4'>
         <input
           className='p-3 bg-white/60 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
           type="text"

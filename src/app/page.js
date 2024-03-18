@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Nav from "../components/nav";
-import { BiRightArrowAlt } from "react-icons/bi";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import arhan from "../../public/img.jpeg"
 import collaboration from "../../public/collaboration.jpg"
 import innovation from "../../public/innovation.jpg"
@@ -21,16 +21,16 @@ export default function Home() {
       <main className="lg:flex flex-col justify-center items-center text-black bg-white text-center">
           <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[15vh] pt-[10vh] lg:h-[30vh] lg:mb-0 mb-14 md:px-20 space-y-6">
             <p className="font-extrabold lg:mx-0 lg:pb-4 pb-2 text-4xl lg:text-5xl text-center">
-              Explore the data deluge with where <br /> curiosity meets innovation
+              Explore the data deluge with DataVoyagers<br /> where curiosity meets innovation
             </p>
           </div>
             
             <Link
-            className="rounded-full lg:ml-2 border-cyan-400 text-cyan-600 border-2 w-fit px-4 py-2 mb-10 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
+            className="rounded-full lg:ml-2 border-cyan-400 text-cyan-600 border-2 w-fit px-4 py-2 mb-6 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
             href="/positions"
             >
                 View Open Positions
-              <BiRightArrowAlt className="mt-[5px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
+              <MdKeyboardArrowRight className="mt-[5px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
             </Link>
 
           <div className="justify-center -space-x-10 items-center text-center lg:flex mb-20 hidden">

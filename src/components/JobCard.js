@@ -10,10 +10,10 @@ const JobCard = ({ job }) => {
 
   return (
     <button onClick={toggleExpanded} className="text-blue-600 hover:text-blue-800 transition ease-linear duration-150 mt-4 text-left">
-      <div className="bg-white p-4 border-2 border-gray-300 rounded-lg hover:bg-gray-100 transition ease-linear duration-150 shadow-lg shadow-gray-300 m-4 text-indigo-500">
+      <div className="bg-white p-4 border-2 border-gray-300 rounded-lg hover:bg-purple-100 transition ease-linear duration-150 shadow-lg shadow-gray-300 m-4 text-indigo-500">
         <h3 className="text-lg font-semibold">{job.title}</h3>
         <p className="text-sm text-gray-600 font-medium overflow-ellipsis overflow-hidden h-12">{job.desc}</p>
-        <p className="text-sm text-green-500 font-medium">{job.pay}</p>
+        <p className="text-sm text-green-600 font-medium">{job.pay}</p>
 
           <p className="text-sm text-gray-600 font-medium mt-2"><span className='font-bold'>Type:</span> {job.type}</p>
           <p className="text-sm text-gray-600 font-medium mt-1"><span className='font-bold'>Experience:</span> {job.experience}</p>

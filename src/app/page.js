@@ -26,18 +26,18 @@ export default function Home() {
           </div>
             
             <Link
-            className="rounded-full lg:ml-2 border-cyan-400 text-cyan-600 border-2 w-fit px-4 py-2 mb-6 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
+            className="rounded-full z-50 lg:ml-2 border-indigo-400 text-indigo-600 border-2 w-fit px-4 py-2 my-3 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
             href="/positions"
             >
                 View Open Positions
               <MdKeyboardArrowRight className="mt-[5px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
             </Link>
 
-          <div className="justify-center -space-x-10 items-center text-center lg:flex mb-20 hidden">
-            <div className="w-1/3 lg:block hidden mb-32 scale-90 -rotate-[8deg]">
+          <div className="justify-center -space-x-8 items-center text-center lg:flex mb-20 hidden">
+            <div className="w-1/3 lg:block hidden mb-4 scale-90 -rotate-[14deg]">
               <Image src={data1} className="object-cover h-full rounded-lg" />
             </div>
-            <div className="w-1/3 lg:block hidden">
+            <div className="w-1/3 lg:block hidden mb-20">
               <Image src={data} className="object-cover h-full rounded-lg" />
             </div>
           </div>
@@ -45,7 +45,7 @@ export default function Home() {
       
 
       <div className="px-10 xl:px-12 py-10">
-        <h1 className=" mb-10 text-3xl font-bold lg:text-left text-center text-blue-500">Why Become a Voyager?</h1>
+        <h1 className=" mb-10 text-3xl font-bold lg:text-left text-center text-indigo-500">Why Become a Voyager?</h1>
         <div className="grid xl:grid-cols-2 gap-6">
           {benefits.map((benefit) => (
             <BenefitsCard key={benefit.title} {...benefit} />
@@ -56,7 +56,7 @@ export default function Home() {
 
       <div className="px-10 xl:px-12 py-10 bg-white">
         
-        <h1 className="text-grey-900 mb-10 text-3xl font-bold text-blue-500">The Voyager Culture</h1>
+        <h1 className="text-grey-900 mb-10 text-3xl font-bold text-indigo-500">The Voyager Culture</h1>
 
         <div className="grid lg:grid-cols-2 gap-10">
             
@@ -65,12 +65,12 @@ export default function Home() {
           </div>
 
           <div className="my-auto">
-            <h1 className="text-blue-400 text-2xl font-bold mb-5">Innovation at Every Turn</h1>
+            <h1 className="text-indigo-400 text-2xl font-bold mb-5">Innovation at Every Turn</h1>
             <p className="text-gray-600 text-lg font-medium">At DataVoyagers, we believe that innovation isn't just a buzzword; it's the cornerstone of our success. We encourage our team to challenge the status quo, think outside the box, and embrace new ideas. Our culture thrives on creativity and the relentless pursuit of excellence.</p>
           </div>
 
           <div className="my-auto">
-            <h1 className="text-blue-400 text-2xl font-bold mb-5">Collaboration and Diversity:</h1>
+            <h1 className="text-indigo-400 text-2xl font-bold mb-5">Collaboration and Diversity:</h1>
             <p className="text-gray-600 text-lg font-medium">We know that the best ideas come from the convergence of diverse perspectives. That's why we foster a collaborative environment where everyone's voice is heard and valued. Our team is made up of individuals from various backgrounds, each bringing their unique insights and experiences to the table.</p>
           </div>
 
@@ -83,12 +83,12 @@ export default function Home() {
           </div>
 
           <div className="my-auto">
-            <h1 className="text-blue-400 text-2xl font-bold mb-5">Empowerment and Growth</h1>
+            <h1 className="text-indigo-400 text-2xl font-bold mb-5">Empowerment and Growth</h1>
             <p className="text-gray-600 text-lg font-medium">Our employees are our greatest asset, and we're committed to their professional and personal growth. We empower our team members with the resources, tools, and support they need to excel in their roles and advance in their careers. At DataVoyagers, you're not just joining a company; you're joining a path to future opportunities.</p>
           </div>
 
           <div className="my-auto">
-            <h1 className="text-blue-400 text-2xl font-bold mb-5">Work-Life Harmony</h1>
+            <h1 className="text-indigo-400 text-2xl font-bold mb-5">Work-Life Harmony</h1>
             <p className="text-gray-600 text-lg font-medium">We understand that our employees have lives outside of work, and we believe that balance is essential for long-term happiness and productivity. Whether it's through flexible working arrangements, wellness programs, or social events, we're dedicated to ensuring our team members have the harmony they deserve.</p>
           </div>
 

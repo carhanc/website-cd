@@ -49,7 +49,7 @@ const navigation = {
 export default function Footer() {
   return (
     <footer
-      className=" bg-gradient-to-r from-black via-indigo-900/45 to-black border-t-2 border-indigo-950"
+      className=" bg-gradient-to-r border-t-2 border-indigo-600/40"
       aria-labelledby="footer-heading"
     >
       <div className="mx-auto max-w-7xl px-16 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32 opacity-100">
@@ -63,12 +63,12 @@ export default function Footer() {
                     draggable="false"
                     src={logo}
                 />
-                <p className="mt-3 hidden md:block text-white">DataVoyagers Careers</p>
+                <p className="mt-3 hidden md:block text-indigo-700">DataVoyagers Careers</p>
             </Link>
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
             <div>
-                <h3 className="text-sm lg:text-lg font-semibold leading-6 text-white">
+                <h3 className="text-sm lg:text-lg font-semibold leading-6 text-indigo-700">
                   About
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -76,7 +76,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm lg:text-lg leading-6 text-gray-300 hover:text-white"
+                        className="text-sm lg:text-lg leading-6 text-indigo-500 hover:text-indigo-400"
                       >
                         {item.name}
                       </Link>
@@ -85,7 +85,7 @@ export default function Footer() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm lg:text-lg font-semibold leading-6 text-white mt-10 md:mt-0">
+                <h3 className="text-sm lg:text-lg font-semibold leading-6 text-indigo-700 mt-10 md:mt-0">
                   Positions
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -93,7 +93,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm lg:text-lg leading-6 text-gray-300 hover:text-white"
+                        className="text-sm lg:text-lg leading-6 text-indigo-500 hover:text-indigo-400"
                       >
                         {item.name}
                       </Link>
@@ -104,7 +104,7 @@ export default function Footer() {
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm lg:text-lg font-semibold leading-6 text-white">
+                <h3 className="text-sm lg:text-lg font-semibold leading-6 text-indigo-700">
                   Apply
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -112,7 +112,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm lg:text-lg leading-6 text-gray-300 hover:text-white"
+                        className="text-sm lg:text-lg leading-6 text-indigo-500 hover:text-indigo-400"
                       >
                         {item.name}
                       </Link>
@@ -121,7 +121,7 @@ export default function Footer() {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm lg:text-lg font-semibold leading-6 text-white">
+                <h3 className="text-sm lg:text-lg font-semibold leading-6 text-indigo-700">
                   Legal
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -129,7 +129,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm lg:text-lg leading-6 text-gray-300 hover:text-white"
+                        className="text-sm lg:text-lg leading-6 text-indigo-500 hover:text-indigo-400"
                       >
                         {item.name}
                       </Link>
@@ -140,21 +140,21 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-8 sm:mt-32 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
+        <div className="mt-8 sm:mt-32 border-t border-indigo-600/40 pt-8 md:flex md:items-center md:justify-between">
           <div className="flex space-x-6 md:order-2">
             {navigation.social.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 target="_blank"
-                className="text-neutral-500 hover:text-neutral-400 ease-linear transition"
+                className="text-indigo-500 hover:text-indigo-400 ease-linear transition"
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="h-6 w-6" aria-hidden="true" />
               </Link>
             ))}
           </div>
-          <p className="mt-8 text-sm lg:text-lg leading-5 text-neutral-400 md:order-1 md:mt-0">
+          <p className="mt-8 text-sm lg:text-lg leading-5 text-indigo-400 md:order-1 md:mt-0">
             &copy; {new Date().getFullYear()} DataVoyagers. All rights reserved.
           </p>
         </div>

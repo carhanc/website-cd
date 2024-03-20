@@ -57,7 +57,7 @@ export default function Footer() {
             <Link href='/' className="space-x-3 sm:flex text-xl rounded-md 
                 font-semibold cursor-pointer ease-linear duration-300">
                 <Image
-                    className="relative w-12 h-12"
+                    className="relative w-12 h-12 brightness-125"
                     alt="SciLynk Logo"
                     placeholder="blur"
                     draggable="false"
@@ -76,7 +76,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm lg:text-lg leading-6 text-indigo-500 hover:text-indigo-400"
+                        className="text-sm lg:text-lg leading-6 text-indigo-500 duration-200 hover:font-medium"
                       >
                         {item.name}
                       </Link>
@@ -93,7 +93,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm lg:text-lg leading-6 text-indigo-500 hover:text-indigo-400"
+                        className="text-sm lg:text-lg leading-6 text-indigo-500  duration-200 hover:font-medium"
                       >
                         {item.name}
                       </Link>
@@ -112,7 +112,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm lg:text-lg leading-6 text-indigo-500 hover:text-indigo-400"
+                        className="text-sm lg:text-lg leading-6 text-indigo-500  duration-200 hover:font-medium"
                       >
                         {item.name}
                       </Link>
@@ -129,7 +129,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm lg:text-lg leading-6 text-indigo-500 hover:text-indigo-400"
+                        className="text-sm lg:text-lg leading-6 text-indigo-500  duration-200 hover:font-medium"
                       >
                         {item.name}
                       </Link>

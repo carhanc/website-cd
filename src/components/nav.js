@@ -34,13 +34,13 @@ const Nav = () => {
                 <Link href='/' className="gap-2 sm:flex text-[22px] rounded-md p-2 
                 font-semibold hover:scale-105 cursor-pointer ease-linear duration-150 text-gray-700 text-transparent bg-clip-text">
                   <Image
-                    className="relative w-14 lg:mt-[-4px] mt-[-2px]"
+                    className="relative w-14 lg:mt-[-4px] mt-[-2px] brightness-125 scale-90"
                     alt="NextGen Logo"
                     placeholder="blur"
                     draggable="false"
                     src={logo}
                   />
-                    <p className="my-auto sm:block hidden font-bold ml-2 text-indigo-500">DataVoyagers Careers</p>
+                    <p className="my-auto sm:block hidden font-bold text-indigo-500">DataVoyagers Careers</p>
                 </Link>
 
                 {/* Mobile Open/Close Btn */}
@@ -60,7 +60,7 @@ const Nav = () => {
                       Positions
                   </Link>
 
-                  <Link href="/apply" className="hover:font-bold hover:text-white ease-linear duration-200 border-[3px] 
+                  <Link href="/apply" className="hover:text-white ease-linear duration-200 border-[3px] 
                   rounded-md pl-4 pr-3 py-1 border-indigo-500/90 hover:bg-indigo-500/90 flex items-center group text-indigo-500/90 hover:brightness-110">
                       Apply 
                       <span className="text-indigo-500 mt-[2px] group-hover:translate-x-1 group-hover:text-white font-semibold transition ease-linear duration-150 text-[27px]">

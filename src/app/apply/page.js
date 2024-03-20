@@ -157,7 +157,7 @@ const Apply = () => {
                 Personal Information
               </span>
               <select
-                className='bg-indigo-400/60 py-2 px-3 text-indigo-800 rounded-full text-sm font-medium lg:text-xl border-2 border-indigo-900/40 lg:mt-0 mt-7 ml-0 lg:ml-5'
+                className='bg-indigo-400/60 py-2 px-3 text-indigo-800 rounded-xl text-sm font-medium lg:text-xl border-2 border-indigo-900/40 lg:mt-0 mt-7 ml-0 lg:ml-5'
                 onChange={(e) => setJob(e.target.value)} 
                 defaultValue="" 
               >
@@ -345,8 +345,8 @@ const Apply = () => {
       {submitted && <div className='bg-white'>
         <div className='bg-indigo-200/25 lg:m-10 lg:p-10 rounded-lg lg:block lg:border-2 lg:border-indigo-900/40 '>
           <div className='text-white'>
-              <h1 className='font-extrabold text-xl lg:text-2xl mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row'>Review Your Application: 
-                <h1 className='border-2 border-indigo-700/90 px-2 rounded-md border-dashed w-fit text-xl lg:text-2xl text-indigo-700/90 text-center lg:ml-2'>{submittedApp.personalInformation.job}</h1>
+              <h1 className='lg:flex-none flex flex-col items-center font-extrabold text-xl lg:text-2xl mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row md:ml-7'>Review Your Application: 
+                <h1 className='border-2 border-indigo-700/90 px-2 rounded-md border-dashed text-xl lg:text-2xl text-indigo-700/90 text-center lg:ml-2 w-fit'>{submittedApp.personalInformation.job}</h1>
               </h1>
             <div className='lg:ml-2'>
 

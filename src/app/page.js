@@ -19,20 +19,20 @@ export default function Home() {
       <Nav />
       
       <main className="lg:flex flex-col justify-center items-center text-black bg-white text-center">
-          <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[15vh] pt-[10vh] lg:h-[30vh] lg:mb-0 mb-14 md:px-20 space-y-6">
+          <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[12vh] pt-[8vh] lg:h-[28vh] lg:mb-0 mb-10 md:px-20 space-y-6">
             <p className="font-extrabold lg:mx-0 lg:pb-4 pb-2 text-4xl lg:text-5xl text-center">
               Explore the data deluge with DataVoyagers<br /> where curiosity meets innovation
             </p>
           </div>
-            
-            <Link
-            className="rounded-full z-50 lg:ml-2 border-indigo-400 text-indigo-600 border-2 w-fit px-4 py-2 my-3 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
-            href="/positions"
-            >
-                View Open Positions
-              <MdKeyboardArrowRight className="mt-[5px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
-            </Link>
-
+            <div className="flex items-center justify-center lg:my-3">
+              <Link
+              className="rounded-full z-50 lg:ml-2 border-indigo-400 text-indigo-600 border-2 w-fit px-4 py-2 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
+              href="/positions"
+              >
+                  View Open Positions
+                <MdKeyboardArrowRight className="lg:mt-[5px] mt-[2px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
+              </Link>
+            </div>
           <div className="justify-center -space-x-8 items-center text-center lg:flex mb-20 hidden">
             <div className="w-1/3 lg:block hidden mb-4 scale-90 -rotate-[14deg]">
               <Image src={data1} className="object-cover h-full rounded-lg" />
@@ -45,7 +45,7 @@ export default function Home() {
       
 
       <div className="px-10 xl:px-12 py-10">
-        <h1 className=" mb-10 text-3xl font-bold lg:text-left text-center text-indigo-500">Why Become a Voyager?</h1>
+        <h1 className=" mb-10 text-3xl font-bold lg:text-left lg:mt-0 mt-4 text-center text-indigo-500">Why Become a Voyager?</h1>
         <div className="grid xl:grid-cols-2 gap-6">
           {benefits.map((benefit) => (
             <BenefitsCard key={benefit.title} {...benefit} />
@@ -56,12 +56,12 @@ export default function Home() {
 
       <div className="px-10 xl:px-12 py-10 bg-white">
         
-        <h1 className="text-grey-900 mb-10 text-3xl font-bold text-indigo-500">The Voyager Culture</h1>
+        <h1 className="text-grey-900 mb-10 text-3xl font-bold text-indigo-500 mt-4">The Voyager Culture</h1>
 
         <div className="grid lg:grid-cols-2 gap-10">
             
-          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
-            <Image src={innovation} className="object-cover max-h-72 rounded-lg" />
+          <div className="hidden lg:block bg-blue-900/10 rounded-lg overflow-hidden">
+            <Image src={innovation} className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" />
           </div>
 
           <div className="my-auto">
@@ -74,12 +74,12 @@ export default function Home() {
             <p className="text-gray-600 text-lg font-medium">We know that the best ideas come from the convergence of diverse perspectives. That's why we foster a collaborative environment where everyone's voice is heard and valued. Our team is made up of individuals from various backgrounds, each bringing their unique insights and experiences to the table.</p>
           </div>
 
-          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
-            <Image src={collaboration} className="object-cover max-h-72 rounded-lg" />
+          <div className="hidden lg:block bg-blue-900/10 rounded-lg overflow-hidden">
+            <Image src={collaboration} className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" />
           </div>
 
-          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
-            <Image src={promotion} className="object-cover max-h-72 rounded-lg" />
+          <div className="hidden lg:block bg-blue-900/10 rounded-lg overflow-hidden">
+            <Image src={promotion} className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" />
           </div>
 
           <div className="my-auto">
@@ -92,8 +92,8 @@ export default function Home() {
             <p className="text-gray-600 text-lg font-medium">We understand that our employees have lives outside of work, and we believe that balance is essential for long-term happiness and productivity. Whether it's through flexible working arrangements, wellness programs, or social events, we're dedicated to ensuring our team members have the harmony they deserve.</p>
           </div>
 
-          <div className="hidden lg:block bg-blue-900/10 rounded-lg">
-            <Image src={bowling} className="object-cover max-h-72 rounded-lg" />
+          <div className="hidden lg:block bg-blue-900/10 rounded-lg overflow-hidden">
+            <Image src={bowling} className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" />
           </div>
 
         </div>

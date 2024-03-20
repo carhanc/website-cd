@@ -37,7 +37,7 @@ const page = () => {
             </div>
         </main>
 
-      <div className='grid grid-cols-1 lg:grid-cols-4 p-10 justify-center items-center text-centergap-5 text-md lg:text-lg border-t-2 border-gray-400 gap-x-6'>
+      <div className='grid grid-cols-1 lg:grid-cols-4 p-10 justify-center items-center text-center gap-5 text-md lg:text-lg border-t-2 border-gray-400 gap-x-6'>
         <input
           className='p-3 bg-white/60 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
           type="text"

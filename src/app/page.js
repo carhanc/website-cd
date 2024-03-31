@@ -18,7 +18,7 @@ export default function Home() {
     <div>
       <Nav />
       
-      <main className="lg:flex flex-col justify-center items-center text-indigo-600 bg-white text-center">
+      <main className="lg:flex flex-col justify-center items-center text-indigo-600 bg-white text-center lg:mb-0 mb-5">
           <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[12vh] pt-[8vh] lg:h-[28vh] lg:mb-0 mb-10 md:px-20 space-y-6">
             <p className="font-extrabold lg:mx-0 lg:pb-4 pb-2 text-4xl lg:text-5xl text-center">
               Explore the data deluge with DataVoyagers<br /> where curiosity meets innovation
@@ -45,7 +45,7 @@ export default function Home() {
       
 
       <div className="px-10 xl:px-12 py-10">
-        <h1 className=" mb-10 text-3xl font-bold lg:text-left lg:mt-0 mt-4 text-center text-indigo-500">Why Become a Voyager?</h1>
+        <h1 className="lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold lg:text-left lg:mt-0 mt-4 text-indigo-500">Why Become a Voyager?</h1>
         <div className="grid xl:grid-cols-2 gap-6">
           {benefits.map((benefit) => (
             <BenefitsCard key={benefit.title} {...benefit} />
@@ -56,7 +56,7 @@ export default function Home() {
 
       <div className="px-10 xl:px-12 py-10 bg-white">
         
-        <h1 className="text-grey-900 mb-10 text-3xl font-bold text-indigo-500 mt-4">The Voyager Culture</h1>
+        <h1 className="text-grey-900 lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold text-indigo-500 mt-4">The Voyager Culture</h1>
 
         <div className="grid lg:grid-cols-2 gap-10">
             

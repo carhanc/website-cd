@@ -126,7 +126,7 @@ const Apply = () => {
     <div className=''>
       <Nav />
       {!submitted && <div className='bg-white'>
-        <div className='lg:m-12 md:m-10 px-6 py-12 rounded-lg lg:block lg:border-4 md:border-4 lg:border-indigo-400/90 md:border-indigo-400/90 bg-indigo-200/25'>
+        <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block lg:border-4 md:border-4 border-2 border-indigo-400/90 bg-indigo-200/25'>
 
           <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300'>
             <div className='lg:w-1/4 w-full flex flex-col lg:text-xl font-medium lg:border-r-4 lg:border-indigo-400/80 mb-10 lg:mb-0'>
@@ -156,7 +156,7 @@ const Apply = () => {
                 Personal Information
               </span>
               <select
-                className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-xl text-sm font-medium lg:text-xl border-2 border-indigo-500/40 lg:mt-0 mt-7 ml-0 lg:ml-5'
+                className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-xl text-ld font-medium lg:text-xl border-2 border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
                 onChange={(e) => setJob(e.target.value)} 
                 defaultValue="" 
               >
@@ -165,7 +165,7 @@ const Apply = () => {
                   <option key={index} value={job.title}>{job.title}</option>
                 ))}
               </select>
-              <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:p-7 pt-12'>
+              <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-12 pt-10'>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1'>Full Name</span>
@@ -206,7 +206,7 @@ const Apply = () => {
               <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>
                 Contact Information
               </span>
-              <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:p-7 pt-12 text-gray-300'>
+              <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-8 pt-6 text-gray-300'>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1'>Email</span>
@@ -237,7 +237,7 @@ const Apply = () => {
               <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>
                 Previous Experiences
               </span>
-              <div className='grid lg:mr-32 lg:p-7 pt-12 text-gray-300'>
+              <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1'>List all previous <strong>work</strong> experiences</span>
@@ -281,7 +281,7 @@ const Apply = () => {
               <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>
                 Skills & Expertise
               </span>
-              <div className='grid lg:mr-32 lg:p-7 pt-12 text-gray-300'>
+              <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1'>What do you consider to be your top <strong>five</strong> professional skills and why?</span>
@@ -290,7 +290,7 @@ const Apply = () => {
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1'>Why do these skills equip you to succeed at DataVoyagers?</span>
-                  <textarea value={skillsQual} placeholder='Elaborate on your unique skillset and why DV specifically can use your skills' onChange={(e) => setSkillsQual(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
+                  <textarea value={skillsQual} placeholder='Elaborate on your unique skillset... How does it help DataVoyagers?' onChange={(e) => setSkillsQual(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
                 </div>
               </div>
             </div>
@@ -299,15 +299,16 @@ const Apply = () => {
 
             <div className={`${active === 5 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
               <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>
-                Other
+                Other Information
               </span>
-              <div className='grid lg:mr-32 lg:p-7 pt-12 text-gray-300'>
+              <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1'>Is there anything else you would like us to know about you?</span>
                   <textarea value={other} placeholder='Why you are the best fit, gaps in your résume, unusual details...' onChange={(e) => setOther(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
                 </div>
-                <div className='grid lg:grid-cols-2 mt-10'>
+
+                <div className='grid lg:grid-cols-2 mt-10 lg:space-y-0 md:space-y-0 space-y-10'>
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>Link to LinkedIn Profile</span>
                     <input value={linkedin} placeholder='linkedin.com/in/username' onChange={(e) => setLinkedin(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />

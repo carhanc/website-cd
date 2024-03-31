@@ -72,7 +72,7 @@ const Page = () => {
         </select>
       </div>
 
-      <div className='grid lg:grid-cols-2 p-10 h-full bg-white'>
+      <div className='grid lg:grid-cols-2 lg:p-10 md:p-8 p-4 h-full bg-white'>
           {filteredJobs.map((job, index) => (
             <JobCard key={index} job={job} />
           ))}

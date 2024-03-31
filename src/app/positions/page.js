@@ -4,10 +4,10 @@ import React from 'react'
 import Nav from "../../components/nav";
 import jobs from '@/data/jobData';
 import JobCard from '../../components/JobCard'
-import Footer from '@/components/footer';
+import Footer from '@/components/footer'
 import { useState } from 'react';
 
-const page = () => {
+const Page = () => {
 
   const [titleFilter, setTitleFilter] = useState('');
   const [skillFilter, setSkillFilter] = useState('');
@@ -83,4 +83,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -1,12 +1,11 @@
 "use client"
 
+import React from 'react'
 import Nav from "../../components/nav";
 import jobs from '@/data/jobData';
 import JobCard from '../../components/JobCard'
 import Footer from '@/components/footer';
 import { useState } from 'react';
-import Image from 'next/image';
-import arhan from "../../../public/img.jpeg"
 
 const page = () => {
 

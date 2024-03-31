@@ -3,9 +3,7 @@
 import React from 'react'
 import Nav from "../../components/nav";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { Listbox } from '@headlessui/react'
 import { useState, useEffect } from 'react'
-import { FaCalendarAlt } from "react-icons/fa";
 import Link from 'next/link';
 import Footer from '@/components/footer';
 import jobs from '@/data/jobData';
@@ -138,6 +136,7 @@ const Apply = () => {
                   className={`${active === tab.id ? "text-indigo-100 bg-indigo-600/90" : "text-gray-500"} 
                 p-4 hover:bg-gray-400/60 hover:text-gray-500 transition ease-linear duration-150 rounded-2xl justify-between flex flex-row lg:mx-5 lg:mr-8 group`}
                   onClick={() => setActive(tab.id)}
+                  key={tab.id}
                 >
                   <span>
                     {tab.name}

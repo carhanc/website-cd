@@ -66,12 +66,12 @@ export default function Home() {
 
           <div className="my-auto">
             <h1 className="text-indigo-400 text-2xl font-bold mb-5">Innovation at Every Turn</h1>
-            <p className="text-gray-600 text-lg font-medium">At DataVoyagers, we believe that innovation isn't just a buzzword; it's the cornerstone of our success. We encourage our team to challenge the status quo, think outside the box, and embrace new ideas. Our culture thrives on creativity and the relentless pursuit of excellence.</p>
+            <p className="text-gray-600 text-lg font-medium">At DataVoyagers, we believe that innovation isn&apos;t just a buzzword; it&apos;s the cornerstone of our success. We encourage our team to challenge the status quo, think outside the box, and embrace new ideas. Our culture thrives on creativity and the relentless pursuit of excellence.</p>
           </div>
 
           <div className="my-auto">
             <h1 className="text-indigo-400 text-2xl font-bold mb-5">Collaboration and Diversity:</h1>
-            <p className="text-gray-600 text-lg font-medium">We know that the best ideas come from the convergence of diverse perspectives. That's why we foster a collaborative environment where everyone's voice is heard and valued. Our team is made up of individuals from various backgrounds, each bringing their unique insights and experiences to the table.</p>
+            <p className="text-gray-600 text-lg font-medium">We know that the best ideas come from the convergence of diverse perspectives. That&apos;s why we foster a collaborative environment where everyone&apos;s voice is heard and valued. Our team is made up of individuals from various backgrounds, each bringing their unique insights and experiences to the table.</p>
           </div>
 
           <div className="hidden lg:block bg-blue-900/10 rounded-lg overflow-hidden">
@@ -84,12 +84,12 @@ export default function Home() {
 
           <div className="my-auto">
             <h1 className="text-indigo-400 text-2xl font-bold mb-5">Empowerment and Growth</h1>
-            <p className="text-gray-600 text-lg font-medium">Our employees are our greatest asset, and we're committed to their professional and personal growth. We empower our team members with the resources, tools, and support they need to excel in their roles and advance in their careers. At DataVoyagers, you're not just joining a company; you're joining a path to future opportunities.</p>
+            <p className="text-gray-600 text-lg font-medium">Our employees are our greatest asset, and we&apos;re committed to their professional and personal growth. We empower our team members with the resources, tools, and support they need to excel in their roles and advance in their careers. At DataVoyagers, you&apos;re not just joining a company; you&apos;re joining a path to future opportunities.</p>
           </div>
 
           <div className="my-auto">
             <h1 className="text-indigo-400 text-2xl font-bold mb-5">Work-Life Harmony</h1>
-            <p className="text-gray-600 text-lg font-medium">We understand that our employees have lives outside of work, and we believe that balance is essential for long-term happiness and productivity. Whether it's through flexible working arrangements, wellness programs, or social events, we're dedicated to ensuring our team members have the harmony they deserve.</p>
+            <p className="text-gray-600 text-lg font-medium">We understand that our employees have lives outside of work, and we believe that balance is essential for long-term happiness and productivity. Whether it&apos;s through flexible working arrangements, wellness programs, or social events, we&apos;re dedicated to ensuring our team members have the harmony they deserve.</p>
           </div>
 
           <div className="hidden lg:block bg-blue-900/10 rounded-lg overflow-hidden">

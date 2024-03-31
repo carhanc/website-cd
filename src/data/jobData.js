@@ -5,7 +5,7 @@ const jobs = [
     "skills": ["SQL", "Python", "Tableau", "Statistical Analysis"],
     "desc": "Responsible for interpreting data, analyzing results using statistical techniques, and providing clear, concise, and actionable ongoing reports.",
     "type": "Full Time",
-    "edu": "Bachelor's degree in Mathematics, Economics, Computer Science, Information Management, or Statistics",
+    "edu": "Bachelors degree in Mathematics, Economics, Computer Science, Information Management, or Statistics",
     "responsibilities": [
       "Develop and implement databases, data collection systems, data analytics, and other strategies that optimize statistical efficiency and quality. ",
       "Acquire data from primary or secondary data sources and maintain databases/data analysis systems. ",

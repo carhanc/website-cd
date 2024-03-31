@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
 import Nav from "../components/nav";
@@ -12,8 +14,10 @@ import data1 from "../../public/data.jpg"
 import BenefitsCard from "@/components/BenefitsCard";
 import benefits from "../data/benefitsData"
 import Footer from "@/components/footer";
+import { useEffect } from "react";
 
-export default function Home() {
+const Home = () => {
+
   return (
     <div>
       <Nav />
@@ -33,8 +37,8 @@ export default function Home() {
                 <MdKeyboardArrowRight className="lg:mt-[5px] mt-[2px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
               </Link>
             </div>
-          <div className="justify-center -space-x-8 items-center text-center lg:flex mb-20 hidden">
-            <div className="w-1/3 lg:block hidden mb-4 scale-90 -rotate-[14deg]">
+          <div className="justify-center -space-x-8 items-center text-center lg:flex lg:mb-10">
+            <div className="w-1/3 lg:block hidden mb-4 scale-90 -rotate-[12deg]">
               <Image src={data1} className="object-cover h-full rounded-lg" />
             </div>
             <div className="w-1/3 lg:block hidden mb-20">
@@ -44,7 +48,7 @@ export default function Home() {
       </main>
       
 
-      <div className="px-10 xl:px-12 py-10">
+      <div className="px-10 xl:px-12 lg:py-10 pt-6 pb-10" id="benefit">
         <h1 className="lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold lg:text-left lg:mt-0 mt-4 text-indigo-500">Why Become a Voyager?</h1>
         <div className="grid xl:grid-cols-2 gap-6">
           {benefits.map((benefit) => (
@@ -103,3 +107,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

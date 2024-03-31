@@ -14,7 +14,7 @@ const navigation = {
   ],
   apply: [
     { name: "Contact", href: "/apply" },
-    { name: "Apply", href: "/apply" },
+    { name: "Application", href: "/apply" },
   ],
   legal: [
     { name: "Privacy", href: "/" },

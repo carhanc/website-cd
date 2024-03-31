@@ -129,7 +129,7 @@ const Apply = () => {
         <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block lg:border-4 md:border-4 border-2 border-indigo-400/90 bg-indigo-200/25'>
 
           <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300'>
-            <div className='lg:w-1/4 w-full flex flex-col lg:text-xl font-medium lg:border-r-4 lg:border-indigo-400/80 mb-10 lg:mb-0'>
+            <div className='xl:w-1/4 lg:w-1/3 w-full flex flex-col lg:text-xl font-medium lg:border-r-4 lg:border-indigo-400/80 mb-10 lg:mb-0'>
 
               {tabs.map((tab) => (
                 <button

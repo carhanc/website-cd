@@ -559,11 +559,15 @@ const Apply = () => {
             </div>
 
             {!finalSubmit && <span className='flex lg:flex-row md:flex-row flex-col gap-4 lg:pl-16 ml-10 lg:ml-0 mb-10 '>
+              
+            {backToTop && (
               <button className='flex my-auto items-center lg:text-xl text-lg border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear 
-                  mt-10 text-indigo-500 font-medium hover:text-gray-100 lg:w-auto md:w-auto w-fit' 
-              onClick={() => setSubmitted(false)}>
+              mt-10 text-indigo-500 font-medium hover:text-gray-100 lg:w-auto md:w-auto w-fit' 
+              onClick={() => {setSubmitted(false); scrollUp(); }}>
                 Edit Application
               </button>
+            )}
+
               {backToTop && (
                 <button onClick={() => { handleSubmit("submit"); scrollUp(); }} className='flex my-auto items-center lg:text-xl text-lg bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-[1.15] transition ease-linear duration-200 lg:mt-10 md:mt-10 mt-4 group font-medium text-gray-200 lg:w-auto md:w-auto w-fit'>
                   Submit

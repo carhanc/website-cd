@@ -55,14 +55,14 @@ const page = () => {
         <select
           value={locationFilter}
           onChange={(e) => setLocationFilter(e.target.value)}
-          className='p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
         >
           <option value="" disabled className='text-zinc-400'>Select Location</option>
           <option value="Remote" className='text-black'>Remote</option>
           <option value="Hybrid" className='text-black'>Hybrid</option>
         </select>
         <select
-          className='p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
           value={experienceFilter}
           onChange={(e) => setExperienceFilter(e.target.value)}
         >

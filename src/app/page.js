@@ -18,7 +18,7 @@ export default function Home() {
     <div>
       <Nav />
       
-      <main className="lg:flex flex-col justify-center items-center text-black bg-white text-center">
+      <main className="lg:flex flex-col justify-center items-center text-indigo-600 bg-white text-center">
           <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[12vh] pt-[8vh] lg:h-[28vh] lg:mb-0 mb-10 md:px-20 space-y-6">
             <p className="font-extrabold lg:mx-0 lg:pb-4 pb-2 text-4xl lg:text-5xl text-center">
               Explore the data deluge with DataVoyagers<br /> where curiosity meets innovation

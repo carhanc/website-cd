@@ -1,5 +1,5 @@
 "use client"
-import React, { use } from 'react'
+
 import Nav from "../../components/nav";
 import jobs from '@/data/jobData';
 import JobCard from '../../components/JobCard'

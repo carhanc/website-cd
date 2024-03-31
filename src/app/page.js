@@ -26,7 +26,7 @@ export default function Home() {
           </div>
             <div className="flex items-center justify-center lg:my-3">
               <Link
-              className="rounded-full z-50 lg:ml-2 border-indigo-400 text-indigo-600 border-2 w-fit px-4 py-2 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
+              className="rounded-full z-40 lg:ml-2 border-indigo-400 text-indigo-600 border-2 w-fit px-4 py-2 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
               href="/positions"
               >
                   View Open Positions

@@ -20,7 +20,7 @@ const Nav = () => {
       initial={{ y: -5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="sticky top-0 z-40 rounded-t-none ease-linear duration-200 p-5 border-b-2 border-indigo-600/40 backdrop-blur-xl"
+      className="sticky top-0 rounded-t-none ease-linear duration-200 p-5 border-b-2 border-indigo-600/40 backdrop-blur-xl z-50"
     >
       <Disclosure
         as="nav"

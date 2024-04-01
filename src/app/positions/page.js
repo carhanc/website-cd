@@ -27,7 +27,7 @@ const Page = () => {
     <div>
       <div className=' bg-indigo-100/60'>
         <Nav />
-        <main className="lg:flex flex-cols-2 justify-evenly text-slate-800 bg-indigo-100/60">
+        <main className="lg:flex flex-cols-2 justify-evenly text-slate-800 bg-gradient-to-tr from-indigo-300 to-blue-100">
             <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[16vh] pt-[10vh] lg:h-[50vh] lg:mb-0 mb-14 md:px-20 space-y-6 p-16">
               <h1 className="text-4xl lg:text-6xl font-bold text-indigo-500">Open Positions</h1>
               <p className="text-xl lg:text-3xl font-semibold bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 bg-clip-text text-transparent lg:mx-0 lg:pb-4 pb-2">

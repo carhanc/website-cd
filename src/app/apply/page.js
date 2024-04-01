@@ -126,7 +126,7 @@ const Apply = () => {
     <div className=''>
       <Nav />
       {!submitted && <div className='bg-white'>
-        <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block lg:border-4 md:border-4 border-2 border-indigo-400/90 bg-indigo-200/25'>
+        <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block border-4 border-indigo-400/90 bg-indigo-200/25 shadow-lg shadow-indigo-100'>
 
           <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300'>
             <div className='xl:w-1/4 lg:w-1/3 w-full flex flex-col lg:text-xl font-medium lg:border-r-4 lg:border-indigo-400/80 mb-10 lg:mb-0'>
@@ -335,14 +335,14 @@ const Apply = () => {
       </div>}
 
       {finalSubmit && 
-        <div className='p-7 rounded-lg m-7 lg:mx-10 mx-5 lg:border-4 md:border-4 border-2 border-indigo-400/90'>
+        <div className='p-7 rounded-lg m-7 lg:mx-10 mx-5 border-2 border-indigo-400/90'>
           <h1 className='lg:text-2xl text-xl text-indigo-500 font-bold mb-1'>Thanks for submitting your application!</h1>
           <p className='inline text-lg text-indigo-500/85 font-medium mt-2'>The DataVoyagers team is eager to read your application. Feel free to email our recruitment team with any updates to your application using the email <p className='inline underline'> files@careers.datavoyagers.com</p>. Excpect to receive an email from our hiring team within 7-14 business days with an interview and further instructions. We will let you know if we are deciding not to move forward with your application over email. Here is to a new potential voyage! 
           <span className='ml-1 text-xl'>🥂🚀</span></p>
         </div>}
 
       {submitted && <div className='bg-white'>
-        <div className='bg-indigo-200/25 m-5 lg:m-10 lg:p-10 rounded-lg lg:block lg:border-4 md:border-4 border-2 border-indigo-400/90'>
+        <div className='bg-indigo-200/25 m-5 lg:m-10 lg:p-10 rounded-lg lg:block border-2 border-indigo-400/90'>
           <div className='text-white'>
               <h1 className='lg:flex-none flex flex-col items-center font-extrabold text-xl lg:text-2xl mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row md:ml-7'>Review Your Application: 
                 <h1 className='border-2 border-indigo-700/90 px-2 rounded-md border-dashed text-xl lg:text-2xl text-indigo-700/90 text-center lg:ml-2 w-fit'>{submittedApp.personalInformation.job}</h1>

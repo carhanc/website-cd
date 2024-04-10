@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
 
-
+// Component for the Benefits Card that takes in the parameters, title, description, and image,
+// from JSON data and displays them
 export default function BenefitsCard({title, desc, img}) {
     return (
 

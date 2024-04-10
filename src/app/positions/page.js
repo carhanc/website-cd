@@ -14,6 +14,8 @@ const Page = () => {
   const [locationFilter, setLocationFilter] = useState('');
   const [experienceFilter, setExperienceFilter] = useState('');
 
+  // Filter jobs based on the filters inputted on the frontend
+  // Returns an array of job objects that match the filters
   const filteredJobs = jobs.filter(job => {
     return (
       (titleFilter ? job.title.toLowerCase().includes(titleFilter.toLowerCase()) : true) &&
@@ -35,7 +37,7 @@ const Page = () => {
               </p>
             </div>
         </main>
-
+      {/* Selector values for the user to filter the jobs */}
       <div className='grid grid-cols-1 lg:grid-cols-4 p-10 justify-center items-center text-center gap-5 text-md lg:text-lg border-t-2 border-gray-400 gap-x-6'>
         <input
           className='p-3 bg-white/60 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
@@ -71,7 +73,7 @@ const Page = () => {
           <option value="Senior" className='text-black'>Senior</option>
         </select>
       </div>
-
+      {/* Map returning JobCard components to display the filtered jobs from the user query */}
       <div className='grid lg:grid-cols-2 lg:p-10 md:p-8 p-4 h-full bg-white'>
           {filteredJobs.map((job, index) => (
             <JobCard key={index} job={job} />

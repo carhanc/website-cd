@@ -18,6 +18,8 @@ const tabs = [
 
 const Apply = () => {
 
+  // States storing the user's input for each field and the status mode of the form (edit, review, submit)
+
   const [active, setActive] = useState(1)
 
   const [job, setJob] = useState('')
@@ -47,6 +49,7 @@ const Apply = () => {
   const [linkedin, setLinkedin] = useState('')
   const [resume, setResume] = useState('')
 
+  // State to store the application status (edit, review, submit) and the final submission status (true/false
   const [submittedApp, setSubmittedApp] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [finalSubmit, setFinalSubmit] = useState(false)
@@ -70,6 +73,8 @@ const Apply = () => {
       });
     }
 
+// Handles the submission of the application form: creates a JSON object 
+// with the user's input, posts it to MongoDB, and logs it to the console for testing
   const handleSubmit = (status) => {
     if (status === 'edit') {
       setSubmitted(true);
@@ -158,7 +163,7 @@ const Apply = () => {
               <select
                 className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-xl text-ld font-medium lg:text-xl border-2 border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
                 onChange={(e) => setJob(e.target.value)} 
-                defaultValue="" 
+                defaultValue={job ? job : ""} 
               >
                 <option value="" disabled>Select a job</option>
                 {jobs.map((job, index) => (

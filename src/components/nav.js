@@ -7,9 +7,10 @@ import { Disclosure, Transition } from "@headlessui/react";
 import logo from "../../public/logo.png"
 
 import { Divide as Hamburger1 } from 'hamburger-react'
-import { useState } from 'react'
-import { FaArrowRightLong } from "react-icons/fa6";
+import { useState, useEffect } from 'react'
 import { MdKeyboardArrowRight } from "react-icons/md";
+
+import { signInWithGoogle } from "@/firebase/auth";
 
 const Nav = () => {
 
@@ -60,12 +61,12 @@ const Nav = () => {
                       Positions
                   </Link>
 
-                  <Link href="/apply" className="hover:text-white ease-linear duration-200 border-[3px] 
-                  rounded-md pl-4 pr-3 py-1 border-indigo-500/90 hover:bg-indigo-500/90 flex items-center group text-indigo-500/90 hover:brightness-110">
-                      Apply 
-                      <span className="text-indigo-500 mt-[2px] group-hover:translate-x-1 group-hover:text-white font-semibold transition ease-linear duration-150 text-[27px]">
-                        <MdKeyboardArrowRight />
-                      </span>
+                  <Link href="/apply" className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110">
+                      Apply
+                  </Link>
+                  
+                  <Link href="/register" className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110">
+                      Register
                   </Link>
                 
                 </div>
@@ -84,7 +85,7 @@ const Nav = () => {
                 className="relative"
               >                
                 <div
-                  className="mt-4 mb-4 border-t border-indigo-600/40 sm:hidden h-[80px] py-4"
+                  className="mt-4 mb-4 border-t border-indigo-600/40 sm:hidden h-[120px] py-4"
                 >
                   <div className="mt-2 flex flex-col space-y-4">
 
@@ -103,6 +104,15 @@ const Nav = () => {
                         className="rounded-md p-2 font-semibold text-indigo-500 hover:bg-gray-900/50 "
                       >
                         Apply
+                      </Disclosure.Button>
+                    </Link>
+
+                    <Link href="/register" passHref>
+                      <Disclosure.Button
+                        as="a"
+                        className="rounded-md p-2 font-semibold text-indigo-500 hover:bg-gray-900/50 "
+                      >
+                        Register
                       </Disclosure.Button>
                     </Link>
 

@@ -14,28 +14,111 @@ import data1 from "../../public/data.jpg"
 import BenefitsCard from "@/components/BenefitsCard";
 import benefits from "../data/benefitsData"
 import Footer from "@/components/footer";
-import { useEffect } from "react";
+
+// firebase imports
+// import { useEffect, useState } from "react";
+// import { collection, doc, getDocs, addDoc } from "firebase/firestore";
+// import { db } from "@/firebase/auth";
 
 const Home = () => {
+
+  // New User States
+
+  // const [user, setUser] = useState([])
+
+  // const [name, setName] = useState('')
+  // const [email, setEmail] = useState('')
+  // const [phone, setPhone] = useState(0)
+  // const [password, setPassword] = useState('')
+  
+  // const userCollectionRef = collection(db, 'users')
+
+  // const getUser = async () => {
+  //   try {
+  //     const data = await getDocs(userCollectionRef)
+  //     const filteredData = data.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data()
+  //     }))   
+  //     setUser(filteredData)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  //   useEffect(() => {
+  //     getUser()
+  //   }, [])
+
+  //   const handleSubmitUser = async () => {
+  //     try {
+  //       await addDoc(userCollectionRef, {
+  //         name: name,
+  //         email: email,
+  //         phone: phone,
+  //         password: password
+  //       })
+  //       console.log('User Added')
+
+  //       getUser()
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
 
   return (
     <div>
       <Nav />
       
-      <main className="lg:flex flex-col justify-center items-center text-indigo-600 bg-white text-center lg:mb-0 mb-5">
+      <div className="p-10 space-y-4">
+        {/* <input className="border-black border-2" type="text" 
+          placeholder="User Name..." 
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <input className="border-black border-2" type="text" 
+        placeholder="User Email..." 
+        onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input className="border-black border-2" type="number" 
+        placeholder="Phone Number..."
+        onChange={(e) => setPhone(Number(e.target.value))} 
+        />
+
+        <input className="border-black border-2" type="text" 
+        placeholder="Password..."
+        onChange={(e) => setPhone(Number(e.target.value))} 
+        />
+
+        <button onClick={handleSubmitUser}>Submit User</button> */}
+
+        {/* <div>
+          {user.map((user) => (
+            <div>
+              <h1>{user.name}</h1>
+              <p>{user.email}</p>
+            </div>
+          ))}
+        </div> */}
+      </div>
+
+      <main className="lg:flex flex-col justify-center items-center text-indigo-600 bg-white text-center lg:mb-0 mb-4">
           <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[12vh] pt-[8vh] lg:h-[28vh] lg:mb-0 mb-10 md:px-20 space-y-6">
             <p className="font-extrabold lg:mx-0 lg:pb-4 pb-2 text-4xl lg:text-5xl text-center">
               Explore the data deluge with DataVoyagers<br /> where curiosity meets innovation
             </p>
           </div>
             <div className="flex items-center justify-center lg:my-3">
+
               <Link
               className="rounded-full z-40 lg:ml-2 border-indigo-400 text-indigo-600 border-2 w-fit px-4 py-2 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
               href="/positions"
               >
                   View Open Positions
-                <MdKeyboardArrowRight className="lg:mt-[5px] mt-[2px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
+                <MdKeyboardArrowRight className="lg:mt-[5px] mt-[5px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
               </Link>
+
             </div>
           <div className="justify-center -space-x-8 items-center text-center lg:flex lg:mb-10">
             <div className="w-1/3 lg:block hidden mb-4 scale-90 -rotate-[12deg]">
@@ -48,7 +131,7 @@ const Home = () => {
       </main>
       
 
-      <div className="px-10 xl:px-12 lg:py-10 pt-6 pb-10" id="benefit">
+      <div className="px-10 xl:px-12 lg:pt-10 pt-6">
         <h1 className="lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold lg:text-left lg:mt-0 mt-4 text-indigo-500">Why Become a Voyager?</h1>
         <div className="grid xl:grid-cols-2 gap-6">
           {benefits.map((benefit) => (
@@ -60,7 +143,7 @@ const Home = () => {
 
       <div className="px-10 xl:px-12 py-10 bg-white">
         
-        <h1 className="text-grey-900 lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold text-indigo-500 mt-4">The Voyager Culture</h1>
+        <h1 className="text-grey-900 lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold text-indigo-500 mt-10">The Voyager Culture</h1>
 
         <div className="grid lg:grid-cols-2 gap-10">
             

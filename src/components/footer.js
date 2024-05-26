@@ -3,9 +3,10 @@ import Link from "next/link";
 import logo from "../../public/logo.png"
 
 const navigation = {
+
   about: [
     { name: "Benefits", href: "/" },
-    { name: "Work Culture", href: "/" },
+    { name: "Work Culture", href: "#culture" },
   ],
   positions: [
     { name: "Senior", href: "/positions" },

@@ -14,6 +14,8 @@ const Page = () => {
   const [locationFilter, setLocationFilter] = useState('');
   const [experienceFilter, setExperienceFilter] = useState('');
 
+  // Filter jobs based on the filters inputted on the frontend
+  // Returns an array of job objects that match the filters
   const filteredJobs = jobs.filter(job => {
     return (
       (titleFilter ? job.title.toLowerCase().includes(titleFilter.toLowerCase()) : true) &&
@@ -28,16 +30,13 @@ const Page = () => {
       <div className=' bg-indigo-100/60'>
         <Nav />
         <main className="lg:flex flex-cols-2 justify-evenly text-slate-800 bg-indigo-100/60">
-            {/* <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[16vh] pt-[10vh] lg:h-[50vh] lg:mb-0 mb-14 md:px-20 space-y-6 p-16"> */}
-            <div className="flex flex-col text-center items-center lg:items-start lg:pt-[16vh] pt-[10vh] lg:h-[50vh] lg:mb-0 mb-14 md:px-20 space-y-6 p-16">
+            <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[16vh] pt-[10vh] lg:h-[50vh] lg:mb-0 mb-14 md:px-20 space-y-6 p-16">
               <h1 className="text-4xl lg:text-6xl font-bold text-indigo-500">Open Positions</h1>
               <p className="text-xl lg:text-3xl lg:text-left font-semibold bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 bg-clip-text text-transparent lg:mx-0 lg:pb-4 pb-2">
                 Check here for frequently updated open positions. Search and filter our list to find the perfect fit for you.
               </p>
             </div>
         </main>
-
-        
 
       <div className='grid grid-cols-1 lg:grid-cols-4 p-10 justify-center items-center text-center gap-5 text-md lg:text-lg border-t-2 border-gray-400 gap-x-6'>
         <input
@@ -74,7 +73,7 @@ const Page = () => {
           <option value="Senior" className='text-black'>Senior</option>
         </select>
       </div>
-
+      {/* Map returning JobCard components to display the filtered jobs from the user query */}
       <div className='grid lg:grid-cols-2 lg:p-10 md:p-8 p-4 h-full bg-white'>
           {filteredJobs.map((job, index) => (
             <JobCard key={index} job={job} />

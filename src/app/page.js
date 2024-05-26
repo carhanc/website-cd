@@ -1,5 +1,6 @@
 "use client"
 
+// Data imports for the page to use
 import Image from "next/image";
 import Link from "next/link";
 import Nav from "../components/nav";
@@ -20,6 +21,7 @@ import Footer from "@/components/footer";
 // import { collection, doc, getDocs, addDoc } from "firebase/firestore";
 // import { db } from "@/firebase/auth";
 
+// JSX Code / HTML returning the Landing Page with inline Tailwind CSS
 const Home = () => {
 
   // New User States
@@ -133,6 +135,7 @@ const Home = () => {
 
       <div className="px-10 xl:px-12 lg:pt-10 pt-6">
         <h1 className="lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold lg:text-left lg:mt-0 mt-4 text-indigo-500">Why Become a Voyager?</h1>
+        {/* Mapping over the benefits array to display each benefit card component */}
         <div className="grid xl:grid-cols-2 gap-6">
           {benefits.map((benefit) => (
             <BenefitsCard key={benefit.title} {...benefit} />

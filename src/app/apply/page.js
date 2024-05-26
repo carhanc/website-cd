@@ -18,6 +18,8 @@ const tabs = [
 
 const Apply = () => {
 
+  // States storing the user's input for each field and the status mode of the form (edit, review, submit)
+
   const [active, setActive] = useState(1)
 
   const [job, setJob] = useState('')
@@ -47,6 +49,7 @@ const Apply = () => {
   const [linkedin, setLinkedin] = useState('')
   const [resume, setResume] = useState('')
 
+  // State to store the application status (edit, review, submit) and the final submission status (true/false
   const [submittedApp, setSubmittedApp] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [finalSubmit, setFinalSubmit] = useState(false)
@@ -70,6 +73,8 @@ const Apply = () => {
       });
     }
 
+// Handles the submission of the application form: creates a JSON object 
+// with the user's input, posts it to MongoDB, and logs it to the console for testing
   const handleSubmit = (status) => {
     if (status === 'edit') {
       setSubmitted(true);
@@ -126,7 +131,7 @@ const Apply = () => {
     <div className=''>
       <Nav />
       {!submitted && <div className='bg-white'>
-        <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block lg:border-4 md:border-4 border-2 border-indigo-400/90 bg-indigo-200/25'>
+        <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block border-4 border-indigo-400/90 bg-indigo-200/25 shadow-lg shadow-indigo-100'>
 
           <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300'>
             <div className='xl:w-1/4 lg:w-1/3 w-full flex flex-col lg:text-xl font-medium lg:border-r-4 lg:border-indigo-400/80 mb-10 lg:mb-0'>
@@ -158,7 +163,7 @@ const Apply = () => {
               <select
                 className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-xl text-ld font-medium lg:text-xl border-2 border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
                 onChange={(e) => setJob(e.target.value)} 
-                defaultValue="" 
+                defaultValue={job ? job : ""} 
               >
                 <option value="" disabled>Select a job</option>
                 {jobs.map((job, index) => (
@@ -335,14 +340,14 @@ const Apply = () => {
       </div>}
 
       {finalSubmit && 
-        <div className='p-7 rounded-lg m-7 lg:mx-10 mx-5 lg:border-4 md:border-4 border-2 border-indigo-400/90'>
+        <div className='p-7 rounded-lg m-7 lg:mx-10 mx-5 border-2 border-indigo-400/90'>
           <h1 className='lg:text-2xl text-xl text-indigo-500 font-bold mb-1'>Thanks for submitting your application!</h1>
           <p className='inline text-lg text-indigo-500/85 font-medium mt-2'>The DataVoyagers team is eager to read your application. Feel free to email our recruitment team with any updates to your application using the email <p className='inline underline'> files@careers.datavoyagers.com</p>. Excpect to receive an email from our hiring team within 7-14 business days with an interview and further instructions. We will let you know if we are deciding not to move forward with your application over email. Here is to a new potential voyage! 
           <span className='ml-1 text-xl'>🥂🚀</span></p>
         </div>}
 
       {submitted && <div className='bg-white'>
-        <div className='bg-indigo-200/25 m-5 lg:m-10 lg:p-10 rounded-lg lg:block lg:border-4 md:border-4 border-2 border-indigo-400/90'>
+        <div className='bg-indigo-200/25 m-5 lg:m-10 lg:p-10 rounded-lg lg:block border-2 border-indigo-400/90'>
           <div className='text-white'>
               <h1 className='lg:flex-none flex flex-col items-center font-extrabold text-xl lg:text-2xl mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row md:ml-7'>Review Your Application: 
                 <h1 className='border-2 border-indigo-700/90 px-2 rounded-md border-dashed text-xl lg:text-2xl text-indigo-700/90 text-center lg:ml-2 w-fit'>{submittedApp.personalInformation.job}</h1>

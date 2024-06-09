@@ -16,93 +16,14 @@ import BenefitsCard from "@/components/BenefitsCard";
 import benefits from "../data/benefitsData"
 import Footer from "@/components/footer";
 
-// firebase imports
-// import { useEffect, useState } from "react";
-// import { collection, doc, getDocs, addDoc } from "firebase/firestore";
-// import { db } from "@/firebase/auth";
-
-// JSX Code / HTML returning the Landing Page with inline Tailwind CSS
 const Home = () => {
-
-  // New User States
-
-  // const [user, setUser] = useState([])
-
-  // const [name, setName] = useState('')
-  // const [email, setEmail] = useState('')
-  // const [phone, setPhone] = useState(0)
-  // const [password, setPassword] = useState('')
-  
-  // const userCollectionRef = collection(db, 'users')
-
-  // const getUser = async () => {
-  //   try {
-  //     const data = await getDocs(userCollectionRef)
-  //     const filteredData = data.docs.map((doc) => ({
-  //       id: doc.id,
-  //       ...doc.data()
-  //     }))   
-  //     setUser(filteredData)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  //   useEffect(() => {
-  //     getUser()
-  //   }, [])
-
-  //   const handleSubmitUser = async () => {
-  //     try {
-  //       await addDoc(userCollectionRef, {
-  //         name: name,
-  //         email: email,
-  //         phone: phone,
-  //         password: password
-  //       })
-  //       console.log('User Added')
-
-  //       getUser()
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
 
   return (
     <div>
       <Nav />
       
       <div className="p-10 space-y-4">
-        {/* <input className="border-black border-2" type="text" 
-          placeholder="User Name..." 
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <input className="border-black border-2" type="text" 
-        placeholder="User Email..." 
-        onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input className="border-black border-2" type="number" 
-        placeholder="Phone Number..."
-        onChange={(e) => setPhone(Number(e.target.value))} 
-        />
-
-        <input className="border-black border-2" type="text" 
-        placeholder="Password..."
-        onChange={(e) => setPhone(Number(e.target.value))} 
-        />
-
-        <button onClick={handleSubmitUser}>Submit User</button> */}
-
-        {/* <div>
-          {user.map((user) => (
-            <div>
-              <h1>{user.name}</h1>
-              <p>{user.email}</p>
-            </div>
-          ))}
-        </div> */}
+      
       </div>
 
       <main className="lg:flex flex-col justify-center items-center text-indigo-600 bg-white text-center lg:mb-0 mb-4">

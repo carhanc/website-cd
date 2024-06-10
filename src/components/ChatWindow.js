@@ -1,7 +1,29 @@
 // components/ChatWindow.js
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const ChatWindow = ({ closeChat }) => {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+
+  const sendMessage = async () => {
+    if (!input.trim()) return;
+
+    const userMessage = { sender: 'user', text: input };
+    setMessages([...messages, userMessage]);
+
+    try {
+      const response = await axios.post('/api/chat', { message: input });
+      const botMessage = { sender: 'bot', text: response.data.response };
+      setMessages([...messages, userMessage, botMessage]);
+    } catch (error) {
+      const errorMessage = { sender: 'bot', text: 'Error communicating with the chatbot.' };
+      setMessages([...messages, userMessage, errorMessage]);
+    }
+
+    setInput('');
+  };
+
   return (
     <div
       style={{
@@ -29,20 +51,28 @@ const ChatWindow = ({ closeChat }) => {
       >
         X
       </button>
-      <div style={{ flex: 1, overflowY: 'auto' }}>
-        {/* Your chat content goes here */}
-        <p>Chat with us!</p>
+      <div style={{ flex: 1, overflowY: 'auto', marginBottom: '10px' }}>
+        {messages.map((msg, index) => (
+          <div key={index} style={{ textAlign: msg.sender === 'user' ? 'right' : 'left' }}>
+            <p><strong>{msg.sender}:</strong> {msg.text}</p>
+          </div>
+        ))}
       </div>
       <input
         type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
         placeholder="Type a message..."
         style={{
           padding: '10px',
           borderRadius: '5px',
           border: '1px solid #ccc',
-          marginTop: '10px',
         }}
       />
+      <button onClick={sendMessage} style={{ marginTop: '10px' }}>
+        Send
+      </button>
     </div>
   );
 };

@@ -19,6 +19,7 @@ import RegisterPage from "./register/page";
 import { useState, useEffect } from "react";
 import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
 import {auth} from '@/firebase/auth';
+import ChatButton from "../components/ChatButton.js";
 
 
 // JSX Code / HTML returning the Landing Page with inline Tailwind CSS
@@ -133,6 +134,7 @@ const Home = () => {
         </div>
         
       </div>
+      <ChatButton />
       <Footer />  
     </div>
   );

@@ -44,10 +44,10 @@ const RegisterPage = () => {
       // Set authenticated user state
       setAuthenticatedUser(true);
 
-      router.push("/");
     } catch (error) {
       console.error("Error adding user:", error);
     }
+    router.push("/");
   };
 
   return (
@@ -142,13 +142,19 @@ const RegisterPage = () => {
               />
             </div>
 
-              <button
-                type="submit"
-                className="w-full bg-indigo-500 text-white px-4 py-2 mt-2 rounded-lg hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 duration-150 ease-linear"
-                onClick={handleSubmitUser}
-              >
-                <Link href="/">Register</Link>
-              </button>
+            <button
+              type="submit"
+              className="w-full bg-indigo-500 text-white px-4 py-2 mt-2 rounded-lg hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 duration-150ease-linear"
+              onClick={handleSubmitUser}
+            >
+              <Link href="/">Register</Link>
+            </button>
+              
+            <div className="mt-4 text-center">
+              <Link href="/signin" className="text-indigo-500 hover:underline">
+                Already have an account? Sign In
+              </Link>
+            </div>
             
           </div>
         </div>

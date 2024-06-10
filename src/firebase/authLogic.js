@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import { onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import Link from 'next/link';
 import { auth } from '../firebase/auth';
+import { collection, setDoc, doc, getDoc } from "firebase/firestore";
+import { db } from "@/firebase/auth";
+import { useRouter } from "next/navigation";
 
 const AuthLogic = () => {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     setPersistence(auth, browserLocalPersistence)
@@ -26,6 +30,7 @@ const AuthLogic = () => {
     signOut(auth)
       .then(() => {
         console.log('User signed out');
+        router.push("/");
         window.location.reload();
         setAuthenticatedUser(null);
       })
@@ -46,11 +51,22 @@ const AuthLogic = () => {
           href="/register"
           className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110"
         >
-          Register
+          Sign Up
         </Link>
       )}
     </div>
   );
+};
+
+export const fetchUserData = async (uid) => {
+  const userDocRef = doc(db, 'userDatabase', uid);
+  const userDoc = await getDoc(userDocRef);
+  if (userDoc.exists()) {
+    return userDoc.data();
+  } else {
+    console.log('No such document!');
+    return null;
+  }
 };
 
 export default AuthLogic;

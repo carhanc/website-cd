@@ -7,6 +7,8 @@ import { BiError } from "react-icons/bi";
 import Link from 'next/link';
 import Footer from '@/components/footer';
 import jobs from '@/data/jobData';
+import { useSearchParams } from "next/navigation";
+
 
 const tabs = [
   { id: 1, name: 'Personal Information', fields: ['job', 'name', 'dob', 'address', 'city', 'state', 'zip'] },
@@ -17,6 +19,8 @@ const tabs = [
 ]
 
 const Apply = () => {
+  const searchParams = useSearchParams();
+  let selectedJob = searchParams.get("selectedJob");
   const [active, setActive] = useState(1);
   const [submittedApp, setSubmittedApp] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -26,7 +30,7 @@ const Apply = () => {
   const [tabErrors, setTabErrors] = useState({});
 
   const [formData, setFormData] = useState({
-    job: '',
+    job: selectedJob ? selectedJob : '',
     name: '',
     dob: '',
     address: '',
@@ -48,7 +52,8 @@ const Apply = () => {
     other: '',
     linkedin: '',
     resume: '',
-  });
+  })
+  console.log(formData);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -70,7 +75,7 @@ const Apply = () => {
   const validateFields = () => {
     const newErrors = {};
     Object.keys(formData).forEach(key => {
-      if (!formData[key] && key !== 'title' && key !== 'pronoun' && key !== 'linkedin' && key !== 'resume') {
+      if (!formData[key] && key !== 'title' && key !== 'pronoun') {
         newErrors[key] = 'No response';
       }
     });
@@ -216,12 +221,12 @@ const Apply = () => {
                   </div>
 
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                    <span className='ml-1'>Title (opt)</span>
+                    <span className='ml-1'>Title (optional)</span>
                     <input name="title" value={formData.title} placeholder='Mr., Mrs., etc.' onChange={handleChange} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
                   </div>
 
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mt-10'>
-                    <span className='ml-1'>Pronouns</span>
+                    <span className='ml-1'>Pronouns (optional)</span>
                     <input name="pronoun" value={formData.pronoun} placeholder='They/them' onChange={handleChange} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
                   </div>
                 </div>
@@ -305,10 +310,12 @@ const Apply = () => {
                     <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1'>Link to LinkedIn Profile</span>
                       <input name="linkedin" value={formData.linkedin} placeholder='linkedin.com/in/username' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.linkedin ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.linkedin && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.linkedin}</span>}
                     </div>
                     <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1'>Link to Résume</span>
                       <input name="resume" value={formData.resume} placeholder='www.example.com/resume' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.resume ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.resume && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.resume}</span>}
                     </div>
                   </div>
                   <span className='flex flex-row gap-4'>

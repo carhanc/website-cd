@@ -1,5 +1,6 @@
 "use client"
 
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 const JobCard = ({ job }) => {
@@ -10,7 +11,7 @@ const JobCard = ({ job }) => {
   };
 
   return (
-    <button onClick={toggleExpanded} className="text-blue-600 hover:text-blue-800 transition ease-linear duration-150 mt-4 text-left">
+    <button className="text-blue-600 hover:text-blue-800 transition ease-linear duration-150 mt-4 text-left">
       <div className="bg-white p-4 border-2 border-indigo-100 rounded-lg hover:bg-purple-100 transition ease-linear duration-150 shadow-md shadow-gray-300 m-4 text-indigo-500">
         <h3 className="text-lg font-semibold mb-1">{job.title}</h3>
         <p className="text-sm text-gray-600 font-medium overflow-ellipsis overflow-hidden h-fit mb-1">{job.desc}</p>
@@ -43,9 +44,11 @@ const JobCard = ({ job }) => {
             </div>
           </>
         )}
-
-        <div className='w-fit'>{isExpanded ? 'Show Less' : 'Show More'}</div>
-      </div>
+        <div className='flex justify-between'>
+          <button onClick={toggleExpanded} className='w-fit'>{isExpanded ? 'Show Less' : 'Show More'}</button>
+          <Link href={`/apply?selectedJob=${job.title}`} className='px-2 py-1 border rounded-md border-black hover:text-white hover:bg-purple-500 transition ease-linear duration-300'>Apply</Link>
+        </div> 
+        </div>
     </button>
 
   );

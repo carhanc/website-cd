@@ -14,6 +14,14 @@ const Page = () => {
   const [locationFilter, setLocationFilter] = useState('');
   const [experienceFilter, setExperienceFilter] = useState('');
 
+  // Function to clear all filters
+  const clearFilters = () => {
+    setTitleFilter('');
+    setSkillFilter('');
+    setLocationFilter('');
+    setExperienceFilter('');
+  };
+
   // Filter jobs based on the filters inputted on the frontend
   // Returns an array of job objects that match the filters
   const filteredJobs = jobs.filter(job => {
@@ -30,7 +38,7 @@ const Page = () => {
       <div className=' bg-indigo-100/60'>
         <Nav />
         <main className="lg:flex flex-cols-2 justify-evenly text-slate-800 bg-indigo-100/60">
-            <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[16vh] pt-[10vh] lg:h-[50vh] lg:mb-0 mb-14 md:px-20 space-y-6 p-16">
+            <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[12vh] pt-[10vh] lg:h-[30vh]  mb-14 md:px-20 space-y-6 p-16">
               <h1 className="text-4xl lg:text-6xl font-bold text-indigo-500">Open Positions</h1>
               <p className="text-xl lg:text-3xl lg:text-left font-semibold bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 bg-clip-text text-transparent lg:mx-0 lg:pb-4 pb-2">
                 Check here for frequently updated open positions. Search and filter our list to find the perfect fit for you.
@@ -38,16 +46,16 @@ const Page = () => {
             </div>
         </main>
 
-      <div className='grid grid-cols-1 lg:grid-cols-4 p-10 justify-center items-center text-center gap-5 text-md lg:text-lg border-t-2 border-gray-400 gap-x-6'>
+      <div className='lg:flex p-10 justify-center items-center text-center gap-5 text-md lg:text-lg border-t-2 border-gray-400 gap-x-6'>
         <input
-          className='p-3 bg-white/60 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='w-full p-3 bg-white/60 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
           type="text"
           placeholder="Search job titles..."
           value={titleFilter}
           onChange={(e) => setTitleFilter(e.target.value)}
         />
         <input
-          className='p-3 bg-white/60 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='w-full p-3 bg-white/60 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
           type="text"
           placeholder="Search skills..."
           value={skillFilter}
@@ -56,14 +64,14 @@ const Page = () => {
         <select
           value={locationFilter}
           onChange={(e) => setLocationFilter(e.target.value)}
-          className='p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
+          className='w-full p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
         >
           <option value="" disabled className='text-zinc-400'>Select Location</option>
           <option value="Remote" className='text-black'>Remote</option>
           <option value="Hybrid" className='text-black'>Hybrid</option>
         </select>
         <select
-          className='p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
+          className='w-full p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
           value={experienceFilter}
           onChange={(e) => setExperienceFilter(e.target.value)}
         >
@@ -72,6 +80,15 @@ const Page = () => {
           <option value="Mid" className='text-black'>Mid</option>
           <option value="Senior" className='text-black'>Senior</option>
         </select>
+        <button
+          onClick={clearFilters}
+          className='p-3 border-white border-2 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-sm focus:ring-opacity-50'
+        >
+          Clear
+        </button>
+      </div>
+      <div className='flex justify-center'>
+        
       </div>
       {/* Map returning JobCard components to display the filtered jobs from the user query */}
       <div className='grid lg:grid-cols-2 lg:p-10 md:p-8 p-4 h-full bg-white'>

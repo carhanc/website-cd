@@ -6,6 +6,9 @@ import jobs from '@/data/jobData';
 import JobCard from '../../components/JobCard'
 import Footer from '@/components/footer'
 import { useState } from 'react';
+import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
+import {auth} from '@/firebase/auth';
+import { useEffect } from 'react';
 
 const Page = () => {
 
@@ -13,6 +16,7 @@ const Page = () => {
   const [skillFilter, setSkillFilter] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
   const [experienceFilter, setExperienceFilter] = useState('');
+  const [userData, setUserData] = useState(null);
 
   // Filter jobs based on the filters inputted on the frontend
   // Returns an array of job objects that match the filters
@@ -24,6 +28,20 @@ const Page = () => {
       (experienceFilter ? job.experience === experienceFilter : true)
     );
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (auth.currentUser) {
+        const data = await fetchUserData(auth.currentUser.uid);
+        if (data) {
+          setUserData(data);
+          console.log(`User Name: ${data.name}, Email: ${data.email}, Phone: ${data.phone}`);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>

@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link';
 import Footer from '@/components/footer';
 import jobs from '@/data/jobData';
+import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
+import {auth} from '@/firebase/auth';
 
 const tabs = [
   { id: 1, name: 'Personal Information' },
@@ -48,6 +50,22 @@ const Apply = () => {
   const [other, setOther] = useState('')
   const [linkedin, setLinkedin] = useState('')
   const [resume, setResume] = useState('')
+
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (auth.currentUser) {
+        const data = await fetchUserData(auth.currentUser.uid);
+        if (data) {
+          setUserData(data);
+          console.log(`User Name: ${data.name}, Email: ${data.email}, Phone: ${data.phone}`);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // State to store the application status (edit, review, submit) and the final submission status (true/false
   const [submittedApp, setSubmittedApp] = useState({})

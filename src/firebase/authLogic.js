@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import Link from 'next/link';
 import { auth } from '../firebase/auth';
+import { collection, setDoc, doc, getDoc } from "firebase/firestore";
+import { db } from "@/firebase/auth";
 
 const AuthLogic = () => {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
@@ -51,6 +53,17 @@ const AuthLogic = () => {
       )}
     </div>
   );
+};
+
+export const fetchUserData = async (uid) => {
+  const userDocRef = doc(db, 'userDatabase', uid);
+  const userDoc = await getDoc(userDocRef);
+  if (userDoc.exists()) {
+    return userDoc.data();
+  } else {
+    console.log('No such document!');
+    return null;
+  }
 };
 
 export default AuthLogic;

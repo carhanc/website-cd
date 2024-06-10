@@ -15,9 +15,25 @@ import data1 from "../../public/data.jpg"
 import BenefitsCard from "@/components/BenefitsCard";
 import benefits from "../data/benefitsData"
 import Footer from "@/components/footer";
-import AuthLogic from "@/firebase/authLogic";
-import Auth from "@/firebase/auth";
 import RegisterPage from "./register/page";
+import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
+import {auth} from '@/firebase/auth';
+
+const [userData, setUserData] = useState(null);
+
+useEffect(() => {
+  const fetchData = async () => {
+    if (auth.currentUser) {
+      const data = await fetchUserData(auth.currentUser.uid);
+      if (data) {
+        setUserData(data);
+        console.log(`User Name: ${data.name}, Email: ${data.email}, Phone: ${data.phone}`);
+      }
+    }
+  };
+
+  fetchData();
+}, []);
 
 const Home = () => {
 

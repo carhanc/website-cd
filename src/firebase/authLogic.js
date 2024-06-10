@@ -51,7 +51,7 @@ const AuthLogic = () => {
           href="/register"
           className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110"
         >
-          Register
+          Sign Up
         </Link>
       )}
     </div>

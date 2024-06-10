@@ -35,6 +35,8 @@ useEffect(() => {
   fetchData();
 }, []);
 
+// JSX Code / HTML returning the Landing Page with inline Tailwind CSS
+// Tailwind CSS helps make the website responsive by specifying device-specific styles
 const Home = () => {
 
   return (

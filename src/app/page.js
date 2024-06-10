@@ -19,6 +19,8 @@ import AuthLogic from "@/firebase/authLogic";
 import Auth from "@/firebase/auth";
 import RegisterPage from "./register/page";
 
+// JSX Code / HTML returning the Landing Page with inline Tailwind CSS
+// Tailwind CSS helps make the website responsive by specifying device-specific styles
 const Home = () => {
 
   return (

@@ -1,468 +1,440 @@
 "use client"
 
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Nav from "../../components/nav";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { useState, useEffect } from 'react'
+import { BiError } from "react-icons/bi";
 import Link from 'next/link';
 import Footer from '@/components/footer';
 import jobs from '@/data/jobData';
 
 const tabs = [
-  { id: 1, name: 'Personal Information' },
-  { id: 2, name: 'Contact Information' },
-  { id: 3, name: 'Previous Experiences' },
-  { id: 4, name: 'Skills / Expertise' },
-  { id: 5, name: 'Other' },
+  { id: 1, name: 'Personal Information', fields: ['job', 'name', 'dob', 'address', 'city', 'state', 'zip'] },
+  { id: 2, name: 'Contact Information', fields: ['email', 'phone', 'title', 'pronoun'] },
+  { id: 3, name: 'Previous Experiences', fields: ['workExp', 'workExpQual', 'undergrad', 'undergradDegree', 'grad', 'gradDegree'] },
+  { id: 4, name: 'Skills / Expertise', fields: ['skills', 'skillsQual'] },
+  { id: 5, name: 'Other', fields: ['other', 'linkedin', 'resume'] },
 ]
 
 const Apply = () => {
-
-  // States storing the user's input for each field and the status mode of the form (edit, review, submit)
-
-  const [active, setActive] = useState(1)
-
-  const [job, setJob] = useState('')
-  const [name, setName] = useState('')
-  const [dob, setDob] = useState('')
-  const [address, setAddress] = useState('')
-  const [city, setCity] = useState('')
-  const [state, setState] = useState('')
-  const [zip, setZip] = useState('')
-
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [title, setTitle] = useState('')
-  const [pronoun, setPronoun] = useState('')
-
-  const [workExp, setWorkExp] = useState('')
-  const [workExpQual, setWorkExpQual] = useState('')
-  const [undergrad, setUndergrad] = useState('')
-  const [undergradDegree, setUndergradDegree] = useState('')
-  const [grad, setGrad] = useState('')
-  const [gradDegree, setGradDegree] = useState('')
-
-  const [skills, setSkills] = useState('')
-  const [skillsQual, setSkillsQual] = useState('')
-
-  const [other, setOther] = useState('')
-  const [linkedin, setLinkedin] = useState('')
-  const [resume, setResume] = useState('')
-
-  // State to store the application status (edit, review, submit) and the final submission status (true/false
-  const [submittedApp, setSubmittedApp] = useState({})
-  const [submitted, setSubmitted] = useState(false)
-  const [finalSubmit, setFinalSubmit] = useState(false)
-
+  const [active, setActive] = useState(1);
+  const [submittedApp, setSubmittedApp] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+  const [finalSubmit, setFinalSubmit] = useState(false);
   const [backToTop, setBackToTop] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [tabErrors, setTabErrors] = useState({});
+
+  const [formData, setFormData] = useState({
+    job: '',
+    name: '',
+    dob: '',
+    address: '',
+    city: '',
+    state: '',
+    zip: '',
+    email: '',
+    phone: '',
+    title: '',
+    pronoun: '',
+    workExp: '',
+    workExpQual: '',
+    undergrad: '',
+    undergradDegree: '',
+    grad: '',
+    gradDegree: '',
+    skills: '',
+    skillsQual: '',
+    other: '',
+    linkedin: '',
+    resume: '',
+  });
 
   useEffect(() => {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-          setBackToTop(true);
-        } else {
-          setBackToTop(false);
-        }
-      });
-    }, [])
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        setBackToTop(true);
+      } else {
+        setBackToTop(false);
+      }
+    });
+  }, []);
 
-    const scrollUp = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
+  const scrollUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
+
+  const validateFields = () => {
+    const newErrors = {};
+    Object.keys(formData).forEach(key => {
+      if (!formData[key] && key !== 'title' && key !== 'pronoun' && key !== 'linkedin' && key !== 'resume') {
+        newErrors[key] = 'No response';
+      }
+    });
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^\d{3}-\d{3}-\d{4}$/;
+    const dobPattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d{2}$/;
+
+    if (formData.email && !emailPattern.test(formData.email)) {
+      newErrors.email = 'Invalid email format';
+    }
+    if (formData.phone && !phonePattern.test(formData.phone)) {
+      newErrors.phone = 'Invalid phone number format';
+    }
+    if (formData.dob && !dobPattern.test(formData.dob)) {
+      newErrors.dob = 'Invalid date of birth format';
     }
 
-// Handles the submission of the application form: creates a JSON object 
-// with the user's input, posts it to MongoDB, and logs it to the console for testing
+    setErrors(newErrors);
+    updateTabErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
+
+  const updateTabErrors = (newErrors) => {
+    const tabErrorsCount = {};
+    tabs.forEach(tab => {
+      const errorCount = tab.fields.reduce((count, field) => newErrors[field] ? count + 1 : count, 0);
+      tabErrorsCount[tab.id] = errorCount;
+    });
+    setTabErrors(tabErrorsCount);
+  }
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
   const handleSubmit = (status) => {
-    if (status === 'edit') {
-      setSubmitted(true);
+    if (validateFields()) {
+      if (status === 'edit') {
+        setSubmitted(true);
+      }
+      if (status === 'submit') {
+        setFinalSubmit(true);
+      }
+      setSubmittedApp(formData);
     }
-    if (status === 'submit') {
-      setFinalSubmit(true);
-    }
-
-    const submittedData = {
-      personalInformation: {
-        job,
-        name,
-        dob,
-        address,
-        city,
-        state,
-        zip,
-      },
-      contactInformation: {
-        email,
-        phone,
-        title,
-        pronoun,
-      },
-      previousExperiences: {
-        workExperience: workExp,
-        workExperienceQualification: workExpQual,
-        undergrad: {
-          institution: undergrad,
-          degree: undergradDegree,
-        },
-        grad: {
-          institution: grad,
-          degree: gradDegree,
-        },
-      },
-      skillsExpertise: {
-        skills,
-        skillsQualification: skillsQual,
-      },
-      other: {
-        additionalInformation: other,
-        linkedin,
-        resume,
-      },
-    };
-
-    console.log(JSON.stringify(submittedData, null, 2));
-
-    setSubmittedApp(submittedData);
   };
 
   return (
     <div className=''>
       <Nav />
-      {!submitted && <div className='bg-white'>
-        <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block border-4 border-indigo-400/90 bg-indigo-200/25 shadow-lg shadow-indigo-100'>
-
-          <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300'>
-            <div className='xl:w-1/4 lg:w-1/3 w-full flex flex-col lg:text-xl font-medium lg:border-r-4 lg:border-indigo-400/80 mb-10 lg:mb-0'>
-
-              {tabs.map((tab) => (
-                <button
-                  className={`${active === tab.id ? "text-indigo-100 bg-indigo-600/90" : "text-gray-500"} 
-                p-4 hover:bg-gray-400/60 hover:text-gray-500 transition ease-linear duration-150 rounded-2xl justify-between flex flex-row lg:mx-5 lg:mr-8 group`}
-                  onClick={() => setActive(tab.id)}
-                  key={tab.id}
-                >
-                  <span>
-                    {tab.name}
-                  </span>
-                  <span className='flex items-center text-[30px] group-hover:translate-x-2 transition ease-linear duration-100'>
-                    <MdKeyboardArrowRight />
-                  </span>
-                </button>
-              ))}
-
-            </div>
-
-            {/* Personal Information */}
-
-            <div className={`${active === 1 ? "block" : "hidden"} lg:w-4/5 w-full lg:pl-10`}>
-              <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>
-                Personal Information
-              </span>
-              <select
-                className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-xl text-ld font-medium lg:text-xl border-2 border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
-                onChange={(e) => setJob(e.target.value)} 
-                defaultValue={job ? job : ""} 
-              >
-                <option value="" disabled>Select a job</option>
-                {jobs.map((job, index) => (
-                  <option key={index} value={job.title}>{job.title}</option>
-                ))}
-              </select>
-              <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-12 pt-10'>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
-                  <span className='ml-1'>Full Name</span>
-                  <input value={name} placeholder='John Doe' onChange={(e) => setName(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex mt-10 lg:mt-0 flex-col'>
-                  <span className='ml-1'>Date of Birth</span>
-                  <input value={dob} placeholder='MM/DD/YYYY' onChange={(e) => setDob(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                  <span className='ml-1'>Address</span>
-                  <input value={address} placeholder='123 Example Ave' onChange={(e) => setAddress(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10'>
-                  <span className='ml-1'>City</span>
-                  <input value={city} placeholder='Los Angeles' onChange={(e) => setCity(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                  <span className='ml-1'>State/Country</span>
-                  <input value={state} placeholder='California, USA' onChange={(e) => setState(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10'>
-                  <span className='ml-1'>Zip Code</span>
-                  <input value={zip} placeholder='12345' onChange={(e) => setZip(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none' />
-                </div>
-
-              </div>
-            </div>
-
-            {/* Contact Information */}
-
-            <div className={`${active === 2 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
-              <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>
-                Contact Information
-              </span>
-              <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-8 pt-6 text-gray-300'>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
-                  <span className='ml-1'>Email</span>
-                  <input value={email} placeholder='username@email.com' onChange={(e) => setEmail(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-0'>
-                  <span className='ml-1'>Phone Number</span>
-                  <input value={phone} placeholder='123-458-7890' onChange={(e) => setPhone(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                  <span className='ml-1'>Title (opt)</span>
-                  <input value={title} placeholder='Mr., Mrs., etc.' onChange={(e) => setTitle(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mt-10'>
-                  <span className='ml-1'>Pronouns</span>
-                  <input value={pronoun} placeholder='They/them' onChange={(e) => setPronoun(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-              </div>
-            </div>
-
-            {/* Academic / Work Experience */}
-
-            <div className={`${active === 3 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
-              <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>
-                Previous Experiences
-              </span>
-              <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
-                  <span className='ml-1'>List all previous <strong>work</strong> experiences</span>
-                  <textarea value={workExp} placeholder='Company names, years worked, brief role description, etc.' onChange={(e) => setWorkExp(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                  <span className='ml-1'>Why do these experiences qualify you for this position?</span>
-                  <textarea value={workExpQual} placeholder='Short essay about how your experiences have shaped you...' onChange={(e) => setWorkExpQual(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='grid lg:grid-cols-2'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                    <span className='ml-1'>Undergrad Institution / Graduating Year</span>
-                    <input value={undergrad} placeholder='Example University, YYYY' onChange={(e) => setUndergrad(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                  </div>
-
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                    <span className='ml-1'>Degree(s) Earned</span>
-                    <input value={undergradDegree} placeholder='Data Science' onChange={(e) => setUndergradDegree(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                  </div>
-                </div>
-
-                <div className='grid lg:grid-cols-2'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                    <span className='ml-1'>Grad Institution / Graduating Year</span>
-                    <input value={grad} placeholder='Example University, YYYY' onChange={(e) => setGrad(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                  </div>
-
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                    <span className='ml-1'>Degree(s) Earned</span>
-                    <input value={gradDegree} placeholder='Data Science' onChange={(e) => setGradDegree(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Skills & Expertise */}
-
-            <div className={`${active === 4 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
-              <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>
-                Skills & Expertise
-              </span>
-              <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
-                  <span className='ml-1'>What do you consider to be your top <strong>five</strong> professional skills and why?</span>
-                  <textarea value={skills} placeholder='List top five skills...' onChange={(e) => setSkills(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                  <span className='ml-1'>Why do these skills equip you to succeed at DataVoyagers?</span>
-                  <textarea value={skillsQual} placeholder='Elaborate on your unique skillset... How does it help DataVoyagers?' onChange={(e) => setSkillsQual(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-              </div>
-            </div>
-
-            {/* Other */}
-
-            <div className={`${active === 5 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
-              <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>
-                Other Information
-              </span>
-              <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
-
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
-                  <span className='ml-1'>Is there anything else you would like us to know about you?</span>
-                  <textarea value={other} placeholder='Why you are the best fit, gaps in your résume, unusual details...' onChange={(e) => setOther(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                </div>
-
-                <div className='grid lg:grid-cols-2 mt-10 lg:space-y-0 md:space-y-0 space-y-10'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
-                    <span className='ml-1'>Link to LinkedIn Profile</span>
-                    <input value={linkedin} placeholder='linkedin.com/in/username' onChange={(e) => setLinkedin(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                  </div>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
-                    <span className='ml-1'>Link to Résume</span>
-                    <input value={resume} placeholder='www.example.com/resume' onChange={(e) => setResume(e.target.value)} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
-                  </div>
-                </div>
-                <span className='flex flex-row gap-4'>
-                  <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-indigo-100 hover:brightness-[1.15] transition ease-linear duration-200 mt-10 group font-medium text-gray-200'>
-                    Review
-                    <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
+      {!submitted && (
+        <div className='bg-white'>
+          <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block border-4 border-indigo-400/90 bg-indigo-200/25 shadow-lg shadow-indigo-100'>
+            <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300'>
+              <div className='xl:w-1/4 lg:w-1/3 w-full flex flex-col lg:text-xl font-medium lg:border-r-4 lg:border-indigo-400/80 mb-10 lg:mb-0'>
+                {tabs.map((tab) => (
+                  <button
+                    className={`${active === tab.id ? "text-indigo-100 bg-indigo-600/90" : errors[tab.id] ? "text-red-500" : "text-gray-500"} 
+                      p-4 hover:bg-gray-400/60 hover:text-gray-500 transition ease-linear duration-150 rounded-2xl justify-between flex flex-row lg:mx-5 lg:mr-8 group`}
+                    onClick={() => setActive(tab.id)}
+                    key={tab.id}
+                  >
+                    <span>{tab.name}</span>
+                    {tabErrors[tab.id] > 0 && (
+                      <span className='flex my-auto bg-red-100 text-red-700 border-yellow-600 border border-dashed rounded-full px-2 text-sm ml-auto'>
+                        <BiError className='my-auto mr-1'/> {tabErrors[tab.id]}
+                      </span>
+                    )}
+                    <span className='flex items-center text-[30px] group-hover:translate-x-2 transition ease-linear duration-100'>
                       <MdKeyboardArrowRight />
                     </span>
                   </button>
-                </span>
-
+                ))}
               </div>
 
+              {/* Personal Information */}
+              <div className={`${active === 1 ? "block" : "hidden"} lg:w-4/5 w-full lg:pl-10`}>
+                <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Personal Information</span>
+                <select
+                  name="job"
+                  className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-xl text-ld font-medium lg:text-xl border-2 border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
+                  onChange={handleChange}
+                  value={formData.job}
+                >
+                  <option value="" disabled>Select a job</option>
+                  {jobs.map((job, index) => (
+                    <option key={index} value={job.title}>{job.title}</option>
+                  ))}
+                </select>
+                <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-12 pt-10'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <span className='ml-1'>Full Name</span>
+                    <input name="name" value={formData.name} placeholder='John Doe' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.name ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.name && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.name}</span>}
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex mt-10 lg:mt-0 flex-col'>
+                    <span className='ml-1'>Date of Birth</span>
+                    <input name="dob" value={formData.dob} placeholder='MM/DD/YYYY' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.dob ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.dob && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.dob}</span>}
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                    <span className='ml-1'>Address</span>
+                    <input name="address" value={formData.address} placeholder='123 Example Ave' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.address ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.address && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.address}</span>}
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10'>
+                    <span className='ml-1'>City</span>
+                    <input name="city" value={formData.city} placeholder='Los Angeles' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.city ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.city && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.city}</span>}
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                    <span className='ml-1'>State/Country</span>
+                    <input name="state" value={formData.state} placeholder='California, USA' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.state ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.state && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.state}</span>}
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10'>
+                    <span className='ml-1'>Zip Code</span>
+                    <input name="zip" value={formData.zip} placeholder='12345' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.zip ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.zip && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.zip}</span>}
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Information */}
+              <div className={`${active === 2 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
+                <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Contact Information</span>
+                <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-8 pt-6 text-gray-300'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <span className='ml-1'>Email</span>
+                    <input name="email" value={formData.email} placeholder='username@email.com' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.email ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.email && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.email}</span>}
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-0'>
+                    <span className='ml-1'>Phone Number</span>
+                    <input name="phone" value={formData.phone} placeholder='123-458-7890' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.phone ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.phone && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.phone}</span>}
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                    <span className='ml-1'>Title (opt)</span>
+                    <input name="title" value={formData.title} placeholder='Mr., Mrs., etc.' onChange={handleChange} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mt-10'>
+                    <span className='ml-1'>Pronouns</span>
+                    <input name="pronoun" value={formData.pronoun} placeholder='They/them' onChange={handleChange} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
+                  </div>
+                </div>
+              </div>
+
+              {/* Previous Experiences */}
+              <div className={`${active === 3 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
+                <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Previous Experiences</span>
+                <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <span className='ml-1'>List all previous <strong>work</strong> experiences</span>
+                    <textarea name="workExp" value={formData.workExp} placeholder='Company names, years worked, brief role description, etc.' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExp ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.workExp && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.workExp}</span>}
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                    <span className='ml-1'>Why do these experiences qualify you for this position?</span>
+                    <textarea name="workExpQual" value={formData.workExpQual} placeholder='Short essay about how your experiences have shaped you...' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExpQual ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.workExpQual && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.workExpQual}</span>}
+                  </div>
+
+                  <div className='grid lg:grid-cols-2'>
+                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                      <span className='ml-1'>Undergrad Institution / Graduating Year</span>
+                      <input name="undergrad" value={formData.undergrad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergrad ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.undergrad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.undergrad}</span>}
+                    </div>
+
+                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                      <span className='ml-1'>Degree(s) Earned</span>
+                      <input name="undergradDegree" value={formData.undergradDegree} placeholder='Data Science' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.undergradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.undergradDegree}</span>}
+                    </div>
+                  </div>
+
+                  <div className='grid lg:grid-cols-2'>
+                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                      <span className='ml-1'>Grad Institution / Graduating Year</span>
+                      <input name="grad" value={formData.grad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.grad ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.grad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.grad}</span>}
+                    </div>
+
+                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                      <span className='ml-1'>Degree(s) Earned</span>
+                      <input name="gradDegree" value={formData.gradDegree} placeholder='Data Science' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.gradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.gradDegree}</span>}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Skills & Expertise */}
+              <div className={`${active === 4 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
+                <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Skills & Expertise</span>
+                <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <span className='ml-1'>What do you consider to be your top <strong>five</strong> professional skills and why?</span>
+                    <textarea name="skills" value={formData.skills} placeholder='List top five skills...' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.skills ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.skills && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.skills}</span>}
+                  </div>
+
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                    <span className='ml-1'>Why do these skills equip you to succeed at DataVoyagers?</span>
+                    <textarea name="skillsQual" value={formData.skillsQual} placeholder='Elaborate on your unique skillset... How does it help DataVoyagers?' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.skillsQual ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.skillsQual && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.skillsQual}</span>}
+                  </div>
+                </div>
+              </div>
+
+              {/* Other */}
+              <div className={`${active === 5 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
+                <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Other Information</span>
+                <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
+                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <span className='ml-1'>Is there anything else you would like us to know about you?</span>
+                    <textarea name="other" value={formData.other} placeholder='Why you are the best fit, gaps in your résume, unusual details...' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.other ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.other && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.other}</span>}
+                  </div>
+
+                  <div className='grid lg:grid-cols-2 mt-10 lg:space-y-0 md:space-y-0 space-y-10'>
+                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                      <span className='ml-1'>Link to LinkedIn Profile</span>
+                      <input name="linkedin" value={formData.linkedin} placeholder='linkedin.com/in/username' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.linkedin ? 'text-red-500' : 'text-indigo-500'}`} />
+                    </div>
+                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                      <span className='ml-1'>Link to Résume</span>
+                      <input name="resume" value={formData.resume} placeholder='www.example.com/resume' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.resume ? 'text-red-500' : 'text-indigo-500'}`} />
+                    </div>
+                  </div>
+                  <span className='flex flex-row gap-4'>
+                    <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-indigo-100 hover:brightness-[1.15] transition ease-linear duration-200 mt-10 group font-medium text-gray-200'>
+                      Review
+                      <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
+                        <MdKeyboardArrowRight />
+                      </span>
+                    </button>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>}
+      )}
 
-      {finalSubmit && 
+      {finalSubmit &&
         <div className='p-7 rounded-lg m-7 lg:mx-10 mx-5 border-2 border-indigo-400/90'>
           <h1 className='lg:text-2xl text-xl text-indigo-500 font-bold mb-1'>Thanks for submitting your application!</h1>
           <p className='inline text-lg text-indigo-500/85 font-medium mt-2'>The DataVoyagers team is eager to read your application. Feel free to email our recruitment team with any updates to your application using the email <p className='inline underline'> files@careers.datavoyagers.com</p>. Excpect to receive an email from our hiring team within 7-14 business days with an interview and further instructions. We will let you know if we are deciding not to move forward with your application over email. Here is to a new potential voyage! 
-          <span className='ml-1 text-xl'>🥂🚀</span></p>
-        </div>}
+            <span className='ml-1 text-xl'>🥂🚀</span></p>
+        </div>
+      }
 
       {submitted && <div className='bg-white'>
         <div className='bg-indigo-200/25 m-5 lg:m-10 lg:p-10 rounded-lg lg:block border-2 border-indigo-400/90'>
           <div className='text-white'>
-              <h1 className='lg:flex-none flex flex-col items-center font-extrabold text-xl lg:text-2xl mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row md:ml-7'>Review Your Application: 
-                <h1 className='border-2 border-indigo-700/90 px-2 rounded-md border-dashed text-xl lg:text-2xl text-indigo-700/90 text-center lg:ml-2 w-fit'>{submittedApp.personalInformation.job}</h1>
-              </h1>
+            <h1 className='lg:flex-none flex flex-col items-center font-extrabold text-xl lg:text-2xl mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row md:ml-7'>Review Your Application: 
+              <h1 className='border-2 border-indigo-700/90 px-2 rounded-md border-dashed text-xl lg:text-2xl text-indigo-700/90 text-center lg:ml-2 w-fit'>{submittedApp.job}</h1>
+            </h1>
             <div className='lg:ml-2'>
-
-              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 lg:mt-6'>
-                Personal Information
-              </h2>
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 lg:mt-6'>Personal Information</h2>
               <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 px-7 pb-7 lg:ml-7'>
-
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1 mt-6 font-semibold'>Full Name</span>
                   <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.personalInformation.name || 'No response'}
+                    {submittedApp.name || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Date of Birth</span>
                   <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.personalInformation.dob || 'No response'}
+                    {submittedApp.dob || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Address</span>
                   <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.personalInformation.address || 'No response'}
+                    {submittedApp.address || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>City</span>
                   <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.personalInformation.city || 'No response'}
+                    {submittedApp.city || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>State/Country</span>
                   <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.personalInformation.state || 'No response'}
+                    {submittedApp.state || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Zip Code</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.personalInformation.zip || 'No response'}
+                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none'>
+                    {submittedApp.zip || 'No response'}
                   </div>
                 </div>
-
               </div>
             </div>
 
             <div className='ml-2'>
-
-              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>
-                Contact Information
-              </h2>
-
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Contact Information</h2>
               <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 px-7 pb-7 lg:ml-7'>
-
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1 mt-6 font-semibold'>Email</span>
                   <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.contactInformation.email !== '' ? submittedApp.contactInformation.email : 'No response'}
+                    {submittedApp.email || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Phone</span>
                   <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.contactInformation.phone || 'No response'}
+                    {submittedApp.phone || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Title</span>
                   <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.contactInformation.title || 'No response'}
+                    {submittedApp.title || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Pronouns</span>
                   <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                    {submittedApp.contactInformation.pronoun || 'No response'}
+                    {submittedApp.pronoun || 'No response'}
                   </div>
                 </div>
-
               </div>
             </div>
 
             <div className='ml-2'>
-
-              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>
-                Previous Experience
-              </h2>
-
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Previous Experience</h2>
               <div className='space-y-4 text-white lg:mr-56 px-7 pb-7 pt-3 lg:ml-7'>
-
                 <div className='flex flex-col'>
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-4 font-semibold'>Work Experience</span>
                     <div placeholder='John Doe' className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.previousExperiences.workExperience || 'No response'}
+                      {submittedApp.workExp || 'No response'}
                     </div>
                   </div>
 
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-8 font-semibold'>Work Experience Qualifications</span>
                     <div placeholder='John Doe' className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.previousExperiences.workExperienceQualification || 'No response'}
+                      {submittedApp.workExpQual || 'No response'}
                     </div>
                   </div>
                 </div>
@@ -471,75 +443,63 @@ const Apply = () => {
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-6 lg:mr-10'>
                     <span className='ml-1 font-semibold'>Undergraduate Education Information</span>
                     <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.previousExperiences.undergrad.institution || 'No response'}
+                      {submittedApp.undergrad || 'No response'}
                     </div>
                   </div>
 
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-4 lg:mr-10'>
                     <span className='ml-1 font-semibold'>Undergraduate Degree(s)</span>
                     <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.previousExperiences.undergrad.degree || 'No response'}
+                      {submittedApp.undergradDegree || 'No response'}
                     </div>
                   </div>
 
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 font-semibold'>Graduate Education Information</span>
                     <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.previousExperiences.grad.institution || 'No response'}
+                      {submittedApp.grad || 'No response'}
                     </div>
                   </div>
 
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-4 lg:mr-10'>
                     <span className='ml-1 font-semibold'>Graduate Degree(s)</span>
                     <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.previousExperiences.grad.institution || 'No response'}
+                      {submittedApp.gradDegree || 'No response'}
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
 
             <div className='ml-2'>
-
-              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>
-                Skills / Expertise
-              </h2>
-
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Skills / Expertise</h2>
               <div className='space-y-4 text-white lg:mr-56 px-7 pb-7 pt-3 lg:ml-7'>
-
                 <div className='flex flex-col'>
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-4 font-semibold'>Skills Acquired</span>
                     <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.skillsExpertise.skills || 'No response'}
+                      {submittedApp.skills || 'No response'}
                     </div>
                   </div>
 
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-8 font-semibold'>Skills Qualifications</span>
                     <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.skillsExpertise.skillsQualification || 'No response'}
+                      {submittedApp.skillsQual || 'No response'}
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
 
             <div className='ml-2'>
-
-              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>
-                Other Information
-              </h2>
-
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Other Information</h2>
               <div className='space-y-4 text-white lg:mr-56 px-7 lg:mb-7 mb-3 pt-3 lg:ml-7'>
-
                 <div className='flex flex-col'>
                   <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mb-2'>
                     <span className='ml-1 mt-4 font-semibold'>Additional Information</span>
                     <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none'>
-                      {submittedApp.other.additionalInformation || 'No response'}
+                      {submittedApp.other || 'No response'}
                     </div>
                   </div>
 
@@ -547,49 +507,46 @@ const Apply = () => {
                     <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1 mt-4 font-semibold'>LinkedIn</span>
                       <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                        {submittedApp.other.linkedin ? <Link target='_blank' href={submittedApp.other.linkedin}>{submittedApp.other.linkedin}</Link> : 'No response'}
+                        {submittedApp.linkedin ? <Link target='_blank' href={submittedApp.linkedin}>{submittedApp.linkedin}</Link> : 'No response'}
                       </div>
                     </div>
 
                     <div className='text-indigo-500 text-md lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1 mt-4 font-semibold'>Resume</span>
                       <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                        {submittedApp.other.resume ? <Link target='_blank' href={submittedApp.other.resume}>{submittedApp.other.resume}</Link> : 'No response'}
+                        {submittedApp.resume ? <Link target='_blank' href={submittedApp.resume}>{submittedApp.resume}</Link> : 'No response'}
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
 
-            {!finalSubmit && <span className='flex lg:flex-row md:flex-row flex-col gap-4 lg:pl-16 ml-10 lg:ml-0 mb-10 '>
-              
-            {backToTop && (
-              <button className='flex my-auto items-center lg:text-xl text-lg border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear 
-              mt-10 text-indigo-500 font-medium hover:text-gray-100 lg:w-auto md:w-auto w-fit' 
-              onClick={() => {setSubmitted(false); scrollUp(); }}>
-                Edit Application
-              </button>
+            {!finalSubmit && (
+              <span className='flex lg:flex-row md:flex-row flex-col gap-4 lg:pl-16 ml-10 lg:ml-0 mb-10 '>
+                {backToTop && (
+                  <button className='flex my-auto items-center lg:text-xl text-lg border-2 border-indigo-500 rounded-md px-4 py-2 hover:bg-indigo-500 transition ease-linear mt-10 text-indigo-500 font-medium hover:text-gray-100 lg:w-auto md:w-auto w-fit'
+                    onClick={() => { setSubmitted(false); scrollUp(); }}>
+                    Edit Application
+                  </button>
+                )}
+
+                {backToTop && (
+                  <button onClick={() => { handleSubmit("submit"); scrollUp(); }} className='flex my-auto items-center lg:text-xl text-lg bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-[1.15] transition ease-linear duration-200 lg:mt-10 md:mt-10 mt-4 group font-medium text-gray-200 lg:w-auto md:w-auto w-fit'>
+                    Submit
+                    <span className="text-md text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
+                      <MdKeyboardArrowRight />
+                    </span>
+                  </button>
+                )}
+              </span>
             )}
-
-              {backToTop && (
-                <button onClick={() => { handleSubmit("submit"); scrollUp(); }} className='flex my-auto items-center lg:text-xl text-lg bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-[1.15] transition ease-linear duration-200 lg:mt-10 md:mt-10 mt-4 group font-medium text-gray-200 lg:w-auto md:w-auto w-fit'>
-                  Submit
-                  <span className="text-md text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
-                    <MdKeyboardArrowRight />
-                  </span>
-                </button>
-              )}
-
-            </span>}
-
           </div>
         </div>
       </div>}
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }
 
 export default Apply;

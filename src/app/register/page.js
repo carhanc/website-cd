@@ -44,10 +44,10 @@ const RegisterPage = () => {
       // Set authenticated user state
       setAuthenticatedUser(true);
 
-      router.push("/");
     } catch (error) {
       console.error("Error adding user:", error);
     }
+    router.push("/");
   };
 
   return (

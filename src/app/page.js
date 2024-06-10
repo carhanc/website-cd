@@ -16,28 +16,30 @@ import BenefitsCard from "@/components/BenefitsCard";
 import benefits from "../data/benefitsData"
 import Footer from "@/components/footer";
 import RegisterPage from "./register/page";
+import { useState, useEffect } from "react";
 import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
 import {auth} from '@/firebase/auth';
 
-const [userData, setUserData] = useState(null);
-
-useEffect(() => {
-  const fetchData = async () => {
-    if (auth.currentUser) {
-      const data = await fetchUserData(auth.currentUser.uid);
-      if (data) {
-        setUserData(data);
-        console.log(`User Name: ${data.name}, Email: ${data.email}, Phone: ${data.phone}`);
-      }
-    }
-  };
-
-  fetchData();
-}, []);
 
 // JSX Code / HTML returning the Landing Page with inline Tailwind CSS
 // Tailwind CSS helps make the website responsive by specifying device-specific styles
 const Home = () => {
+
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (auth.currentUser) {
+        const data = await fetchUserData(auth.currentUser.uid);
+        if (data) {
+          setUserData(data);
+          console.log(`User Name: ${data.name}, Email: ${data.email}, Phone: ${data.phone}`);
+        }
+      }
+    };
+  
+    fetchData();
+  }, []);
 
   return (
     <div>

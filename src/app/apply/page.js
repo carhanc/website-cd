@@ -8,7 +8,8 @@ import Link from 'next/link';
 import Footer from '@/components/footer';
 import jobs from '@/data/jobData';
 import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
-import {auth} from '@/firebase/auth';
+import {auth, db } from '@/firebase/auth';
+import { collection, setDoc, doc, getDoc, addDoc, getDocs } from "firebase/firestore";
 
 const tabs = [
   { id: 1, name: 'Personal Information', fields: ['job', 'name', 'dob', 'address', 'city', 'state', 'zip'] },
@@ -51,6 +52,32 @@ const Apply = () => {
   const [linkedin, setLinkedin] = useState('')
   const [resume, setResume] = useState('')
 
+  //For Submitting Applications to Firebase
+  const [submittedApps, setSubmittedApps] = useState([])
+  
+  const submittedAppsCollectionRef = collection(db, 'submittedApplications'); 
+  
+  useEffect(() => {
+
+    const getSubmittedApps = async () => {
+      try {
+        const data = await getDocs(submittedAppsCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(), 
+          id: doc.id
+        }));
+
+        setSubmittedApps(filteredData);
+      } catch (error) {
+        console.error("Error getting documents: ", error);
+      }
+    }
+
+    getSubmittedApps();
+  }, [])
+  // End of Firebase Code
+
+
   // State to store the application status (edit, review, submit) and the final submission status (true/false
   const [submittedApp, setSubmittedApp] = useState({})
   const [submitted, setSubmitted] = useState(false)
@@ -59,6 +86,23 @@ const Apply = () => {
   const [backToTop, setBackToTop] = useState(false);
   const [errors, setErrors] = useState({});
   const [tabErrors, setTabErrors] = useState({});
+
+
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (auth.currentUser) {
+        const data = await fetchUserData(auth.currentUser.uid);
+        if (data) {
+          setUserData(data);
+          console.log(`User Name: ${data.name}, Email: ${data.email}, Phone: ${data.phone}`);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const [formData, setFormData] = useState({
     job: '',
@@ -141,6 +185,40 @@ const Apply = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
+  const onSubmitApp = async () => {
+          
+    try {
+      await addDoc(submittedAppsCollectionRef, {
+        job: formData.job,
+        name: formData.name,
+        dob: formData.dob,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        zip: formData.zip,
+        email: formData.email,
+        phone: formData.phone,
+        title: formData.title,
+        pronoun: formData.pronoun,
+        workExp: formData.workExp,
+        workExpQual: formData.workExpQual,
+        undergrad: formData.undergrad,
+        undergradDegree: formData.undergradDegree,
+        grad: formData.grad,
+        gradDegree: formData.gradDegree,
+        skills: formData.skills,
+        skillsQual: formData.skillsQual,
+        other: formData.other,
+        linkedin: formData.linkedin,
+        resume: formData.resume,
+        uid: auth.currentUser.uid,
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+    
+  }
+
   const handleSubmit = (status) => {
     if (validateFields()) {
       if (status === 'edit') {
@@ -148,6 +226,11 @@ const Apply = () => {
       }
       if (status === 'submit') {
         setFinalSubmit(true);
+        console.log('Form submitted:', formData);
+
+        //Submitting Data to Firebase
+        onSubmitApp();
+
       }
       setSubmittedApp(formData);
     }
@@ -567,7 +650,8 @@ const Apply = () => {
                 )}
 
                 {backToTop && (
-                  <button onClick={() => { handleSubmit("submit"); scrollUp(); }} className='flex my-auto items-center lg:text-xl text-lg bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-[1.15] transition ease-linear duration-200 lg:mt-10 md:mt-10 mt-4 group font-medium text-gray-200 lg:w-auto md:w-auto w-fit'>
+                  <button onClick={() => { handleSubmit("submit"); scrollUp(); }} 
+                  className='flex my-auto items-center lg:text-xl text-lg bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-[1.15] transition ease-linear duration-200 lg:mt-10 md:mt-10 mt-4 group font-medium text-gray-200 lg:w-auto md:w-auto w-fit'>
                     Submit
                     <span className="text-md text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
                       <MdKeyboardArrowRight />

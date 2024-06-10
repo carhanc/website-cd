@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { auth } from '../firebase/auth';
 import { collection, setDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase/auth";
+import { useRouter } from "next/navigation";
 
 const AuthLogic = () => {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     setPersistence(auth, browserLocalPersistence)
@@ -28,6 +30,7 @@ const AuthLogic = () => {
     signOut(auth)
       .then(() => {
         console.log('User signed out');
+        router.push("/");
         window.location.reload();
         setAuthenticatedUser(null);
       })

@@ -1,30 +1,33 @@
 import { useState, useEffect } from 'react';
-import { auth } from '@/firebase/auth';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import Link from 'next/link';
-
-let setAuthenticatedUserState;
+import { auth } from '../firebase/auth';
 
 const AuthLogic = () => {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
-  setAuthenticatedUserState = setAuthenticatedUser;
-
   useEffect(() => {
-    const listenAuth = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthenticatedUser(user);
-      } else {
-        setAuthenticatedUser(null);
-      }
-    });
-    return () => listenAuth();
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            setAuthenticatedUser(user);
+          } else {
+            setAuthenticatedUser(null);
+          }
+        });
+      })
+      .catch((error) => {
+        console.log('Error setting persistence', error);
+      });
   }, []);
 
   const signOutUser = () => {
     signOut(auth)
       .then(() => {
         console.log('User signed out');
+        window.location.reload();
+        setAuthenticatedUser(null);
       })
       .catch((error) => console.log('error', error));
   };
@@ -32,13 +35,12 @@ const AuthLogic = () => {
   return (
     <div>
       {authenticatedUser ? (
-        <Link
-          href="/"
+        <button
           onClick={signOutUser}
           className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110"
         >
           Logout
-        </Link>
+        </button>
       ) : (
         <Link
           href="/register"
@@ -49,12 +51,6 @@ const AuthLogic = () => {
       )}
     </div>
   );
-};
-
-export const setAuthenticatedUser = (user) => {
-  if (setAuthenticatedUserState) {
-    setAuthenticatedUserState(user);
-  }
 };
 
 export default AuthLogic;

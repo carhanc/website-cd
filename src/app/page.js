@@ -15,6 +15,9 @@ import data1 from "../../public/data.jpg"
 import BenefitsCard from "@/components/BenefitsCard";
 import benefits from "../data/benefitsData"
 import Footer from "@/components/footer";
+import AuthLogic from "@/firebase/authLogic";
+import Auth from "@/firebase/auth";
+import RegisterPage from "./register/page";
 
 const Home = () => {
 

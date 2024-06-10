@@ -4,31 +4,42 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Nav from "@/components/nav";
 import { collection, setDoc, doc } from "firebase/firestore";
-import { db } from "@/firebase/auth";
-import { setAuthenticatedUser } from "@/app/register/authLogic";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "@/firebase/auth";
+import { setAuthenticatedUser } from "@/firebase/authLogic";
+import Link from "next/link";
 
 const RegisterPage = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState(""); // Ensure you have a password field for user creation
 
   const handleSubmitUser = async () => {
-    if (!name || !email || !phone) {
+    if (!name || !email || !phone || !password) {
       alert("Please fill in all fields.");
       return;
     }
 
     try {
+      // Create user with email and password
+      await createUserWithEmailAndPassword(auth, email, password);
+
       // Add user data to Firestore
-      const userCollectionRef = collection(db, "users");
-      const userDocRef = doc(userCollectionRef, name);
+      const userCollectionRef = collection(db, "userDatabase");
+      const userDocRef = doc(userCollectionRef, auth.currentUser.uid);
       await setDoc(userDocRef, {
         name,
         email,
         phone,
       });
       console.log("User Added");
+      
+      console.log("Name:", name);
+      console.log("Email:", email);
+      console.log("Phone:", phone);
 
       // Set authenticated user state
       setAuthenticatedUser(true);
@@ -114,14 +125,31 @@ const RegisterPage = () => {
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
+            <div className="mb-4">
+              <label
+                htmlFor="password"
+                className="block text-gray-700 text-sm font-semibold mb-2"
+              >
+                Password *
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
+                required
+                placeholder="********"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-            <button
-              type="submit"
-              className="w-full bg-indigo-500 text-white px-4 py-2 mt-2 rounded-lg hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 duration-150 ease-linear"
-              onClick={handleSubmitUser}
-            >
-              Register
-            </button>
+              <button
+                type="submit"
+                className="w-full bg-indigo-500 text-white px-4 py-2 mt-2 rounded-lg hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 duration-150 ease-linear"
+                onClick={handleSubmitUser}
+              >
+                <Link href="/">Register</Link>
+              </button>
+            
           </div>
         </div>
       </div>

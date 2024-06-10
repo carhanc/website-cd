@@ -8,7 +8,7 @@ import logo from "../../public/logo.png";
 
 import { Divide as Hamburger1 } from "hamburger-react";
 import { useState } from "react";
-import AuthLogic from "@/app/register/authLogic";
+import AuthLogic from "@/firebase/authLogic";
 
 const Nav = () => {
   const [isOpen, setOpen] = useState(false);

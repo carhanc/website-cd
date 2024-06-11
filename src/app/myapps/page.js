@@ -21,7 +21,7 @@ const MyApps = () => {
           const submittedSnapshot = await getDocs(submittedQuery);
           const submittedApps = submittedSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
           setSubmittedApplications(submittedApps);
-
+  
           // Fetch saved applications
           const savedQuery = query(collection(db, "savedApplications"), where("uid", "==", user.uid));
           const savedSnapshot = await getDocs(savedQuery);
@@ -32,7 +32,7 @@ const MyApps = () => {
         console.error("Error fetching applications: ", error);
       }
     };
-
+  
     fetchApplications();
   }, []);
 

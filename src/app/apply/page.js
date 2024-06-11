@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Footer from '@/components/footer';
 import jobs from '@/data/jobData';
 import { useSearchParams } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
 import {auth, db } from '@/firebase/auth';
@@ -28,11 +29,7 @@ const Apply = () => {
 
 
   let form = JSON.parse(searchParams.get("form"));
-  // <Link 
-  // href={`/apply?form=${JSON.stringify(uid)}`} 
-  // className='px-2 py-1 border rounded-md border-black hover:text-white hover:bg-purple-500 transition ease-linear duration-300'>
-  //   Edit Application
-  // </Link>
+  const router = useRouter()
 
 
   // States storing the user's input for each field and the status mode of the form (edit, review, submit)
@@ -167,6 +164,7 @@ const Apply = () => {
   //   resume: form?.resume ? form.resume : '',
   // })
   const [formData, setFormData] = useState({
+    id: form?.id || '',
     job: form?.job || selectedJob || "",
     name: form?.name || '',
     dob: form?.dob || '',
@@ -283,45 +281,78 @@ const Apply = () => {
   }
 
   const onSavedApp = async () => {
-          
     try {
-      await addDoc(savedAppsCollectionRef, {
-        job: formData.job,
-        name: formData.name,
-        dob: formData.dob,
-        address: formData.address,
-        city: formData.city,
-        state: formData.state,
-        zip: formData.zip,
-        email: formData.email,
-        phone: formData.phone,
-        title: formData.title,
-        pronoun: formData.pronoun,
-        workExp: formData.workExp,
-        workExpQual: formData.workExpQual,
-        undergrad: formData.undergrad,
-        undergradDegree: formData.undergradDegree,
-        grad: formData.grad,
-        gradDegree: formData.gradDegree,
-        skills: formData.skills,
-        skillsQual: formData.skillsQual,
-        other: formData.other,
-        linkedin: formData.linkedin,
-        resume: formData.resume,
-        uid: auth.currentUser.uid,
-      });
+      // Check if the application already exists by its ID
+      const existingApp = savedApps.find(app => app.id === formData.id);
+  
+      if (existingApp) {
+        // If the application exists, update it using setDoc
+        const docRef = doc(db, 'savedApplications', formData.id);
+        await setDoc(docRef, {
+          job: formData.job,
+          name: formData.name,
+          dob: formData.dob,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          zip: formData.zip,
+          email: formData.email,
+          phone: formData.phone,
+          title: formData.title,
+          pronoun: formData.pronoun,
+          workExp: formData.workExp,
+          workExpQual: formData.workExpQual,
+          undergrad: formData.undergrad,
+          undergradDegree: formData.undergradDegree,
+          grad: formData.grad,
+          gradDegree: formData.gradDegree,
+          skills: formData.skills,
+          skillsQual: formData.skillsQual,
+          other: formData.other,
+          linkedin: formData.linkedin,
+          resume: formData.resume,
+          uid: auth.currentUser.uid,
+        });
+      } else {
+        // If the application does not exist, add a new one
+        const docRef = await addDoc(savedAppsCollectionRef, {
+          job: formData.job,
+          name: formData.name,
+          dob: formData.dob,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          zip: formData.zip,
+          email: formData.email,
+          phone: formData.phone,
+          title: formData.title,
+          pronoun: formData.pronoun,
+          workExp: formData.workExp,
+          workExpQual: formData.workExpQual,
+          undergrad: formData.undergrad,
+          undergradDegree: formData.undergradDegree,
+          grad: formData.grad,
+          gradDegree: formData.gradDegree,
+          skills: formData.skills,
+          skillsQual: formData.skillsQual,
+          other: formData.other,
+          linkedin: formData.linkedin,
+          resume: formData.resume,
+          uid: auth.currentUser.uid,
+        });
+        // Update the formData with the new document ID
+        setFormData({ ...formData, id: docRef.id });
+      }
+  
       console.log('Application Saved Successfully:', formData);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
-    
   }
-
   const handleSave = (status) => {
-    if (validateFields()) {
       if (status === 'save') {
       onSavedApp();
-    }}};
+    }};
 
   const handleSubmit = (status) => {
     if (validateFields()) {

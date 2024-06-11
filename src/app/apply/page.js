@@ -24,6 +24,16 @@ const tabs = [
 const Apply = () => {
   const searchParams = useSearchParams();
   let selectedJob = searchParams.get("selectedJob");
+  // let form = searchParams.get("form") ? JSON.parse(decodeURIComponent(searchParams.get("form"))) : {};
+
+
+  let form = JSON.parse(searchParams.get("form"));
+  // <Link 
+  // href={`/apply?form=${JSON.stringify(uid)}`} 
+  // className='px-2 py-1 border rounded-md border-black hover:text-white hover:bg-purple-500 transition ease-linear duration-300'>
+  //   Edit Application
+  // </Link>
+
 
   // States storing the user's input for each field and the status mode of the form (edit, review, submit)
 
@@ -79,7 +89,31 @@ const Apply = () => {
 
     getSubmittedApps();
   }, [])
-  // End of Firebase Code
+
+  // For Saving Applications to Firebase
+  const [savedApps, setSavedApps] = useState([])
+  
+  const savedAppsCollectionRef = collection(db, 'savedApplications'); 
+  
+  useEffect(() => {
+
+    const getSubmittedApps = async () => {
+      try {
+        const data = await getDocs(savedAppsCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(), 
+          id: doc.id
+        }));
+
+        setSavedApps(filteredData);
+      } catch (error) {
+        console.error("Error getting documents: ", error);
+      }
+    }
+
+    getSubmittedApps();
+  }, [])
+  //end of Firebase code
 
 
   // State to store the application status (edit, review, submit) and the final submission status (true/false
@@ -108,30 +142,54 @@ const Apply = () => {
     fetchData();
   }, []);
 
+  // const [formData, setFormData] = useState({
+  //   job: selectedJob ? selectedJob : "",
+  //   name: form?.name ? form.name : '',
+  //   dob: form?.dob ? form.dob : '',
+  //   address: form?.address ? form.address : '',
+  //   city: form?.city ? form.city : '',
+  //   state: form?.state ? form.state : '',
+  //   zip: form?.zip ? form.zip : '',
+  //   email: form?.email ? form.email : '',
+  //   phone: form?.phone ? form.phone : '',
+  //   title: form?.title ? form.title : '',
+  //   pronoun: form?.pronoun ? form.pronoun : '',
+  //   workExp: form?.workExp ? form.workExp : '',
+  //   workExpQual: form?.workExpQual ? form.workExpQual : '',
+  //   undergrad: form?.undergrad ? form.undergrad : '',
+  //   undergradDegree: form?.undergradDegree ? form.undergradDegree : '',
+  //   grad: form?.grad ? form.grad : '',
+  //   gradDegree: form?.gradDegree ? form.gradDegree : '',
+  //   skills: form?.skills ? form.skills : '',
+  //   skillsQual: form?.skillsQual ? form.skillsQual : '',
+  //   other: form?.other ? form.other : '',
+  //   linkedin: form?.linkedin ? form.linkedin : '',
+  //   resume: form?.resume ? form.resume : '',
+  // })
   const [formData, setFormData] = useState({
-    job: selectedJob ? selectedJob : '',
-    name: '',
-    dob: '',
-    address: '',
-    city: '',
-    state: '',
-    zip: '',
-    email: '',
-    phone: '',
-    title: '',
-    pronoun: '',
-    workExp: '',
-    workExpQual: '',
-    undergrad: '',
-    undergradDegree: '',
-    grad: '',
-    gradDegree: '',
-    skills: '',
-    skillsQual: '',
-    other: '',
-    linkedin: '',
-    resume: '',
-  })
+    job: form?.job || selectedJob || "",
+    name: form?.name || '',
+    dob: form?.dob || '',
+    address: form?.address || '',
+    city: form?.city || '',
+    state: form?.state || '',
+    zip: form?.zip || '',
+    email: form?.email || '',
+    phone: form?.phone || '',
+    title: form?.title || '',
+    pronoun: form?.pronoun || '',
+    workExp: form?.workExp || '',
+    workExpQual: form?.workExpQual || '',
+    undergrad: form?.undergrad || '',
+    undergradDegree: form?.undergradDegree || '',
+    grad: form?.grad || '',
+    gradDegree: form?.gradDegree || '',
+    skills: form?.skills || '',
+    skillsQual: form?.skillsQual || '',
+    other: form?.other || '',
+    linkedin: form?.linkedin || '',
+    resume: form?.resume || '',
+  });
   console.log(formData);
 
   useEffect(() => {
@@ -224,6 +282,47 @@ const Apply = () => {
     
   }
 
+  const onSavedApp = async () => {
+          
+    try {
+      await addDoc(savedAppsCollectionRef, {
+        job: formData.job,
+        name: formData.name,
+        dob: formData.dob,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        zip: formData.zip,
+        email: formData.email,
+        phone: formData.phone,
+        title: formData.title,
+        pronoun: formData.pronoun,
+        workExp: formData.workExp,
+        workExpQual: formData.workExpQual,
+        undergrad: formData.undergrad,
+        undergradDegree: formData.undergradDegree,
+        grad: formData.grad,
+        gradDegree: formData.gradDegree,
+        skills: formData.skills,
+        skillsQual: formData.skillsQual,
+        other: formData.other,
+        linkedin: formData.linkedin,
+        resume: formData.resume,
+        uid: auth.currentUser.uid,
+      });
+      console.log('Application Saved Successfully:', formData);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+    
+  }
+
+  const handleSave = (status) => {
+    if (validateFields()) {
+      if (status === 'save') {
+      onSavedApp();
+    }}};
+
   const handleSubmit = (status) => {
     if (validateFields()) {
       if (status === 'edit') {
@@ -244,6 +343,7 @@ const Apply = () => {
   return (
     <div className=''>
       <Nav />
+      
       {!submitted && (
         <div className='bg-white'>
           <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block border-4 border-indigo-400/90 bg-indigo-200/25 shadow-lg shadow-indigo-100'>
@@ -437,12 +537,18 @@ const Apply = () => {
                     </div>
                   </div>
                   <span className='flex flex-row gap-4'>
-                    <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-indigo-100 hover:brightness-[1.15] transition ease-linear duration-200 mt-10 group font-medium text-gray-200'>
+
+                    <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-indigo-100 hover:brightness-[1.15] transition ease-linear duration-200 mt-10 group font-medium text-gray-100'>
                       Review
                       <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
                         <MdKeyboardArrowRight />
                       </span>
                     </button>
+
+                    <button onClick={() => {handleSave("save");}} className='flex my-auto items-center text-xl rounded-md px-4 border-2 border-indigo-500 py-2 text-indigo-500 hover:text-gray-100 hover:bg-indigo-500 transition ease-linear duration-200 mt-10 group font-medium'>
+                      Save
+                    </button>
+
                   </span>
                 </div>
               </div>
@@ -658,7 +764,7 @@ const Apply = () => {
 
                 {backToTop && (
                   <button onClick={() => { handleSubmit("submit"); scrollUp(); }} 
-                  className='flex my-auto items-center lg:text-xl text-lg bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-[1.15] transition ease-linear duration-200 lg:mt-10 md:mt-10 mt-4 group font-medium text-gray-200 lg:w-auto md:w-auto w-fit'>
+                  className='flex my-auto items-center lg:text-xl text-lg bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-gray-100 hover:brightness-[1.15] transition ease-linear duration-200 lg:mt-10 md:mt-10 mt-4 group font-medium text-gray-100 lg:w-auto md:w-auto w-fit'>
                     Submit
                     <span className="text-md text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
                       <MdKeyboardArrowRight />

@@ -31,7 +31,6 @@ const AuthLogic = () => {
       .then(() => {
         console.log('User signed out');
         router.push("/");
-        window.location.reload();
         setAuthenticatedUser(null);
       })
       .catch((error) => console.log('error', error));
@@ -40,12 +39,13 @@ const AuthLogic = () => {
   return (
     <div>
       {authenticatedUser ? (
-        <button
+        <Link
+          href="/"
           onClick={signOutUser}
           className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110"
         >
           Logout
-        </button>
+        </Link>
       ) : (
         <Link
           href="/register"

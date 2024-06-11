@@ -47,19 +47,30 @@ const Nav = () => {
 
               {/* Desktop Links */}
               <div className="hidden gap-x-12 sm:flex text-[22px] my-auto rounded-md p-2 font-semibold text-indigo-700 text-transparent bg-clip-text">
+
                 <Link
                   href="/positions"
                   className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110"
                 >
                   Positions
                 </Link>
+
                 <Link
                   href="/apply"
                   className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110"
                 >
                   Apply
                 </Link>
+
                 <AuthLogic />
+
+                <Link
+                  href="/myapps"
+                  className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110"
+                >
+                  My Applications
+                </Link>
+                
               </div>
             </div>
 

@@ -51,19 +51,19 @@ export const AuthLogic = () => {
       {authenticatedUser ? (
         <div className="relative">
           <button
-            className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110 flex"
+            className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-black hover:brightness-110 flex"
             onClick={toggleDropdown}
           >
-            Welcome, {userData?.name} 
+            Welcome, {userData?.name} 👋
             <IoMdArrowDropdown className='my-auto ml-1'/>
           </button>
           {dropdownOpen && (
             <div className=" fixed right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
               <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                <Link href="/myapps" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                <Link href="/myapps" className="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-500 hover:bg-black" role="menuitem">
                   My Applications
                 </Link>
-                <button onClick={signOutUser} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                <button onClick={signOutUser} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-red-500" role="menuitem">
                   Logout
                 </button>
               </div>

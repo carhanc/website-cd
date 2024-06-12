@@ -23,14 +23,14 @@ const Nav = () => {
     >
       <Disclosure as="nav" className="w-full space-x-4 rounded-xl px-4 py-0">
         {({ open }) => (
-          <nav className="flex justify-between space-x-8 rounded-xl flex-col">
+          <nav className="flex justify-between space-x-3 rounded-xl flex-col">
             <div className="flex flex-row justify-between xl:mx-16">
               <Link
                 href="/"
                 className="gap-2 sm:flex text-lg rounded-md p-2 font-semibold hover:scale-105 cursor-pointer ease-linear duration-150 text-gray-700 text-transparent bg-clip-text"
               >
                 <Image
-                  className="relative w-10 lg:mt-[-4px] mt-[-2px] brightness-125 scale-90"
+                  className="relative w-10 lg:mt-[-4px] mt-[4px] brightness-125 scale-90"
                   alt="NextGen Logo"
                   placeholder="blur"
                   draggable="false"
@@ -79,7 +79,7 @@ const Nav = () => {
               leaveTo="transform scale-95 opacity-0"
               className="relative"
             >
-              <div className="mb-4 first-letter:sm:hidden h-[157px] py-4">
+              <div className="mb-6 first-letter:sm:hidden h-[157px] py-4">
                 <div className="mt-2 flex flex-col space-y-4">
                   <Link href="/positions" passHref>
                     <Disclosure.Button

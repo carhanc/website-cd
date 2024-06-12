@@ -186,7 +186,7 @@ const Apply = () => {
   const validateFields = () => {
     const newErrors = {};
     Object.keys(formData).forEach(key => {
-      if (!formData[key] && key !== 'title' && key !== 'pronoun') {
+      if (!formData[key] && key !== 'title' && key !== 'pronoun' && key !== "id") {
         newErrors[key] = 'No response';
       }
     });
@@ -206,6 +206,7 @@ const Apply = () => {
 
     setErrors(newErrors);
     updateTabErrors(newErrors);
+    console.log(newErrors)
     return Object.keys(newErrors).length === 0;
   }
 
@@ -334,7 +335,9 @@ const Apply = () => {
   const handleSubmit = (status) => {
     console.log("hi")
     if (validateFields()) {
+      console.log("bang bang")
       if (status === 'edit') {
+       
         setSubmitted(true);
       }
       if (status === 'submit') {

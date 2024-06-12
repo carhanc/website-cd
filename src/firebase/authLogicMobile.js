@@ -6,7 +6,7 @@ import { collection, setDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase/auth";
 import { useRouter } from "next/navigation";
 
-const AuthLogic = () => {
+const AuthLogicMobile = () => {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
   const router = useRouter();
 
@@ -37,24 +37,24 @@ const AuthLogic = () => {
   };
 
   return (
-    <strong className='ml-2'>
+    <div className='ml-2'>
       {authenticatedUser ? (
         <Link
           href="/"
           onClick={signOutUser}
-          className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110 text-extrabold"
+          className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500 font-bold"
         >
           Logout
         </Link>
       ) : (
         <Link
           href="/register"
-          className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110"
+          className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500 hover:brightness-110"
         >
           Sign Up
         </Link>
       )}
-    </strong>
+    </div>
   );
 };
 
@@ -69,4 +69,4 @@ export const fetchUserData = async (uid) => {
   }
 };
 
-export default AuthLogic;
+export default AuthLogicMobile;

@@ -102,7 +102,7 @@ const Page = () => {
         </select>
         <button
           onClick={clearFilters}
-          className='p-3 bg-indigo-500 rounded-md text-white text-sm w-full lg:w-fit'
+          className='p-3 bg-indigo-500 rounded-md text-white text-sm w-full lg:w-fit hover:bg-indigo-400 ease-linear duration-300'
         >
           Clear
         </button>

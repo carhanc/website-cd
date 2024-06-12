@@ -32,7 +32,7 @@ const SignInPage = () => {
   return (
     <div className="bg-gray-100 h-screen">
       <Nav />
-      <div className="flex items-center justify-center mt-20">
+      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:scale-125 md:mt-32 scale-90">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
           <div className="flex justify-center mb-6">
             <span className="inline-block bg-gray-200 rounded-full p-3">

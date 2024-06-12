@@ -9,6 +9,7 @@ import logo from "../../public/logo.png";
 import { Divide as Hamburger1 } from "hamburger-react";
 import { useState } from "react";
 import AuthLogic from "@/firebase/authLogic";
+import AuthLogicMobile from "@/firebase/authLogicMobile";
 
 const Nav = () => {
   const [isOpen, setOpen] = useState(false);
@@ -63,13 +64,6 @@ const Nav = () => {
                 </Link>
 
                 <AuthLogic />
-
-                <Link
-                  href="/myapps"
-                  className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500/90 hover:brightness-110"
-                >
-                  My Applications
-                </Link>
                 
               </div>
             </div>
@@ -85,7 +79,7 @@ const Nav = () => {
               leaveTo="transform scale-95 opacity-0"
               className="relative"
             >
-              <div className="mt-4 mb-4 border-t border-indigo-600/40 sm:hidden h-[120px] py-4">
+              <div className="mt-4 mb-4 border-t border-indigo-600/40 sm:hidden h-[157px] py-4">
                 <div className="mt-2 flex flex-col space-y-4">
                   <Link href="/positions" passHref>
                     <Disclosure.Button
@@ -103,14 +97,15 @@ const Nav = () => {
                       Apply
                     </Disclosure.Button>
                   </Link>
-                  <Link href="/register" passHref>
+                  <Link href="/myapps" passHref>
                     <Disclosure.Button
                       as="a"
                       className="rounded-md p-2 font-semibold text-indigo-500 hover:bg-gray-900/50"
                     >
-                      Register
+                      My Applications
                     </Disclosure.Button>
                   </Link>
+                  <AuthLogicMobile />
                 </div>
               </div>
             </Transition>

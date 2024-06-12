@@ -22,14 +22,15 @@ const RegisterPage = () => {
       alert("Please fill in all fields.");
       return;
     }
-
+  
     try {
       // Create user with email and password
-      await createUserWithEmailAndPassword(auth, email, password);
-
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
       // Add user data to Firestore
       const userCollectionRef = collection(db, "userDatabase");
-      const userDocRef = doc(userCollectionRef, auth.currentUser.uid);
+      const userDocRef = doc(userCollectionRef, user.uid);
       await setDoc(userDocRef, {
         name,
         email,
@@ -40,20 +41,19 @@ const RegisterPage = () => {
       console.log("Name:", name);
       console.log("Email:", email);
       console.log("Phone:", phone);
-
-      // Set authenticated user state
-      setAuthenticatedUser(true);
-
+  
+      // Redirect to home page
+      router.push("/");
+  
     } catch (error) {
       console.error("Error adding user:", error);
     }
-    router.push("/");
   };
 
   return (
     <div className="bg-gray-100 h-screen">
       <Nav />
-      <div className="flex items-center justify-center mt-20">
+      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:scale-125 md:mt-32 scale-90">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
           <div className="flex justify-center mb-6">
             <span className="inline-block bg-gray-200 rounded-full p-3">
@@ -147,7 +147,7 @@ const RegisterPage = () => {
               className="w-full bg-indigo-500 text-white px-4 py-2 mt-2 rounded-lg hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 duration-150ease-linear"
               onClick={handleSubmitUser}
             >
-              <Link href="/">Register</Link>
+              Register
             </button>
               
             <div className="mt-4 text-center">

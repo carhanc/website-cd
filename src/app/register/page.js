@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import Nav from "@/components/nav";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "@/firebase/auth";
-import { setAuthenticatedUser } from "@/firebase/authLogic";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
 import Link from "next/link";
 
 const RegisterPage = () => {
@@ -15,20 +15,41 @@ const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState(""); // Ensure you have a password field for user creation
+  const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const validateFields = () => {
+    let errors = {};
+
+    if (!name) errors.name = "Full Name is required.";
+    if (!email) {
+      errors.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "Email address is invalid.";
+    }
+    if (!phone) {
+      errors.phone = "Phone Number is required.";
+    } else if (phone.length !== 10) {
+      errors.phone = "Phone Number must be 10 digits.";
+    }
+    if (!password) {
+      errors.password = "Password is required.";
+    } else if (password.length < 6) {
+      errors.password = "Password must be at least 6 characters.";
+    }
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmitUser = async () => {
-    if (!name || !email || !phone || !password) {
-      alert("Please fill in all fields.");
-      return;
-    }
-  
+    if (!validateFields()) return;
+
     try {
-      // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-  
-      // Add user data to Firestore
+
       const userCollectionRef = collection(db, "userDatabase");
       const userDocRef = doc(userCollectionRef, user.uid);
       await setDoc(userDocRef, {
@@ -37,14 +58,7 @@ const RegisterPage = () => {
         phone,
       });
       console.log("User Added");
-      
-      console.log("Name:", name);
-      console.log("Email:", email);
-      console.log("Phone:", phone);
-  
-      // Redirect to home page
       router.push("/");
-  
     } catch (error) {
       console.error("Error adding user:", error);
     }
@@ -92,6 +106,7 @@ const RegisterPage = () => {
                 placeholder="James Brown"
                 onChange={(e) => setName(e.target.value)}
               />
+              {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
             </div>
             <div className="mb-4">
               <label
@@ -108,6 +123,7 @@ const RegisterPage = () => {
                 placeholder="hello@datavoyagers.com"
                 onChange={(e) => setEmail(e.target.value)}
               />
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div className="mb-4">
               <label
@@ -124,8 +140,9 @@ const RegisterPage = () => {
                 placeholder="0123456789"
                 onChange={(e) => setPhone(e.target.value)}
               />
+              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             </div>
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <label
                 htmlFor="password"
                 className="block text-gray-700 text-sm font-semibold mb-2"
@@ -133,18 +150,29 @@ const RegisterPage = () => {
                 Password *
               </label>
               <input
-                type="password"
+                type={passwordVisible ? "text" : "password"}
                 id="password"
                 className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
                 required
                 placeholder="********"
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <span
+                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-xl mt-6 my-auto"
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              >
+                {passwordVisible ? (
+                  <div className=""><IoEyeOutline /></div>
+                ) : (
+                  <div><IoEyeOffOutline /></div>
+                )}
+              </span>
+              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
             </div>
 
             <button
               type="submit"
-              className="w-full bg-indigo-500 text-white px-4 py-2 mt-2 rounded-lg hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 duration-150ease-linear"
+              className="w-full bg-indigo-500 text-white px-4 py-2 mt-2 rounded-lg hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 duration-150 ease-linear"
               onClick={handleSubmitUser}
             >
               Register

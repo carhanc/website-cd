@@ -71,9 +71,9 @@ export const AuthLogic = () => {
                 <Link href="/myapps" className="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-500 hover:bg-black" role="menuitem">
                   My Applications
                 </Link>
-                <button onClick={signOutUser} className="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-500 hover:bg-black" role="menuitem">
+                <Link href='/' onClick={signOutUser} className="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-500 hover:bg-black" role="menuitem">
                   Logout
-                </button>
+                </Link>
               </div>
             </div>
           )}

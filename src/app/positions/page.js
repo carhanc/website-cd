@@ -52,7 +52,7 @@ const Page = () => {
   }, []);
 
   return (
-    <div>
+    <div className=''>
       <div className=' bg-indigo-100/60'>
         <Nav />
         <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-24 p-10">
@@ -111,7 +111,7 @@ const Page = () => {
         
       </div>
       {/* Map returning JobCard components to display the filtered jobs from the user query */}
-      <div className='px-10 py-8 lg:px-32 grid lg:grid-cols-2 h-full gap-4 bg-indigo-50'>
+      <div className='px-10 py-8 pb-10 lg:px-32 grid lg:grid-cols-2 h-full gap-4 bg-indigo-50'>
           {filteredJobs.map((job, index) => (
             <JobCard key={index} job={job} />
           ))}

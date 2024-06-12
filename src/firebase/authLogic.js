@@ -46,6 +46,14 @@ export const AuthLogic = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  const getFirstNameWithInitial = (fullName) => {
+    if (!fullName) return '';
+    const nameParts = fullName.split(' ');
+    const firstName = nameParts[0];
+    const lastNameInitial = nameParts.length > 1 ? nameParts[1][0] : '';
+    return lastNameInitial ? `${firstName} ${lastNameInitial}` : firstName;
+  };
+
   return (
     <div className="relative inline-block text-left">
       {authenticatedUser ? (
@@ -54,7 +62,7 @@ export const AuthLogic = () => {
             className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-black hover:brightness-110 flex"
             onClick={toggleDropdown}
           >
-            Welcome, {userData?.name} 👋
+            Welcome, {getFirstNameWithInitial(userData?.name)} 👋
             <IoMdArrowDropdown className='my-auto ml-1'/>
           </button>
           {dropdownOpen && (

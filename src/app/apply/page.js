@@ -215,7 +215,7 @@ const Apply = () => {
       }
     });
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phonePattern = /^\d{3}-\d{3}-\d{4}$/;
+    const phonePattern = /^\d{3}\d{3}\d{4}$/;
     const dobPattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d{2}$/;
 
     if (formData.email && !emailPattern.test(formData.email)) {
@@ -355,6 +355,7 @@ const Apply = () => {
     }};
 
   const handleSubmit = (status) => {
+    console.log("hi")
     if (validateFields()) {
       if (status === 'edit') {
         setSubmitted(true);
@@ -376,28 +377,39 @@ const Apply = () => {
       <Nav />
       
       {!submitted && (
-        <div className='bg-white'>
-          <div className='lg:m-12 md:m-10 m-5 px-6 py-12 rounded-lg lg:block border-4 border-indigo-400/90 bg-indigo-200/25 shadow-lg shadow-indigo-100'>
-            <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300'>
-              <div className='xl:w-1/4 lg:w-1/3 w-full flex flex-col lg:text-xl font-medium lg:border-r-4 lg:border-indigo-400/80 mb-10 lg:mb-0'>
+        <div className='bg-indigo-50'>
+            <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300 lg:px-20 p-10'>
+              <div className='xl:w-1/4 lg:w-1/3 w-full flex flex-col lg:text-md font-medium bg-indigo-200 rounded-lg py-6 mb-10 lg:mb-0'>
                 {tabs.map((tab) => (
                   <button
                     className={`${active === tab.id ? "text-indigo-100 bg-indigo-600/90" : errors[tab.id] ? "text-red-500" : "text-gray-500"} 
-                      p-4 hover:bg-gray-400/60 hover:text-gray-500 transition ease-linear duration-150 rounded-2xl justify-between flex flex-row lg:mx-5 lg:mr-8 group`}
+                     px-4 hover:bg-gray-400/60 hover:text-gray-500 transition ease-linear duration-150 rounded-lg justify-between flex mx-4 group py-4`}
                     onClick={() => setActive(tab.id)}
                     key={tab.id}
                   >
                     <span>{tab.name}</span>
                     {tabErrors[tab.id] > 0 && (
-                      <span className='flex my-auto bg-red-100 text-red-700 border-yellow-600 border border-dashed rounded-full px-2 text-sm ml-auto'>
+                      <span className='flex bg-red-100 text-red-700 border-yellow-600 border border-dashed rounded-full px-2 text-sm ml-auto'>
                         <BiError className='my-auto mr-1'/> {tabErrors[tab.id]}
                       </span>
                     )}
-                    <span className='flex items-center text-[30px] group-hover:translate-x-2 transition ease-linear duration-100'>
-                      <MdKeyboardArrowRight />
+                    <span className='flex items-center text-3xl group-hover:translate-x-2 transition ease-linear duration-100'>
+                    
                     </span>
                   </button>
                 ))}
+                <span className='flex flex-row gap-2 mx-auto mt-auto'>
+                  <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex text-md bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-indigo-100 hover:brightness-[1.15] transition ease-linear duration-200 mt-10 group font-medium text-gray-100'>
+                    Review
+                    <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear hidden lg:block">
+                      <MdKeyboardArrowRight />
+                    </span>
+                  </button>
+
+                  <button onClick={() => {handleSave("save");}} className='flex my-auto items-center text-md rounded-md px-4 border-2 border-indigo-500 py-2 text-indigo-500 hover:text-gray-100 hover:bg-indigo-500 transition ease-linear duration-200 mt-10 group font-medium'>
+                    Save for Later
+                  </button>
+                </span>
               </div>
 
               {/* Personal Information */}
@@ -405,7 +417,7 @@ const Apply = () => {
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Personal Information</span>
                 <select
                   name="job"
-                  className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-xl text-ld font-medium lg:text-xl border-2 border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
+                  className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-lg text-xl font-medium border border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
                   onChange={handleChange}
                   value={formData.job}
                 >
@@ -415,40 +427,40 @@ const Apply = () => {
                   ))}
                 </select>
                 <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-12 pt-10'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>Full Name</span>
-                    <input name="name" value={formData.name} placeholder='John Doe' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.name ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.name && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.name}</span>}
+                    <input name="name" value={formData.name} placeholder='John Doe' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.name ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.name && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.name}</span>}
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex mt-10 lg:mt-0 flex-col'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex mt-10 lg:mt-0 flex-col'>
                     <span className='ml-1'>Date of Birth</span>
-                    <input name="dob" value={formData.dob} placeholder='MM/DD/YYYY' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.dob ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.dob && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.dob}</span>}
+                    <input name="dob" value={formData.dob} placeholder='MM/DD/YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.dob ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.dob && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.dob}</span>}
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>Address</span>
-                    <input name="address" value={formData.address} placeholder='123 Example Ave' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.address ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.address && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.address}</span>}
+                    <input name="address" value={formData.address} placeholder='123 Example Ave' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.address ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.address && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.address}</span>}
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10'>
                     <span className='ml-1'>City</span>
-                    <input name="city" value={formData.city} placeholder='Los Angeles' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.city ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.city && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.city}</span>}
+                    <input name="city" value={formData.city} placeholder='Los Angeles' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.city ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.city && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.city}</span>}
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>State/Country</span>
-                    <input name="state" value={formData.state} placeholder='California, USA' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.state ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.state && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.state}</span>}
+                    <input name="state" value={formData.state} placeholder='California, USA' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.state ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.state && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.state}</span>}
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10'>
                     <span className='ml-1'>Zip Code</span>
-                    <input name="zip" value={formData.zip} placeholder='12345' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.zip ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.zip && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.zip}</span>}
+                    <input name="zip" value={formData.zip} placeholder='12345' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.zip ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.zip && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.zip}</span>}
                   </div>
                 </div>
               </div>
@@ -457,26 +469,26 @@ const Apply = () => {
               <div className={`${active === 2 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Contact Information</span>
                 <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-8 pt-6 text-gray-300'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>Email</span>
-                    <input name="email" value={formData.email} placeholder='username@email.com' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.email ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.email && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.email}</span>}
+                    <input name="email" value={formData.email} placeholder='username@email.com' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.email ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.email && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.email}</span>}
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-0'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-0'>
                     <span className='ml-1'>Phone Number</span>
-                    <input name="phone" value={formData.phone} placeholder='123-458-7890' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.phone ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.phone && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.phone}</span>}
+                    <input name="phone" value={formData.phone} placeholder='123-458-7890' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.phone ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.phone && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.phone}</span>}
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>Title (optional)</span>
-                    <input name="title" value={formData.title} placeholder='Mr., Mrs., etc.' onChange={handleChange} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
+                    <input name="title" value={formData.title} placeholder='Mr., Mrs., etc.' onChange={handleChange} className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mt-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10'>
                     <span className='ml-1'>Pronouns (optional)</span>
-                    <input name="pronoun" value={formData.pronoun} placeholder='They/them' onChange={handleChange} className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
+                    <input name="pronoun" value={formData.pronoun} placeholder='They/them' onChange={handleChange} className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
                   </div>
                 </div>
               </div>
@@ -485,43 +497,43 @@ const Apply = () => {
               <div className={`${active === 3 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Previous Experiences</span>
                 <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>List all previous <strong>work</strong> experiences</span>
-                    <textarea name="workExp" value={formData.workExp} placeholder='Company names, years worked, brief role description, etc.' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExp ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.workExp && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.workExp}</span>}
+                    <textarea name="workExp" value={formData.workExp} placeholder='Company names, years worked, brief role description, etc.' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExp ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.workExp && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.workExp}</span>}
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>Why do these experiences qualify you for this position?</span>
-                    <textarea name="workExpQual" value={formData.workExpQual} placeholder='Short essay about how your experiences have shaped you...' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExpQual ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.workExpQual && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.workExpQual}</span>}
+                    <textarea name="workExpQual" value={formData.workExpQual} placeholder='Short essay about how your experiences have shaped you...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExpQual ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.workExpQual && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.workExpQual}</span>}
                   </div>
 
                   <div className='grid lg:grid-cols-2'>
-                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                       <span className='ml-1'>Undergrad Institution / Graduating Year</span>
-                      <input name="undergrad" value={formData.undergrad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergrad ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.undergrad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.undergrad}</span>}
+                      <input name="undergrad" value={formData.undergrad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergrad ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.undergrad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergrad}</span>}
                     </div>
 
-                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                       <span className='ml-1'>Degree(s) Earned</span>
-                      <input name="undergradDegree" value={formData.undergradDegree} placeholder='Data Science' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.undergradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.undergradDegree}</span>}
+                      <input name="undergradDegree" value={formData.undergradDegree} placeholder='Data Science' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.undergradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergradDegree}</span>}
                     </div>
                   </div>
 
                   <div className='grid lg:grid-cols-2'>
-                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                       <span className='ml-1'>Grad Institution / Graduating Year</span>
-                      <input name="grad" value={formData.grad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.grad ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.grad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.grad}</span>}
+                      <input name="grad" value={formData.grad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.grad ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.grad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.grad}</span>}
                     </div>
 
-                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                       <span className='ml-1'>Degree(s) Earned</span>
-                      <input name="gradDegree" value={formData.gradDegree} placeholder='Data Science' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.gradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.gradDegree}</span>}
+                      <input name="gradDegree" value={formData.gradDegree} placeholder='Data Science' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.gradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.gradDegree}</span>}
                     </div>
                   </div>
                 </div>
@@ -531,16 +543,16 @@ const Apply = () => {
               <div className={`${active === 4 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Skills & Expertise</span>
                 <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>What do you consider to be your top <strong>five</strong> professional skills and why?</span>
-                    <textarea name="skills" value={formData.skills} placeholder='List top five skills...' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.skills ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.skills && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.skills}</span>}
+                    <textarea name="skills" value={formData.skills} placeholder='List top five skills...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.skills ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.skills && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.skills}</span>}
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>Why do these skills equip you to succeed at DataVoyagers?</span>
-                    <textarea name="skillsQual" value={formData.skillsQual} placeholder='Elaborate on your unique skillset... How does it help DataVoyagers?' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.skillsQual ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.skillsQual && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.skillsQual}</span>}
+                    <textarea name="skillsQual" value={formData.skillsQual} placeholder='Elaborate on your unique skillset... How does it help DataVoyagers?' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.skillsQual ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.skillsQual && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.skillsQual}</span>}
                   </div>
                 </div>
               </div>
@@ -549,42 +561,28 @@ const Apply = () => {
               <div className={`${active === 5 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Other Information</span>
                 <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>Is there anything else you would like us to know about you?</span>
-                    <textarea name="other" value={formData.other} placeholder='Why you are the best fit, gaps in your résume, unusual details...' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.other ? 'text-red-500' : 'text-indigo-500'}`} />
-                    {errors.other && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.other}</span>}
+                    <textarea name="other" value={formData.other} placeholder='Why you are the best fit, gaps in your résume, unusual details...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.other ? 'text-red-500' : 'text-indigo-500'}`} />
+                    {errors.other && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.other}</span>}
                   </div>
 
                   <div className='grid lg:grid-cols-2 mt-10 lg:space-y-0 md:space-y-0 space-y-10'>
-                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1'>Link to LinkedIn Profile</span>
-                      <input name="linkedin" value={formData.linkedin} placeholder='linkedin.com/in/username' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.linkedin ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.linkedin && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.linkedin}</span>}
+                      <input name="linkedin" value={formData.linkedin} placeholder='linkedin.com/in/username' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.linkedin ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.linkedin && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.linkedin}</span>}
                     </div>
-                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1'>Link to Résume</span>
-                      <input name="resume" value={formData.resume} placeholder='www.example.com/resume' onChange={handleChange} className={`p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.resume ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.resume && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md'><BiError className='my-auto mr-1' />{errors.resume}</span>}
+                      <input name="resume" value={formData.resume} placeholder='www.example.com/resume' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.resume ? 'text-red-500' : 'text-indigo-500'}`} />
+                      {errors.resume && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.resume}</span>}
                     </div>
                   </div>
-                  <span className='flex flex-row gap-4'>
-
-                    <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex my-auto items-center text-xl bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-indigo-100 hover:brightness-[1.15] transition ease-linear duration-200 mt-10 group font-medium text-gray-100'>
-                      Review
-                      <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear">
-                        <MdKeyboardArrowRight />
-                      </span>
-                    </button>
-
-                    <button onClick={() => {handleSave("save");}} className='flex my-auto items-center text-xl rounded-md px-4 border-2 border-indigo-500 py-2 text-indigo-500 hover:text-gray-100 hover:bg-indigo-500 transition ease-linear duration-200 mt-10 group font-medium'>
-                      Save
-                    </button>
-
-                  </span>
+                  
                 </div>
               </div>
             </div>
-          </div>
         </div>
       )}
 
@@ -605,44 +603,44 @@ const Apply = () => {
             <div className='lg:ml-2'>
               <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 lg:mt-6'>Personal Information</h2>
               <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 px-7 pb-7 lg:ml-7'>
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1 mt-6 font-semibold'>Full Name</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.name || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Date of Birth</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.dob || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Address</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.address || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>City</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.city || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>State/Country</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.state || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Zip Code</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none'>
                     {submittedApp.zip || 'No response'}
                   </div>
                 </div>
@@ -652,30 +650,30 @@ const Apply = () => {
             <div className='ml-2'>
               <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Contact Information</h2>
               <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 px-7 pb-7 lg:ml-7'>
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1 mt-6 font-semibold'>Email</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.email || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Phone</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.phone || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Title</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.title || 'No response'}
                   </div>
                 </div>
 
-                <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-10 lg:mr-10'>
+                <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Pronouns</span>
-                  <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.pronoun || 'No response'}
                   </div>
                 </div>
@@ -686,46 +684,46 @@ const Apply = () => {
               <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Previous Experience</h2>
               <div className='space-y-4 text-white lg:mr-56 px-7 pb-7 pt-3 lg:ml-7'>
                 <div className='flex flex-col'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-4 font-semibold'>Work Experience</span>
-                    <div placeholder='John Doe' className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div placeholder='John Doe' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.workExp || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-8 font-semibold'>Work Experience Qualifications</span>
-                    <div placeholder='John Doe' className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div placeholder='John Doe' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.workExpQual || 'No response'}
                     </div>
                   </div>
                 </div>
 
                 <div className='grid lg:grid-cols-2 space-y-6'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-6 lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-6 lg:mr-10'>
                     <span className='ml-1 font-semibold'>Undergraduate Education Information</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.undergrad || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-4 lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-4 lg:mr-10'>
                     <span className='ml-1 font-semibold'>Undergraduate Degree(s)</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.undergradDegree || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 font-semibold'>Graduate Education Information</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.grad || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col mt-4 lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-4 lg:mr-10'>
                     <span className='ml-1 font-semibold'>Graduate Degree(s)</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.gradDegree || 'No response'}
                     </div>
                   </div>
@@ -737,16 +735,16 @@ const Apply = () => {
               <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Skills / Expertise</h2>
               <div className='space-y-4 text-white lg:mr-56 px-7 pb-7 pt-3 lg:ml-7'>
                 <div className='flex flex-col'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-4 font-semibold'>Skills Acquired</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.skills || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-8 font-semibold'>Skills Qualifications</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.skillsQual || 'No response'}
                     </div>
                   </div>
@@ -758,24 +756,24 @@ const Apply = () => {
               <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Other Information</h2>
               <div className='space-y-4 text-white lg:mr-56 px-7 lg:mb-7 mb-3 pt-3 lg:ml-7'>
                 <div className='flex flex-col'>
-                  <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10 mb-2'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mb-2'>
                     <span className='ml-1 mt-4 font-semibold'>Additional Information</span>
-                    <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none'>
                       {submittedApp.other || 'No response'}
                     </div>
                   </div>
 
                   <div className='grid lg:grid-cols-2'>
-                    <div className='text-indigo-500 font-medium text-md lg:text-lg flex flex-col lg:mr-10'>
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1 mt-4 font-semibold'>LinkedIn</span>
-                      <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.linkedin ? <Link target='_blank' href={submittedApp.linkedin}>{submittedApp.linkedin}</Link> : 'No response'}
                       </div>
                     </div>
 
                     <div className='text-indigo-500 text-md lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1 mt-4 font-semibold'>Resume</span>
-                      <div className='p-4 text-md lg:text-lg rounded-xl bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.resume ? <Link target='_blank' href={submittedApp.resume}>{submittedApp.resume}</Link> : 'No response'}
                       </div>
                     </div>

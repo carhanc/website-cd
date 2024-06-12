@@ -19,7 +19,7 @@ const Nav = () => {
       initial={{ y: -5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="sticky top-0 rounded-t-none ease-linear duration-200 p-2 backdrop-blur-xl z-50"
+      className="sticky top-0 rounded-t-none ease-linear duration-200 p-3 backdrop-blur-xl z-50"
     >
       <Disclosure as="nav" className="w-full space-x-4 rounded-xl px-4 py-0">
         {({ open }) => (
@@ -47,7 +47,7 @@ const Nav = () => {
               </Disclosure.Button>
 
               {/* Desktop Links */}
-              <div className="hidden gap-x-8 sm:flex text-md my-auto rounded-md p-2 font-regular text-indigo-700 text-transparent bg-clip-text">
+              <div className="hidden gap-x-10 sm:flex text-md my-auto rounded-md p-2 font-light text-indigo-700 text-transparent bg-clip-text">
 
                 <Link
                   href="/positions"
@@ -79,7 +79,7 @@ const Nav = () => {
               leaveTo="transform scale-95 opacity-0"
               className="relative"
             >
-              <div className="mb-4 sm:hidden h-[157px] py-4">
+              <div className="mb-4 first-letter:sm:hidden h-[157px] py-4">
                 <div className="mt-2 flex flex-col space-y-4">
                   <Link href="/positions" passHref>
                     <Disclosure.Button

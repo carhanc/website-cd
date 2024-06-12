@@ -45,35 +45,27 @@ const Home = () => {
   return (
     <div>
       <Nav />
-      
-      <div className="p-10 space-y-4">
-      
-      </div>
-
-      <main className="lg:flex flex-col justify-center items-center text-indigo-600 bg-white text-center lg:mb-0 mb-4">
-          <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[12vh] pt-[8vh] lg:h-[28vh] lg:mb-0 mb-10 md:px-20 space-y-6">
-            <p className="font-extrabold lg:mx-0 lg:pb-4 pb-2 text-4xl lg:text-5xl text-center">
-              Explore the data deluge with DataVoyagers<br /> where curiosity meets innovation
+      <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-100 to-indigo-300 lg:mb-0 mb-4 lg:px-32 lg:py-24 p-10">
+          <div className="flex flex-col lg:text-left">
+            <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-3xl inline">
+              Join the data deluge. Where <p className="inline text-indigo-400">curiosity</p> meets <p className="inline text-indigo-800">innovation</p>.
             </p>
           </div>
-            <div className="flex items-center justify-center lg:my-3">
-
-              <Link
-              className="rounded-full z-40 lg:ml-2 border-indigo-400 text-indigo-600 border-2 w-fit px-4 py-2 hover:brightness-90 transition ease-linear duration-300 flex flex-row group lg:text-lg"
+          <div className="flex lg:my-3 space-x-2">
+            <Link
+              className="rounded-sm z-40 border-indigo-500 bg-indigo-500 text-white border w-fit px-4 py-2 hover:brightness-90 transition ease-linear duration-300 flex flex-row group text-sm lg:text-md"
+              href="/apply"
+            >
+                  Apply
+                <MdKeyboardArrowRight className="my-auto scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
+            </Link>
+            <Link
+              className="hover:bg-indigo-500 hover:text-white rounded-sm z-40 border-indigo-600 text-indigo-600 border w-fit px-4 py-2 hover:brightness-90 transition ease-linear duration-300 flex flex-row group text-sm lg:text-md"
               href="/positions"
-              >
+            >
                   View Open Positions
-                <MdKeyboardArrowRight className="lg:mt-[5px] mt-[5px] scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
-              </Link>
+            </Link>
 
-            </div>
-          <div className="justify-center -space-x-8 items-center text-center lg:flex lg:mb-10">
-            <div className="w-1/3 lg:block hidden mb-4 scale-90 -rotate-[12deg]">
-              <Image src={data1} className="object-cover h-full rounded-lg" />
-            </div>
-            <div className="w-1/3 lg:block hidden mb-20">
-              <Image src={data} className="object-cover h-full rounded-lg" />
-            </div>
           </div>
       </main>
       

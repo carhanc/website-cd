@@ -55,25 +55,27 @@ const Page = () => {
     <div>
       <div className=' bg-indigo-100/60'>
         <Nav />
-        <main className="lg:flex flex-cols-2 justify-evenly text-slate-800 bg-indigo-100/60">
-            <div className="flex flex-col text-center items-center lg:items-start lg:text-left lg:pt-[12vh] pt-[10vh] lg:h-[30vh]  mb-14 md:px-20 space-y-6 p-16">
-              <h1 className="text-4xl lg:text-6xl font-bold text-indigo-500">Open Positions</h1>
-              <p className="text-xl lg:text-3xl lg:text-left font-semibold bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 bg-clip-text text-transparent lg:mx-0 lg:pb-4 pb-2">
-                Check here for frequently updated open positions. Search and filter our list to find the perfect fit for you.
-              </p>
-            </div>
+        <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-24 p-10">
+          <div className="flex flex-col lg:text-left">
+            <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-3xl inline">
+              Open Positions
+            </p>
+            <p className="lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-xl inline ">
+              Check here for frequently updated open positions. Search and filter our list to find the perfect fit for you.
+            </p>
+          </div>
         </main>
 
-      <div className='lg:flex p-10 justify-center items-center text-center gap-5 text-md lg:text-lg border-t-2 border-gray-400 gap-x-6'>
+      <div className='lg:flex p-10 lg:px-32 justify-center items-center text-center gap-5 text-md lg:text-lg gap-x-2 bg-indigo-100 lg:space-y-0 space-y-3'>
         <input
-          className='w-full p-3 bg-white/60 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='border border-indigo-50 text-sm w-full p-3 bg-white/50 rounded-md text-gray-900 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
           type="text"
           placeholder="Search job titles..."
           value={titleFilter}
           onChange={(e) => setTitleFilter(e.target.value)}
         />
         <input
-          className='w-full p-3 bg-white/60 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          className='border border-indigo-50 text-sm w-full p-3 bg-white/50 rounded-md text-gray-900 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
           type="text"
           placeholder="Search skills..."
           value={skillFilter}
@@ -82,14 +84,14 @@ const Page = () => {
         <select
           value={locationFilter}
           onChange={(e) => setLocationFilter(e.target.value)}
-          className='w-full p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
+          className='border border-indigo-50 text-sm w-full p-3 bg-white/50 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
         >
           <option value=""  className='text-zinc-400'>Select Location</option>
           <option value="Remote" className='text-black'>Remote</option>
           <option value="Hybrid" className='text-black'>Hybrid</option>
         </select>
         <select
-          className='w-full p-3 bg-white/60 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
+          className='border border-indigo-50 text-sm w-full p-3 bg-white/50 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'
           value={experienceFilter}
           onChange={(e) => setExperienceFilter(e.target.value)}
         >
@@ -100,7 +102,7 @@ const Page = () => {
         </select>
         <button
           onClick={clearFilters}
-          className='p-3 border-white border-2 rounded-lg text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-sm focus:ring-opacity-50'
+          className='p-3 bg-indigo-500 rounded-md text-white text-sm w-full lg:w-fit'
         >
           Clear
         </button>
@@ -109,7 +111,7 @@ const Page = () => {
         
       </div>
       {/* Map returning JobCard components to display the filtered jobs from the user query */}
-      <div className='grid lg:grid-cols-2 lg:p-10 md:p-8 p-4 h-full bg-white'>
+      <div className='px-10 py-8 lg:px-32 grid lg:grid-cols-2 h-full gap-4 bg-indigo-50'>
           {filteredJobs.map((job, index) => (
             <JobCard key={index} job={job} />
           ))}

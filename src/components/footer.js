@@ -5,13 +5,13 @@ import logo from "../../public/logo.png"
 const navigation = {
 
   about: [
-    { name: "Benefits", href: "/" },
-    { name: "Work Culture", href: "#culture" },
+    { name: "Benefits", href: "/#benefits" },
+    { name: "Work Culture", href: "/#culture" },
   ],
   positions: [
-    { name: "Senior", href: "/positions" },
-    { name: "Mid-level", href: "/positions" },
-    { name: "Entry", href: "/positions" },
+    { name: "Senior", href: "/positions?type=Senior" },
+    { name: "Mid-level", href: "/positions?type=Mid" },
+    { name: "Entry", href: "/positions?type=Entry" },
   ],
   apply: [
     { name: "Contact", href: "/apply" },

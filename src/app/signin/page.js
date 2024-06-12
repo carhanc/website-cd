@@ -68,7 +68,7 @@ const SignInPage = () => {
                 id="email"
                 className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
                 required
-                placeholder="hello@alignui.com"
+                placeholder="hello@datavoyagers.com"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>

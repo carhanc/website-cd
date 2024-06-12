@@ -9,13 +9,17 @@ import { useState } from 'react';
 import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
 import {auth} from '@/firebase/auth';
 import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const Page = () => {
+
+  const searchParams = useSearchParams();
+  let type = searchParams.get("type");
 
   const [titleFilter, setTitleFilter] = useState('');
   const [skillFilter, setSkillFilter] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
-  const [experienceFilter, setExperienceFilter] = useState('');
+  const [experienceFilter, setExperienceFilter] = useState(type ? type : '');
   const [userData, setUserData] = useState(null);
 
   // Function to clear all filters
@@ -97,7 +101,7 @@ const Page = () => {
         >
           <option value=""  className='text-zinc-400'>Select Experience</option>
           <option value="Entry" className='text-black'>Entry</option>
-          <option value="Mid" className='text-black'>Mid</option>
+          <option value="Mid" className='text-black'>Mid-level</option>
           <option value="Senior" className='text-black'>Senior</option>
         </select>
         <button

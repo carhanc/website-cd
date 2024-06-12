@@ -79,9 +79,12 @@ export const AuthLogic = () => {
           )}
         </div>
       ) : (
-        <Link href="/register" className="my-auto ease-linear duration-150 hover:text-indigo-500 text-black hover:brightness-110">
-          Sign Up
-        </Link>
+        <span className='flex flex-row gap-4'>
+          <Link href="/register" className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-50 text-white ">
+            Sign Up
+          </Link>
+        </span>
+        
       )}
     </div>
   );

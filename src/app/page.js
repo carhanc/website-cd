@@ -70,7 +70,7 @@ const Home = () => {
       </main>
       
 
-      <div className="px-10 xl:px-12 lg:pt-10 pt-6">
+      <div id='benefits' className="px-10 xl:px-12 lg:pt-10 pt-6">
         <h1 className="lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold lg:text-left lg:mt-0 mt-4 text-indigo-500">Why Become a Voyager?</h1>
         {/* Mapping over the benefits array to display each benefit card component */}
         <div className="grid xl:grid-cols-2 gap-6">
@@ -81,7 +81,7 @@ const Home = () => {
         
       </div>
 
-      <div className="px-10 xl:px-12 py-10 bg-white">
+      <div id='culture' className="px-10 xl:px-12 py-10 bg-white">
         
         <h1 className="text-grey-900 lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold text-indigo-500 mt-10">The Voyager Culture</h1>
 

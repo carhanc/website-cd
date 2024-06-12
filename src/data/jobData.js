@@ -210,6 +210,111 @@ const jobs = [
     "location": "Hybrid",
     "experience": "Mid"
   },
+  {
+    "title": "Machine Learning Engineer",
+    "pay": "$110,000 - $140,000",
+    "skills": ["Machine Learning", "Python", "TensorFlow", "Deep Learning"],
+    "desc": "Designs and develops machine learning and deep learning systems, and works on integrating AI into business operations.",
+    "type": "Full Time",
+    "edu": "Master's degree in Computer Science, Data Science, or related field",
+    "responsibilities": [
+      "Develop machine learning models for various applications.",
+      "Collaborate with data scientists and software engineers to deploy models.",
+      "Maintain and improve existing machine learning models."
+    ],
+    "qualifications": [
+      "Proven experience as a Machine Learning Engineer.",
+      "Familiarity with machine learning frameworks (like Keras or PyTorch).",
+      "Solid understanding of data structures, algorithms, and statistical methods."
+    ],
+    "benefits": "Health insurance, 401(k), stock options, flexible working hours",
+    "location": "Remote",
+    "experience": "Senior"
+  },
+  {
+    "title": "Data Governance Specialist",
+    "pay": "$85,000 - $105,000",
+    "skills": ["Data Governance", "Data Quality", "SQL", "Compliance"],
+    "desc": "Ensures data accuracy, security, and accessibility, and helps maintain compliance with data-related policies and regulations.",
+    "type": "Full Time",
+    "edu": "Bachelor's degree in Information Management, Business, or related field",
+    "responsibilities": [
+      "Develop and enforce data governance policies and procedures.",
+      "Monitor data management practices to ensure compliance.",
+      "Collaborate with IT and business teams to manage data lifecycle."
+    ],
+    "qualifications": [
+      "Experience in data governance and data quality management.",
+      "Strong understanding of data management principles and regulations.",
+      "Excellent organizational and communication skills."
+    ],
+    "benefits": "Comprehensive health benefits, 401(k) matching, paid time off, remote work options",
+    "location": "Hybrid",
+    "experience": "Mid"
+  },
+  {
+    "title": "Database Administrator",
+    "pay": "$70,000 - $90,000",
+    "skills": ["Database Management", "SQL", "Oracle", "Backup and Recovery"],
+    "desc": "Manages and maintains the company’s databases, ensuring optimal performance, security, and data integrity.",
+    "type": "Full Time",
+    "edu": "Bachelor's degree in Computer Science, Information Systems, or related field",
+    "responsibilities": [
+      "Install, configure, and upgrade database management systems.",
+      "Monitor database performance and implement improvements.",
+      "Develop backup and recovery plans."
+    ],
+    "qualifications": [
+      "Proven experience as a Database Administrator.",
+      "Familiarity with database management tools and technologies.",
+      "Strong problem-solving and analytical skills."
+    ],
+    "benefits": "Health insurance, 401(k), professional development opportunities, flexible schedule",
+    "location": "In Person",
+    "experience": "Mid"
+  },
+  {
+    "title": "Data Visualization Specialist",
+    "pay": "$65,000 - $85,000",
+    "skills": ["Data Visualization", "Tableau", "Power BI", "SQL"],
+    "desc": "Creates and manages data visualization projects to help communicate insights and findings effectively to stakeholders.",
+    "type": "Full Time",
+    "edu": "Bachelor's degree in Computer Science, Data Science, or related field",
+    "responsibilities": [
+      "Develop interactive dashboards and reports.",
+      "Collaborate with data analysts and business units to understand visualization needs.",
+      "Ensure data accuracy and visual consistency."
+    ],
+    "qualifications": [
+      "Experience with data visualization tools.",
+      "Strong understanding of data structures and SQL.",
+      "Excellent communication and presentation skills."
+    ],
+    "benefits": "Remote work options, health insurance, retirement plans, paid time off",
+    "location": "Hybrid",
+    "experience": "Mid"
+  },
+  {
+    "title": "Senior Data Architect",
+    "pay": "$120,000 - $150,000",
+    "skills": ["Data Architecture", "Big Data", "Cloud Services", "Data Modeling"],
+    "desc": "Designs and oversees the implementation of data architectures that support organizational goals and strategies.",
+    "type": "Full Time",
+    "edu": "Master's degree in Computer Science, Information Technology, or related field",
+    "responsibilities": [
+      "Develop and implement data architecture strategies.",
+      "Collaborate with IT and business teams to align data architectures with business requirements.",
+      "Ensure data quality and governance."
+    ],
+    "qualifications": [
+      "Proven experience as a Data Architect.",
+      "Strong understanding of database and data warehouse technologies.",
+      "Excellent analytical and problem-solving skills."
+    ],
+    "benefits": "Comprehensive health benefits, 401(k) with company match, remote work flexibility, stock options",
+    "location": "Remote",
+    "experience": "Senior"
+  }
 ]
 
 export default jobs;

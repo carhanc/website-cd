@@ -24,7 +24,7 @@ const Page = () => {
   const allSkills = Array.from(new Set(jobs.flatMap(job => job.skills)));
   const allTitles = Array.from(new Set(jobs.map(job => job.title)));
   const allLocations = Array.from(new Set(jobs.map(job => job.location)));
-  const allExperiences = ["Entry", "Mid-level", "Senior"];
+  const allExperiences = ["Entry", "Mid", "Senior"];
 
   // Function to clear all filters
   const clearFilters = () => {

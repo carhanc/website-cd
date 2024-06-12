@@ -6,9 +6,8 @@ import Nav from "@/components/nav";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from "@/firebase/auth";
-import { IoEyeOutline } from "react-icons/io5";
-import { IoEyeOffOutline } from "react-icons/io5";
 import Link from "next/link";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -120,7 +119,7 @@ const RegisterPage = () => {
                 id="email"
                 className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
                 required
-                placeholder="hello@datavoyagers.com"
+                placeholder="hello@alignui.com"
                 onChange={(e) => setEmail(e.target.value)}
               />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
@@ -158,13 +157,13 @@ const RegisterPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <span
-                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-xl mt-6 my-auto"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-xl mt-7"
                 onClick={() => setPasswordVisible(!passwordVisible)}
               >
                 {passwordVisible ? (
-                  <div className=""><IoEyeOutline /></div>
+                  <IoEyeOffOutline className="h-5 w-5 text-gray-700" />
                 ) : (
-                  <div><IoEyeOffOutline /></div>
+                  <IoEyeOutline className="h-5 w-5 text-gray-700" />
                 )}
               </span>
               {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}

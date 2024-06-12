@@ -66,7 +66,7 @@ export const AuthLogic = () => {
             <IoMdArrowDropdown className='my-auto ml-1'/>
           </button>
           {dropdownOpen && (
-            <div className=" fixed right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 border-black">
+            <div className="right-4 fixed mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
               <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 <Link href="/myapps" className="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-500 hover:bg-black" role="menuitem">
                   My Applications

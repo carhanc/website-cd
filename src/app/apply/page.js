@@ -139,30 +139,6 @@ const Apply = () => {
     fetchData();
   }, []);
 
-  // const [formData, setFormData] = useState({
-  //   job: selectedJob ? selectedJob : "",
-  //   name: form?.name ? form.name : '',
-  //   dob: form?.dob ? form.dob : '',
-  //   address: form?.address ? form.address : '',
-  //   city: form?.city ? form.city : '',
-  //   state: form?.state ? form.state : '',
-  //   zip: form?.zip ? form.zip : '',
-  //   email: form?.email ? form.email : '',
-  //   phone: form?.phone ? form.phone : '',
-  //   title: form?.title ? form.title : '',
-  //   pronoun: form?.pronoun ? form.pronoun : '',
-  //   workExp: form?.workExp ? form.workExp : '',
-  //   workExpQual: form?.workExpQual ? form.workExpQual : '',
-  //   undergrad: form?.undergrad ? form.undergrad : '',
-  //   undergradDegree: form?.undergradDegree ? form.undergradDegree : '',
-  //   grad: form?.grad ? form.grad : '',
-  //   gradDegree: form?.gradDegree ? form.gradDegree : '',
-  //   skills: form?.skills ? form.skills : '',
-  //   skillsQual: form?.skillsQual ? form.skillsQual : '',
-  //   other: form?.other ? form.other : '',
-  //   linkedin: form?.linkedin ? form.linkedin : '',
-  //   resume: form?.resume ? form.resume : '',
-  // })
   const [formData, setFormData] = useState({
     id: form?.id || '',
     job: form?.job || selectedJob || "",
@@ -352,6 +328,7 @@ const Apply = () => {
   const handleSave = (status) => {
       if (status === 'save') {
       onSavedApp();
+      router.push('/myapps');
     }};
 
   const handleSubmit = (status) => {

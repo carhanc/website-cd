@@ -468,7 +468,7 @@ const Apply = () => {
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-0'>
                     <span className='ml-1'>Phone Number</span>
-                    <input name="phone" value={formData.phone} placeholder='123-458-7890' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.phone ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <input name="phone" value={formData.phone} placeholder='1234587890' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.phone ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.phone && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.phone}</span>}
                   </div>
 

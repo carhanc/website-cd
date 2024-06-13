@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/auth";
 import Nav from "@/components/nav";
 import Link from "next/link";
+import Footer from "@/components/footer";
 
 const SignInPage = () => {
   const router = useRouter();
@@ -32,7 +33,7 @@ const SignInPage = () => {
   return (
     <div className="bg-gray-100 h-screen">
       <Nav />
-      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:scale-125 md:mt-32 scale-90">
+      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:scale-125 md:mt-32 scale-90 mb-10">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
           <div className="flex justify-center mb-6">
             <span className="inline-block bg-gray-200 rounded-full p-3">
@@ -104,6 +105,7 @@ const SignInPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from "@/firebase/auth";
 import Link from "next/link";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import Footer from "@/components/footer";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -66,7 +67,7 @@ const RegisterPage = () => {
   return (
     <div className="bg-gray-100 h-screen">
       <Nav />
-      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:scale-125 md:mt-32 scale-90">
+      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:scale-125 md:mt-32 scale-90 mb-10">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
           <div className="flex justify-center mb-6">
             <span className="inline-block bg-gray-200 rounded-full p-3">
@@ -186,6 +187,7 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

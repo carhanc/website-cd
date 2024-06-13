@@ -405,18 +405,22 @@ const Apply = () => {
 
               {/* Personal Information */}
               <div className={`${active === 1 ? "block" : "hidden"} lg:w-4/5 w-full lg:pl-10`}>
-                <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Personal Information</span>
-                <select
-                  name="job"
-                  className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-lg text-xl font-medium border border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
-                  onChange={handleChange}
-                  value={formData.job}
-                >
-                  <option value="" disabled>Select a job</option>
-                  {jobs.map((job, index) => (
-                    <option key={index} value={job.title}>{job.title}</option>
-                  ))}
-                </select>
+                <div className='flex'>
+                  <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Personal Information</span>
+                  <select
+                    name="job"
+                    className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-lg text-xl font-medium border border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
+                    onChange={handleChange}
+                    value={formData.job}
+                  >
+                    <option value="" disabled>Select a job</option>
+                    {jobs.map((job, index) => (
+                      <option key={index} value={job.title}>{job.title}</option>
+                    ))}
+                  </select>
+                  {errors.job && <span className='ml-2 flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-3 rounded-md text-sm'>
+                    <BiError className='my-auto mr-1' />{errors.job}</span>}
+                </div>
                 <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-12 pt-10'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>Full Name</span>

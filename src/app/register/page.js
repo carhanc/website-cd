@@ -65,12 +65,12 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-screen">
+    <div className="bg-indigo-300/60 h-screen">
       <Nav />
-      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:scale-125 md:mt-32 scale-90 mb-10">
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:mt-8 scale-90 md:mb-10 lg:mb-20 mb-5">
+        <div className="bg-indigo-100 p-8 rounded-lg shadow-lg max-w-sm w-full">
           <div className="flex justify-center mb-6">
-            <span className="inline-block bg-gray-200 rounded-full p-3">
+            <span className="inline-block bg-indigo-200 rounded-full p-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -101,9 +101,9 @@ const RegisterPage = () => {
               <input
                 type="text"
                 id="fullName"
-                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
+                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 placeholder:text-gray-500 focus:ring-blue-500 focus:outline-none bg-indigo-200/60"
                 required
-                placeholder="James Brown"
+                placeholder="ex. James Brown"
                 onChange={(e) => setName(e.target.value)}
               />
               {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
@@ -111,16 +111,16 @@ const RegisterPage = () => {
             <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block text-gray-700 text-sm font-semibold mb-2"
+                className="flex text-gray-700 text-sm font-semibold mb-2"
               >
-                Email Address *
+                Email Address <span className="text-xs text-gray-700 flex items-end ml-2">(Must be a valid email)</span>
               </label>
               <input
                 type="email"
                 id="email"
-                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
+                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 placeholder:text-gray-500 focus:ring-blue-500 focus:outline-none bg-indigo-200/60"
                 required
-                placeholder="hello@alignui.com"
+                placeholder="ex. jamesb@gmail.com"
                 onChange={(e) => setEmail(e.target.value)}
               />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
@@ -128,16 +128,16 @@ const RegisterPage = () => {
             <div className="mb-4">
               <label
                 htmlFor="phone"
-                className="block text-gray-700 text-sm font-semibold mb-2"
+                className="text-gray-700 text-sm font-semibold mb-2 flex"
               >
-                Phone Number *
+                Phone Number <span className="text-xs text-gray-600 flex items-end ml-2">(10 characters long)</span>
               </label>
               <input
                 type="number"
                 id="phone"
-                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
+                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 placeholder:text-gray-500 focus:ring-blue-500 focus:outline-none bg-indigo-200/60"
                 required
-                placeholder="0123456789"
+                placeholder="ex. 0123456789"
                 onChange={(e) => setPhone(e.target.value)}
               />
               {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
@@ -145,28 +145,30 @@ const RegisterPage = () => {
             <div className="mb-4 relative">
               <label
                 htmlFor="password"
-                className="block text-gray-700 text-sm font-semibold mb-2"
+                className="text-gray-700 text-sm font-semibold mb-2 flex"
+                onClick={() => setPasswordVisible(!passwordVisible)}
               >
-                Password *
+                Password 
+
+                <div className="ml-2 cursor-pointer">
+                  {passwordVisible ? (
+                    <IoEyeOffOutline className="h-5 w-5 text-gray-700" />
+                  ) : (
+                    <IoEyeOutline className="h-5 w-5 text-gray-700" />
+                  )}
+                </div>
+
+                <span className="text-xs text-gray-600 flex items-end ml-2">(Must be at least 6 characters)</span>  
+
               </label>
               <input
                 type={passwordVisible ? "text" : "password"}
                 id="password"
-                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
+                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 placeholder:text-gray-500 focus:ring-blue-500 focus:outline-none bg-indigo-200/60"
                 required
-                placeholder="********"
+                placeholder="ex. datavoyagers"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span
-                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-xl mt-7"
-                onClick={() => setPasswordVisible(!passwordVisible)}
-              >
-                {passwordVisible ? (
-                  <IoEyeOffOutline className="h-5 w-5 text-gray-700" />
-                ) : (
-                  <IoEyeOutline className="h-5 w-5 text-gray-700" />
-                )}
-              </span>
               {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
             </div>
 

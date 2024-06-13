@@ -113,9 +113,9 @@ const Page = () => {
     <div className=''>
       <div className=' bg-indigo-100/60'>
         <Nav />
-        <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-24 p-10">
+        <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">
           <div className="flex flex-col lg:text-left">
-            <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-3xl inline">
+            <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline">
               Open Positions
             </p>
             <p className="lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-xl inline ">

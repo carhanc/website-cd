@@ -356,9 +356,20 @@ const Apply = () => {
     <div className=''>
       <Nav />
       
+      <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">
+        <div className="flex flex-col lg:text-left">
+          <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline">
+            Become a Voyager
+          </p>
+          <p className="lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-xl inline ">
+            Join our team and start your journey with us. Explore the opportunities and apply now to become part of our dynamic workforce.
+          </p>
+        </div>
+      </main>
+
       {!submitted && (
         <div className='bg-indigo-50'>
-            <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300 lg:px-20 p-10'>
+            <div className='block lg:flex lg:flex-row lg:space-x-5 text-gray-300 lg:px-20 p-10 py-14'>
               <div className='xl:w-1/4 lg:w-1/3 w-full flex flex-col lg:text-md font-medium bg-indigo-200 rounded-lg py-6 mb-10 lg:mb-0'>
                 {tabs.map((tab) => (
                   <button

@@ -49,9 +49,9 @@ const MyApps = () => {
   return (
     <div className='bg-indigo-100/60'>
       <Nav />
-      <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-24 p-10">
+      <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">
         <div className="flex flex-col lg:text-left">
-          <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-3xl inline">
+          <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline">
             My Applications
           </p>
           <p className="lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-xl inline ">
@@ -60,90 +60,92 @@ const MyApps = () => {
         </div>
       </main>
 
-      <div className="lg:px-32 py-10">
-        <h2 className="text-xl font-semibold mb-4 text-indigo-500">Submitted Applications</h2>
-        {submittedApplications.length > 0 ? (
-          <div className='grid lg:grid-cols-2 gap-4'>
-            {submittedApplications.map((app) => (
-              <div key={app.id} className="relative mb-4 p-6 border border-gray-200 rounded-lg bg-white/50 max-h-56 overflow-hidden">
-                <h2 className="text-2xl font-semibold">{app.job ? app.job : "No response"}</h2>
-                <p><strong>Name:</strong> {app.name ? app.name : "No response"}</p>
-                <p><strong>Date of Birth:</strong> {app.dob ? app.dob : "No response"}</p>
-                <p><strong>Address:</strong> {app.address ? app.address : "No response"}</p>
-                <p><strong>City:</strong> {app.city ? app.city : "No response"}</p>
-                <p><strong>State / Country:</strong> {app.state ? app.state : "No response"}</p>
-                <p><strong>Zip Code:</strong> {app.zip ? app.zip : "No response"}</p>
-                <p><strong>Email:</strong> {app.email ? app.email : "No response"}</p>
-                <p><strong>Phone:</strong> {app.phone ? app.phone : "No response"}</p>
-                <p><strong>Title:</strong> {app.title ? app.title : "No response"}</p>
-                <p><strong>Pronouns:</strong> {app.pronoun ? app.pronoun : "No response"}</p>
-                <p><strong>Work Experience:</strong> {app.workExp ? app.workExp : "No response"}</p>
-                <p><strong>Work Experience Qualifications:</strong> {app.workExpQual ? app.workExpQual : "No response"}</p>
-                <p><strong>Undergraduate Information:</strong> {app.undergrad ? app.undergrad : "No response"}</p>
-                <p><strong>Undergraduate Degree(s):</strong> {app.undergradDegree ? app.undergradDegree : "No response"}</p>
-                <p><strong>Graduate Information:</strong> {app.grad ? app.grad : "No response"}</p>
-                <p><strong>Graduate Degree(s):</strong> {app.gradDegree ? app.gradDegree : "No response"}</p>
-                <p><strong>Skills:</strong> {app.skills ? app.skills : "No response"}</p>
-                <p><strong>Qualifications from Skills:</strong> {app.skillsQual ? app.skillsQual : "No response"}</p>
-                <p><strong>Any Additional Information:</strong> {app.other ? app.other : "No response"}</p>
-                <p><strong>LinkedIn:</strong> {app.linkedin ? <Link target='_blank' href={app.linkedin}>{app.linkedin}</Link> : "No response"}</p>
-                <p><strong>Resume:</strong> {app.resume ? <Link target='_blank' href={app.resume}>{app.resume}</Link> : "No response"}</p>
+      <div className="lg:px-32 lg:py-10 lg:grid lg:grid-cols-2 gap-24 p-8">
+        
+        <div>
 
-                <button onClick={() => handleShowMore(app)} className="absolute bottom-10 left-2 text-indigo-500 underline">Show More</button>
+          <h2 className="text-2xl ml-1 font-bold underline mb-4 text-indigo-500">Submitted Applications</h2>
+          {submittedApplications.length > 0 ? (
+            <div className='gap-4'>
+              <div className='shadow-xl relative mb-4 border border-gray-200 rounded-md bg-white/50'>
+              {submittedApplications.map((app) => (
+                  <div key={app.id} className="">
+                    <div className='pl-6 pt-5 text-md'>
+                    <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800">{app.job ? app.job : "No response"}</h2>
+                    <div className='space-y-[2px] ml-1'>
+                      <p>Name: {app.name ? app.name : "No response"}</p>
+                      <p>Date of Birth: {app.dob ? app.dob : "No response"}</p>
+                      <p>Address: {app.address ? app.address : "No response"}</p>
+                      <p>City: {app.city ? app.city : "No response"}</p>
+                      <p>State / Country: {app.state ? app.state : "No response"}</p>
+                      <p>Zip Code: {app.zip ? app.zip : "No response"}</p>
+                      <p className='mb-5'>Email: {app.email ? app.email : "No response"}</p>
+                    </div>
+                  </div>
 
-                <Link 
-                  href={`/apply?form=${JSON.stringify(app)}`} 
-                  className='px-2 py-1 border rounded-md border-black hover:text-white hover:bg-purple-500 transition ease-linear duration-300 absolute bottom-2 left-2'>
-                  Edit Application
-                </Link>
+                  <div>
+                    <button onClick={() => handleShowMore(app)} className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] ml-7 mb-6 text-white mt-4">
+                      Show More
+                    </button>
+                  </div>
+
+                </div>
+                
+              ))}
               </div>
-            ))}
-          </div>
-        ) : (
-          <p>No submitted applications found.</p>
-        )}
+            </div>
+          ) : (
+            <p>No submitted applications found.</p>
+          )}
 
-        <h2 className="text-xl font-semibold mb-4 mt-8">Saved Applications</h2>
-        {savedApplications.length > 0 ? (
-          <div className='grid lg:grid-cols-2 gap-4'>
-            {savedApplications.map((app) => (
-              <div key={app.id} className="relative mb-4 p-6 border border-gray-200 rounded-lg bg-white/50 max-h-56 overflow-hidden">
-                <h2 className="text-2xl font-semibold">{app.job ? app.job : "No response"}</h2>
-                <p><strong>Name:</strong> {app.name ? app.name : "No response"}</p>
-                <p><strong>Date of Birth:</strong> {app.dob ? app.dob : "No response"}</p>
-                <p><strong>Address:</strong> {app.address ? app.address : "No response"}</p>
-                <p><strong>City:</strong> {app.city ? app.city : "No response"}</p>
-                <p><strong>State / Country:</strong> {app.state ? app.state : "No response"}</p>
-                <p><strong>Zip Code:</strong> {app.zip ? app.zip : "No response"}</p>
-                <p><strong>Email:</strong> {app.email ? app.email : "No response"}</p>
-                <p><strong>Phone:</strong> {app.phone ? app.phone : "No response"}</p>
-                <p><strong>Title:</strong> {app.title ? app.title : "No response"}</p>
-                <p><strong>Pronouns:</strong> {app.pronoun ? app.pronoun : "No response"}</p>
-                <p><strong>Work Experience:</strong> {app.workExp ? app.workExp : "No response"}</p>
-                <p><strong>Work Experience Qualifications:</strong> {app.workExpQual ? app.workExpQual : "No response"}</p>
-                <p><strong>Undergraduate Information:</strong> {app.undergrad ? app.undergrad : "No response"}</p>
-                <p><strong>Undergraduate Degree(s):</strong> {app.undergradDegree ? app.undergradDegree : "No response"}</p>
-                <p><strong>Graduate Information:</strong> {app.grad ? app.grad : "No response"}</p>
-                <p><strong>Graduate Degree(s):</strong> {app.gradDegree ? app.gradDegree : "No response"}</p>
-                <p><strong>Skills:</strong> {app.skills ? app.skills : "No response"}</p>
-                <p><strong>Qualifications from Skills:</strong> {app.skillsQual ? app.skillsQual : "No response"}</p>
-                <p><strong>Any Additional Information:</strong> {app.other ? app.other : "No response"}</p>
-                <p><strong>LinkedIn:</strong> {app.linkedin ? <Link target='_blank' href={app.linkedin}>{app.linkedin}</Link> : "No response"}</p>
-                <p><strong>Resume:</strong> {app.resume ? <Link target='_blank' href={app.resume}>{app.resume}</Link> : "No response"}</p>
+        </div>
+        
+        <div>
 
-                <button onClick={() => handleShowMore(app)} className="absolute bottom-10 left-2 text-indigo-500 underline">Show More</button>
+          <h2 className="text-2xl ml-1 font-bold mb-4 underline text-indigo-500">Saved Applications</h2>
+          {savedApplications.length > 0 ? (
+            <div className='gap-4'>
+              <div className='shadow-xl relative mb-4 border border-gray-200 rounded-md bg-white/50'>
+              {savedApplications.map((app) => (
+                  <div key={app.id} className="">
+                    <div className='pl-6 pt-5 text-md'>
+                    <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800">{app.job ? app.job : "No response"}</h2>
+                    <div className='space-y-[2px] ml-1'>
+                      <p>Name: {app.name ? app.name : "No response"}</p>
+                      <p>Date of Birth: {app.dob ? app.dob : "No response"}</p>
+                      <p>Address: {app.address ? app.address : "No response"}</p>
+                      <p>City: {app.city ? app.city : "No response"}</p>
+                      <p>State / Country: {app.state ? app.state : "No response"}</p>
+                      <p>Zip Code: {app.zip ? app.zip : "No response"}</p>
+                      <p className='mb-5'>Email: {app.email ? app.email : "No response"}</p>
+                    </div>
+                  </div>
 
-                <Link 
-                  href={`/apply?form=${JSON.stringify(app)}`} 
-                  className='px-2 py-1 border rounded-md border-black hover:text-white hover:bg-purple-500 transition ease-linear duration-300 absolute bottom-2 left-2'>
-                  Edit Application
-                </Link>
+                  <div className='flex gap-4'>
+                    <div>
+                      <button onClick={() => handleShowMore(app)} className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] ml-7 mb-6 text-white mt-4">
+                        Show More
+                      </button>
+                    </div>
+
+                    <Link 
+                      href={`/apply?form=${JSON.stringify(app)}`} 
+                      className='border border-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 
+                      hover:bg-indigo-500 hover:text-white mb-6 text-indigo-500'>
+                      Edit Application
+                    </Link>
+                  </div>
+
+                </div>
+                
+              ))}
               </div>
-            ))}
+            </div>
+          ) : (
+            <p>No saved applications found.</p>
+          )}
+
           </div>
-        ) : (
-          <p>No saved applications found.</p>
-        )}
       </div>
 
       {expandedApp && (
@@ -151,27 +153,27 @@ const MyApps = () => {
           <div className="relative bg-white p-6 w-11/12 max-w-4xl h-3/4 overflow-auto rounded-lg">
             <button onClick={handleClosePopup} className="absolute top-2 right-2 text-xl font-bold">&times;</button>
             <h2 className="text-2xl font-semibold">{expandedApp.job ? expandedApp.job : "No response"}</h2>
-            <p><strong>Name:</strong> {expandedApp.name ? expandedApp.name : "No response"}</p>
-            <p><strong>Date of Birth:</strong> {expandedApp.dob ? expandedApp.dob : "No response"}</p>
-            <p><strong>Address:</strong> {expandedApp.address ? expandedApp.address : "No response"}</p>
-            <p><strong>City:</strong> {expandedApp.city ? expandedApp.city : "No response"}</p>
-            <p><strong>State / Country:</strong> {expandedApp.state ? expandedApp.state : "No response"}</p>
-            <p><strong>Zip Code:</strong> {expandedApp.zip ? expandedApp.zip : "No response"}</p>
-            <p><strong>Email:</strong> {expandedApp.email ? expandedApp.email : "No response"}</p>
-            <p><strong>Phone:</strong> {expandedApp.phone ? expandedApp.phone : "No response"}</p>
-            <p><strong>Title:</strong> {expandedApp.title ? expandedApp.title : "No response"}</p>
-            <p><strong>Pronouns:</strong> {expandedApp.pronoun ? expandedApp.pronoun : "No response"}</p>
-            <p><strong>Work Experience:</strong> {expandedApp.workExp ? expandedApp.workExp : "No response"}</p>
-            <p><strong>Work Experience Qualifications:</strong> {expandedApp.workExpQual ? expandedApp.workExpQual : "No response"}</p>
-            <p><strong>Undergraduate Information:</strong> {expandedApp.undergrad ? expandedApp.undergrad : "No response"}</p>
-            <p><strong>Undergraduate Degree(s):</strong> {expandedApp.undergradDegree ? expandedApp.undergradDegree : "No response"}</p>
-            <p><strong>Graduate Information:</strong> {expandedApp.grad ? expandedApp.grad : "No response"}</p>
-            <p><strong>Graduate Degree(s):</strong> {expandedApp.gradDegree ? expandedApp.gradDegree : "No response"}</p>
-            <p><strong>Skills:</strong> {expandedApp.skills ? expandedApp.skills : "No response"}</p>
-            <p><strong>Qualifications from Skills:</strong> {expandedApp.skillsQual ? expandedApp.skillsQual : "No response"}</p>
-            <p><strong>Any Additional Information:</strong> {expandedApp.other ? expandedApp.other : "No response"}</p>
-            <p><strong>LinkedIn:</strong> {expandedApp.linkedin ? <Link target='_blank' href={expandedApp.linkedin}>{expandedApp.linkedin}</Link> : "No response"}</p>
-            <p><strong>Resume:</strong> {expandedApp.resume ? <Link target='_blank' href={expandedApp.resume}>{expandedApp.resume}</Link> : "No response"}</p>
+            <p>Name: {expandedApp.name ? expandedApp.name : "No response"}</p>
+            <p>Date of Birth: {expandedApp.dob ? expandedApp.dob : "No response"}</p>
+            <p>Address: {expandedApp.address ? expandedApp.address : "No response"}</p>
+            <p>City: {expandedApp.city ? expandedApp.city : "No response"}</p>
+            <p>State / Country: {expandedApp.state ? expandedApp.state : "No response"}</p>
+            <p>Zip Code: {expandedApp.zip ? expandedApp.zip : "No response"}</p>
+            <p>Email: {expandedApp.email ? expandedApp.email : "No response"}</p>
+            <p>Phone: {expandedApp.phone ? expandedApp.phone : "No response"}</p>
+            <p>Title: {expandedApp.title ? expandedApp.title : "No response"}</p>
+            <p>Pronouns: {expandedApp.pronoun ? expandedApp.pronoun : "No response"}</p>
+            <p>Work Experience: {expandedApp.workExp ? expandedApp.workExp : "No response"}</p>
+            <p>Work Experience Qualifications: {expandedApp.workExpQual ? expandedApp.workExpQual : "No response"}</p>
+            <p>Undergraduate Information: {expandedApp.undergrad ? expandedApp.undergrad : "No response"}</p>
+            <p>Undergraduate Degree(s): {expandedApp.undergradDegree ? expandedApp.undergradDegree : "No response"}</p>
+            <p>Graduate Information: {expandedApp.grad ? expandedApp.grad : "No response"}</p>
+            <p>Graduate Degree(s): {expandedApp.gradDegree ? expandedApp.gradDegree : "No response"}</p>
+            <p>Skills: {expandedApp.skills ? expandedApp.skills : "No response"}</p>
+            <p>Qualifications from Skills: {expandedApp.skillsQual ? expandedApp.skillsQual : "No response"}</p>
+            <p>Any Additional Information: {expandedApp.other ? expandedApp.other : "No response"}</p>
+            <p>LinkedIn: {expandedApp.linkedin ? <Link target='_blank' href={expandedApp.linkedin}>{expandedApp.linkedin}</Link> : "No response"}</p>
+            <p>Resume: {expandedApp.resume ? <Link target='_blank' href={expandedApp.resume}>{expandedApp.resume}</Link> : "No response"}</p>
           </div>
         </div>
       )}

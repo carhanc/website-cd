@@ -19,7 +19,7 @@ const Nav = () => {
       initial={{ y: -5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="sticky top-0 rounded-t-none ease-linear duration-200 p-3 backdrop-blur-xl z-50"
+      className="sticky top-0 rounded-t-none ease-linear duration-200 p-3 backdrop-blur-xl z-50 bg-indigo-100/60"
     >
       <Disclosure as="nav" className="w-full space-x-4 rounded-xl px-4 py-0">
         {({ open }) => (

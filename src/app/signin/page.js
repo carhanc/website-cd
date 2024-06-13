@@ -31,12 +31,12 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-screen">
+    <div className="bg-indigo-300/60 h-screen">
       <Nav />
-      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:scale-125 md:mt-32 scale-90 mb-10">
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:mt-8 scale-90 md:mb-10 lg:mb-20 mb-5">
+        <div className="bg-indigo-100 p-8 rounded-lg shadow-lg max-w-sm w-full">
           <div className="flex justify-center mb-6">
-            <span className="inline-block bg-gray-200 rounded-full p-3">
+            <span className="inline-block bg-indigo-200 rounded-full p-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -67,9 +67,9 @@ const SignInPage = () => {
               <input
                 type="email"
                 id="email"
-                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
+                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 placeholder:text-gray-500 focus:ring-blue-500 focus:outline-none bg-indigo-200/60"
                 required
-                placeholder="hello@datavoyagers.com"
+                placeholder="Email used to register"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -83,7 +83,7 @@ const SignInPage = () => {
               <input
                 type="password"
                 id="password"
-                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500"
+                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 placeholder:text-gray-500 focus:ring-blue-500 focus:outline-none bg-indigo-200/60"
                 required
                 placeholder="********"
                 onChange={(e) => setPassword(e.target.value)}

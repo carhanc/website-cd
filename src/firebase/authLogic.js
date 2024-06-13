@@ -80,7 +80,7 @@ export const AuthLogic = () => {
         </div>
       ) : (
         <span className='flex flex-row gap-4'>
-          <Link href="/register" className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-50 text-white ">
+          <Link href="/register" className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] text-white ">
             Sign Up
           </Link>
         </span>

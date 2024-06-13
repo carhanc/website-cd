@@ -49,7 +49,7 @@ const AuthLogicMobile = () => {
       ) : (
         <Link
           href="/register"
-          className="my-auto bg-indigo-500 hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500 hover:brightness-110"
+          className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500 hover:brightness-110 font-semibold"
         >
           Sign Up
         </Link>

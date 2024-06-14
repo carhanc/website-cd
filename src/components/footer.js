@@ -14,8 +14,8 @@ const navigation = {
     { name: "Entry", href: "/positions?type=Entry" },
   ],
   apply: [
-    { name: "Contact", href: "/apply" },
     { name: "Application", href: "/apply" },
+    { name: "My Applications", href: "/myapps" },
   ],
   legal: [
     { name: "Privacy", href: "/" },

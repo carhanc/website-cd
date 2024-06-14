@@ -66,10 +66,10 @@ const MyApps = () => {
 
           <h2 className="text-2xl ml-1 font-bold underline mb-4 text-indigo-500">Submitted Applications</h2>
           {submittedApplications.length > 0 ? (
-            <div className='gap-4'>
-              <div className='shadow-xl relative mb-4 border border-gray-200 rounded-md bg-white/50'>
+            <div className=''>
+              <div className='shadow-xl relative mb-4 rounded-md space-y-10'>
               {submittedApplications.map((app) => (
-                  <div key={app.id} className="">
+                  <div key={app.id} className=" bg-white/50 border">
                     <div className='pl-6 pt-5 text-md'>
                     <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800">{app.job ? app.job : "No response"}</h2>
                     <div className='space-y-[2px] ml-1'>
@@ -149,31 +149,211 @@ const MyApps = () => {
       </div>
 
       {expandedApp && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="relative bg-white p-6 w-11/12 max-w-4xl h-3/4 overflow-auto rounded-lg">
-            <button onClick={handleClosePopup} className="absolute top-2 right-2 text-xl font-bold">&times;</button>
-            <h2 className="text-2xl font-semibold">{expandedApp.job ? expandedApp.job : "No response"}</h2>
-            <p>Name: {expandedApp.name ? expandedApp.name : "No response"}</p>
-            <p>Date of Birth: {expandedApp.dob ? expandedApp.dob : "No response"}</p>
-            <p>Address: {expandedApp.address ? expandedApp.address : "No response"}</p>
-            <p>City: {expandedApp.city ? expandedApp.city : "No response"}</p>
-            <p>State / Country: {expandedApp.state ? expandedApp.state : "No response"}</p>
-            <p>Zip Code: {expandedApp.zip ? expandedApp.zip : "No response"}</p>
-            <p>Email: {expandedApp.email ? expandedApp.email : "No response"}</p>
-            <p>Phone: {expandedApp.phone ? expandedApp.phone : "No response"}</p>
-            <p>Title: {expandedApp.title ? expandedApp.title : "No response"}</p>
-            <p>Pronouns: {expandedApp.pronoun ? expandedApp.pronoun : "No response"}</p>
-            <p>Work Experience: {expandedApp.workExp ? expandedApp.workExp : "No response"}</p>
-            <p>Work Experience Qualifications: {expandedApp.workExpQual ? expandedApp.workExpQual : "No response"}</p>
-            <p>Undergraduate Information: {expandedApp.undergrad ? expandedApp.undergrad : "No response"}</p>
-            <p>Undergraduate Degree(s): {expandedApp.undergradDegree ? expandedApp.undergradDegree : "No response"}</p>
-            <p>Graduate Information: {expandedApp.grad ? expandedApp.grad : "No response"}</p>
-            <p>Graduate Degree(s): {expandedApp.gradDegree ? expandedApp.gradDegree : "No response"}</p>
-            <p>Skills: {expandedApp.skills ? expandedApp.skills : "No response"}</p>
-            <p>Qualifications from Skills: {expandedApp.skillsQual ? expandedApp.skillsQual : "No response"}</p>
-            <p>Any Additional Information: {expandedApp.other ? expandedApp.other : "No response"}</p>
-            <p>LinkedIn: {expandedApp.linkedin ? <Link target='_blank' href={expandedApp.linkedin}>{expandedApp.linkedin}</Link> : "No response"}</p>
-            <p>Resume: {expandedApp.resume ? <Link target='_blank' href={expandedApp.resume}>{expandedApp.resume}</Link> : "No response"}</p>
+        <div className="fixed inset-0 bg-opacity-60 flex justify-center items-center bg-white">
+          <div className="relative bg-indigo-200/25 m-5 lg:m-10 lg:p-10 rounded-lg border-2 border-indigo-400/90 p-6 w-11/12 max-w-4xl h-3/4 overflow-auto bg-white">
+            <button onClick={handleClosePopup} className="absolute top-2 right-2 text-xl font-bold text-indigo-600">&times;</button>
+            <div className="text-white">
+              <h2 className="lg:flex-none flex flex-col items-center font-extrabold text-xl lg:text-2xl lg:mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row md:ml-7">
+                Review Your Application:
+                <h2 className="border-2 border-indigo-700/90 px-2 rounded-md border-dashed text-lg lg:text-2xl text-indigo-700/90 text-center lg:ml-2 w-fit">
+                  {expandedApp.job ? expandedApp.job : "No response"}
+                </h2>
+              </h2>
+
+              <div className="lg:ml-2">
+                <h2 className="font-bold text-xl lg:text-2xl text-indigo-500 lg:ml-10 ml-7 lg:mt-6">Personal Information</h2>
+                <div className="space-y-6 grid lg:grid-cols-2 text-white px-7 pb-7 lg:ml-7">
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                    <span className="ml-1 mt-6 font-semibold">Full Name</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                      {expandedApp.name ? expandedApp.name : "No response"}
+                    </div>
+                  </div>
+
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10">
+                    <span className="ml-1 font-semibold">Date of Birth</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                      {expandedApp.dob ? expandedApp.dob : "No response"}
+                    </div>
+                  </div>
+
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10">
+                    <span className="ml-1 font-semibold">Address</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                      {expandedApp.address ? expandedApp.address : "No response"}
+                    </div>
+                  </div>
+
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10">
+                    <span className="ml-1 font-semibold">City</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                      {expandedApp.city ? expandedApp.city : "No response"}
+                    </div>
+                  </div>
+
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10">
+                    <span className="ml-1 font-semibold">State/Country</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                      {expandedApp.state ? expandedApp.state : "No response"}
+                    </div>
+                  </div>
+
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10">
+                    <span className="ml-1 font-semibold">Zip Code</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none">
+                      {expandedApp.zip ? expandedApp.zip : "No response"}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="ml-2">
+                <h2 className="font-bold text-xl lg:text-2xl text-indigo-500 lg:ml-10 ml-7 mt-8">Contact Information</h2>
+                <div className="space-y-6 grid lg:grid-cols-2 text-white px-7 pb-7 lg:ml-7">
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                    <span className="ml-1 mt-6 font-semibold">Email</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                      {expandedApp.email ? expandedApp.email : "No response"}
+                    </div>
+                  </div>
+
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10">
+                    <span className="ml-1 font-semibold">Phone</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                      {expandedApp.phone ? expandedApp.phone : "No response"}
+                    </div>
+                  </div>
+
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10">
+                    <span className="ml-1 font-semibold">Title</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                      {expandedApp.title ? expandedApp.title : "No response"}
+                    </div>
+                  </div>
+
+                  <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10">
+                    <span className="ml-1 font-semibold">Pronouns</span>
+                    <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                      {expandedApp.pronoun ? expandedApp.pronoun : "No response"}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="ml-2">
+                <h2 className="font-bold text-xl lg:text-2xl text-indigo-500 lg:ml-10 ml-7 mt-8">Previous Experience</h2>
+                <div className="space-y-4 text-white px-7 pb-7 pt-3 lg:ml-7">
+                  <div className="flex flex-col">
+                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                      <span className="ml-1 mt-4 font-semibold">Work Experience</span>
+                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                        {expandedApp.workExp ? expandedApp.workExp : "No response"}
+                      </div>
+                    </div>
+
+                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                      <span className="ml-1 mt-8 font-semibold">Work Experience Qualifications</span>
+                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                        {expandedApp.workExpQual ? expandedApp.workExpQual : "No response"}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid lg:grid-cols-2 space-y-6">
+                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-6 lg:mr-10">
+                      <span className="ml-1 font-semibold">Undergraduate Education Info.</span>
+                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                        {expandedApp.undergrad ? expandedApp.undergrad : "No response"}
+                      </div>
+                    </div>
+
+                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-4 lg:mr-10">
+                      <span className="ml-1 font-semibold">Undergraduate Degree(s)</span>
+                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                        {expandedApp.undergradDegree ? expandedApp.undergradDegree : "No response"}
+                      </div>
+                    </div>
+
+                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                      <span className="ml-1 font-semibold">Graduate Education Info.</span>
+                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                        {expandedApp.grad ? expandedApp.grad : "No response"}
+                      </div>
+                    </div>
+
+                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-4 lg:mr-10">
+                      <span className="ml-1 font-semibold">Graduate Degree(s)</span>
+                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                        {expandedApp.gradDegree ? expandedApp.gradDegree : "No response"}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="ml-2">
+                <h2 className="font-bold text-xl lg:text-2xl text-indigo-500 lg:ml-10 ml-7 mt-8">Skills / Expertise</h2>
+                <div className="space-y-4 text-white px-7 pb-7 pt-3 lg:ml-7">
+                  <div className="flex flex-col">
+                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                      <span className="ml-1 mt-4 font-semibold">Skills Acquired</span>
+                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                        {expandedApp.skills ? expandedApp.skills : "No response"}
+                      </div>
+                    </div>
+
+                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                      <span className="ml-1 mt-8 font-semibold">Skills Qualifications</span>
+                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                        {expandedApp.skillsQual ? expandedApp.skillsQual : "No response"}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="ml-2">
+                <h2 className="font-bold text-xl lg:text-2xl text-indigo-500 lg:ml-10 ml-7 mt-8">Other Information</h2>
+                <div className="space-y-4 text-white px-7 lg:mb-7 mb-3 pt-3 lg:ml-7">
+                  <div className="flex flex-col">
+                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mb-2">
+                      <span className="ml-1 mt-4 font-semibold">Additional Information</span>
+                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none">
+                        {expandedApp.other ? expandedApp.other : "No response"}
+                      </div>
+                    </div>
+
+                    <div className="grid lg:grid-cols-2">
+                      <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                        <span className="ml-1 mt-4 font-semibold">LinkedIn</span>
+                        <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                          {expandedApp.linkedin ? (
+                            <Link target="_blank" href={expandedApp.linkedin}>
+                              {expandedApp.linkedin}
+                            </Link>
+                          ) : (
+                            "No response"
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="text-indigo-500 text-md lg:text-lg flex flex-col lg:mr-10">
+                        <span className="ml-1 mt-4 font-semibold">Resume</span>
+                        <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                          {expandedApp.resume ? (
+                            <Link target="_blank" href={expandedApp.resume}>
+                              {expandedApp.resume}
+                            </Link>
+                          ) : (
+                            "No response"
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -356,16 +356,18 @@ const Apply = () => {
     <div className=''>
       <Nav />
       
-      <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">
-        <div className="flex flex-col lg:text-left">
-          <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline">
-            Become a Voyager
-          </p>
-          <p className="lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-xl inline ">
-            Join our team and start your journey with us. Explore the opportunities and apply now to become part of our dynamic workforce.
-          </p>
-        </div>
-      </main>
+      {!submitted && !finalSubmit && (
+        <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">
+          <div className="flex flex-col lg:text-left">
+            <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline">
+              Become a Voyager
+            </p>
+            <p className="lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-xl inline ">
+              Join our team and start your journey with us. Explore the opportunities and apply now to become part of our dynamic workforce.
+            </p>
+          </div>
+        </main>
+      )}
 
       {!submitted && (
         <div className='bg-indigo-50'>
@@ -582,9 +584,12 @@ const Apply = () => {
       )}
 
       {finalSubmit &&
-        <div className='p-7 rounded-lg m-7 lg:mx-10 mx-5 border-2 border-indigo-400/90'>
-          <h1 className='lg:text-2xl text-xl text-indigo-500 font-bold mb-1'>Thanks for submitting your application!</h1>
-          <p className='inline text-lg text-indigo-500/85 font-medium mt-2'>The DataVoyagers team is eager to read your application. Feel free to email our recruitment team with any updates to your application using the email <p className='inline underline'> files@careers.datavoyagers.com</p>. Excpect to receive an email from our hiring team within 7-14 business days with an interview and further instructions. We will let you know if we are deciding not to move forward with your application over email. Here is to a new potential voyage! 
+        <div className='p-7 rounded-lg m-7 lg:mx-10 mx-5 border-2 border-indigo-400/90 bg-indigo-200/5 space-y-10'>
+          <div className='lg:flex'>
+            <h1 className='lg:text-2xl text-xl text-indigo-500 font-bold lg:mb-1 mb-3 mr-3'>Thanks for submitting your application!</h1>
+            <Link href='/myapps' className='bg-indigo-500 text-white py-2 px-3 rounded-md'>My Applications</Link>
+          </div>
+          <p className='inline text-lg text-indigo-500/85 font-mediums'>The DataVoyagers team is eager to read your application. Feel free to email our recruitment team with any updates to your application using the email <p className='inline underline'> files@careers.datavoyagers.com</p>. Excpect to receive an email from our hiring team within 7-14 business days with an interview and further instructions. We will let you know if we are deciding not to move forward with your application over email. Here is to a new potential voyage! 
             <span className='ml-1 text-xl'>🥂🚀</span></p>
         </div>
       }

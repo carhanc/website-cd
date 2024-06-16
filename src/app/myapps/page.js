@@ -64,12 +64,12 @@ const MyApps = () => {
         
         <div>
 
-          <h2 className="text-2xl ml-1 font-bold underline mb-4 text-indigo-500">Submitted Applications</h2>
+          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500">Submitted Applications</h2>
           {submittedApplications.length > 0 ? (
             <div className=''>
-              <div className='shadow-xl relative mb-4 rounded-md space-y-10'>
+              <div className='relative mb-4 rounded-md space-y-8'>
               {submittedApplications.map((app) => (
-                  <div key={app.id} className=" bg-white/50 border">
+                  <div key={app.id} className=" bg-white/50 border shadow-lg">
                     <div className='pl-6 pt-5 text-md'>
                     <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800">{app.job ? app.job : "No response"}</h2>
                     <div className='space-y-[2px] ml-1'>
@@ -102,12 +102,12 @@ const MyApps = () => {
         
         <div>
 
-          <h2 className="text-2xl ml-1 font-bold mb-4 underline text-indigo-500">Saved Applications</h2>
+          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500">Saved Applications</h2>
           {savedApplications.length > 0 ? (
             <div className='gap-4'>
-              <div className='shadow-xl relative mb-4 border border-gray-200 rounded-md bg-white/50'>
+              <div className='relative mb-4 rounded-md space-y-10'>
               {savedApplications.map((app) => (
-                  <div key={app.id} className="">
+                  <div key={app.id} className="shadow-xl bg-white/50 border">
                     <div className='pl-6 pt-5 text-md'>
                     <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800">{app.job ? app.job : "No response"}</h2>
                     <div className='space-y-[2px] ml-1'>

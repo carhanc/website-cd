@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 
 import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
 import {auth, db } from '@/firebase/auth';
-import { collection, setDoc, doc, getDoc, addDoc, getDocs } from "firebase/firestore";
+import { collection, setDoc, doc, getDoc, addDoc, getDocs, deleteDoc } from "firebase/firestore";
 
 const tabs = [
   { id: 1, name: 'Personal Information', fields: ['job', 'name', 'dob', 'address', 'city', 'state', 'zip'] },
@@ -186,7 +186,7 @@ const Apply = () => {
   const validateFields = () => {
     const newErrors = {};
     Object.keys(formData).forEach(key => {
-      if (!formData[key] && key !== 'title' && key !== 'pronoun' && key !== "id") {
+      if (!formData[key] && key !== 'title' && key !== 'pronoun' && key !== "id" && key !== "grad" && key !== "gradDegree") {
         newErrors[key] = 'No response';
       }
     });
@@ -224,7 +224,6 @@ const Apply = () => {
   }
 
   const onSubmitApp = async () => {
-          
     try {
       await addDoc(submittedAppsCollectionRef, {
         job: formData.job,
@@ -254,8 +253,16 @@ const Apply = () => {
     } catch (error) {
       console.error("Error adding document: ", error);
     }
-    
-  }
+  };
+  
+  const deleteSavedApp = async (id) => {
+    try {
+      const docRef = doc(db, 'savedApplications', id);
+      await deleteDoc(docRef);
+    } catch (error) {
+      console.error("Error deleting document: ", error);
+    }
+  };
 
   const onSavedApp = async () => {
     try {
@@ -332,25 +339,25 @@ const Apply = () => {
       router.push('/myapps');
     }};
 
-  const handleSubmit = (status) => {
-    console.log("hi")
-    if (validateFields()) {
-      console.log("bang bang")
-      if (status === 'edit') {
-       
-        setSubmitted(true);
-      }
-      if (status === 'submit') {
-        setFinalSubmit(true);
-        console.log('Form submitted:', formData);
-
-        //Submitting Data to Firebase
-        onSubmitApp();
-
-      }
-      setSubmittedApp(formData);
+const handleSubmit = async (status) => {
+  if (validateFields()) {
+    if (status === 'edit') {
+      setSubmitted(true);
     }
-  };
+    if (status === 'submit') {
+      setFinalSubmit(true);
+
+      // Submitting Data to Firebase
+      await onSubmitApp();
+
+      // If the application was previously saved, delete it
+      if (formData.id) {
+        await deleteSavedApp(formData.id);
+      }
+    }
+    setSubmittedApp(formData);
+  }
+};
 
   return (
     <div className=''>
@@ -495,7 +502,7 @@ const Apply = () => {
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Previous Experiences</span>
                 <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
-                    <span className='ml-1'>List all previous <strong>work</strong> experiences</span>
+                    <span className='ml-1'>List all your previous <strong>work</strong> experiences</span>
                     <textarea name="workExp" value={formData.workExp} placeholder='Company names, years worked, brief role description, etc.' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExp ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.workExp && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.workExp}</span>}
                   </div>
@@ -508,7 +515,7 @@ const Apply = () => {
 
                   <div className='grid lg:grid-cols-2'>
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                      <span className='ml-1'>Undergrad Institution / Graduating Year</span>
+                      <span className='ml-1'>Undergraduate Institution / Graduating Year</span>
                       <input name="undergrad" value={formData.undergrad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergrad ? 'text-red-500' : 'text-indigo-500'}`} />
                       {errors.undergrad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergrad}</span>}
                     </div>
@@ -522,13 +529,13 @@ const Apply = () => {
 
                   <div className='grid lg:grid-cols-2'>
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                      <span className='ml-1'>Grad Institution / Graduating Year</span>
+                      <span className='ml-1'>Graduate Institution / Graduating Year (Optional) </span>
                       <input name="grad" value={formData.grad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.grad ? 'text-red-500' : 'text-indigo-500'}`} />
                       {errors.grad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.grad}</span>}
                     </div>
 
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                      <span className='ml-1'>Degree(s) Earned</span>
+                      <span className='ml-1'>Degree(s) Earned (Optional)</span>
                       <input name="gradDegree" value={formData.gradDegree} placeholder='Data Science' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
                       {errors.gradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.gradDegree}</span>}
                     </div>

@@ -45,7 +45,7 @@ const JobCard = ({ job }) => {
           </>
         )}
         <div className='flex justify-between'>
-          <button onClick={toggleExpanded} className='w-fit'>{isExpanded ? 'Show Less' : 'Show More'}</button>
+          <button onClick={toggleExpanded} className='w-fit hover:text-indigo-500 ease-linear duration-200'>{isExpanded ? 'Show Less' : 'Show More'}</button>
           <Link href={`/apply?selectedJob=${job.title}`} className='px-2 py-1 border rounded-md border-indigo-500 hover:text-white hover:bg-indigo-500 transition ease-linear duration-300'>Apply &rarr;</Link>
         </div> 
         </div>

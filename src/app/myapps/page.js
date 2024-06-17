@@ -3,9 +3,11 @@
 import React, { useEffect, useState } from 'react';
 import Nav from "../../components/nav";
 import { auth } from '@/firebase/auth';
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { getDocs, collection, query, where, deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/firebase/auth";
 import Link from 'next/link';
+import { FaPencil } from "react-icons/fa6";
+import { FaRegTrashCan } from "react-icons/fa6";
 import Footer from '@/components/footer';
 
 const MyApps = () => {
@@ -23,7 +25,7 @@ const MyApps = () => {
           const submittedSnapshot = await getDocs(submittedQuery);
           const submittedApps = submittedSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
           setSubmittedApplications(submittedApps);
-  
+
           // Fetch saved applications
           const savedQuery = query(collection(db, "savedApplications"), where("uid", "==", user.uid));
           const savedSnapshot = await getDocs(savedQuery);
@@ -34,7 +36,7 @@ const MyApps = () => {
         console.error("Error fetching applications: ", error);
       }
     };
-  
+
     fetchApplications();
   }, []);
 
@@ -44,6 +46,15 @@ const MyApps = () => {
 
   const handleClosePopup = () => {
     setExpandedApp(null);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, "savedApplications", id));
+      setSavedApplications(savedApplications.filter(app => app.id !== id));
+    } catch (error) {
+      console.error("Error deleting application: ", error);
+    }
   };
 
   return (
@@ -61,91 +72,104 @@ const MyApps = () => {
       </main>
 
       <div className="lg:px-32 lg:py-10 lg:grid lg:grid-cols-2 gap-24 p-8">
-        
+
         <div>
-
-          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500">Submitted Applications</h2>
-          {submittedApplications.length > 0 ? (
-            <div className=''>
-              <div className='relative mb-4 rounded-md space-y-8'>
-              {submittedApplications.map((app) => (
-                  <div key={app.id} className=" bg-white/50 border shadow-lg">
-                    <div className='pl-6 pt-5 text-md'>
-                    <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800">{app.job ? app.job : "No response"}</h2>
-                    <div className='space-y-[2px] ml-1'>
-                      <p>Name: {app.name ? app.name : "No response"}</p>
-                      <p>Date of Birth: {app.dob ? app.dob : "No response"}</p>
-                      <p>Address: {app.address ? app.address : "No response"}</p>
-                      <p>City: {app.city ? app.city : "No response"}</p>
-                      <p>State / Country: {app.state ? app.state : "No response"}</p>
-                      <p>Zip Code: {app.zip ? app.zip : "No response"}</p>
-                      <p className='mb-5'>Email: {app.email ? app.email : "No response"}</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <button onClick={() => handleShowMore(app)} className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] ml-7 mb-6 text-white mt-4">
-                      Show More
-                    </button>
-                  </div>
-
-                </div>
-                
-              ))}
-              </div>
-            </div>
-          ) : (
-            <p>No submitted applications found.</p>
-          )}
-
-        </div>
-        
-        <div>
-
           <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500">Saved Applications</h2>
           {savedApplications.length > 0 ? (
             <div className='gap-4'>
               <div className='relative mb-4 rounded-md space-y-10'>
-              {savedApplications.map((app) => (
+                {savedApplications.map((app) => (
                   <div key={app.id} className="shadow-xl bg-white/50 border">
                     <div className='pl-6 pt-5 text-md'>
-                    <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800">{app.job ? app.job : "No response"}</h2>
-                    <div className='space-y-[2px] ml-1'>
-                      <p>Name: {app.name ? app.name : "No response"}</p>
-                      <p>Date of Birth: {app.dob ? app.dob : "No response"}</p>
-                      <p>Address: {app.address ? app.address : "No response"}</p>
-                      <p>City: {app.city ? app.city : "No response"}</p>
-                      <p>State / Country: {app.state ? app.state : "No response"}</p>
-                      <p>Zip Code: {app.zip ? app.zip : "No response"}</p>
-                      <p className='mb-5'>Email: {app.email ? app.email : "No response"}</p>
+                      <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
+                        {app.job ? app.job : "No response"}
+                        <span className='lg:ml-2 text-sm text-gray-500'>
+                          {app.savedAt ? `(Saved on: ${new Date(app.savedAt).toLocaleDateString()})` : ""}
+                        </span>
+                      </h2>
+                      <div className='space-y-[2px] ml-1'>
+                        <p>Name: {app.name ? app.name : "No response"}</p>
+                        <p>Date of Birth: {app.dob ? app.dob : "No response"}</p>
+                        <p>Address: {app.address ? app.address : "No response"}</p>
+                        <p>City: {app.city ? app.city : "No response"}</p>
+                        <p>State / Country: {app.state ? app.state : "No response"}</p>
+                        <p>Zip Code: {app.zip ? app.zip : "No response"}</p>
+                        <p>Email: {app.email ? app.email : "No response"}</p>
+                      </div>
                     </div>
+
+                    <div className='flex gap-4'>
+                      <div>
+                        <button onClick={() => handleShowMore(app)} className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] ml-7 mb-6 text-white mt-4">
+                          Show More
+                        </button>
+                      </div>
+
+                      <Link 
+                        href={`/apply?form=${JSON.stringify(app)}`} 
+                        className='border border-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 
+                        hover:bg-indigo-500 hover:text-white mb-6 text-indigo-500 flex flex-row'>
+                        <span className='lg:block hidden'>Edit Application</span>
+                        <span className='my-auto lg:ml-2 lg:text-lg text-xl'><FaPencil /></span>
+                      </Link>
+
+                      <button onClick={() => handleDelete(app.id)} className="bg-red-500 lg:flex lg:flex-row px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-90 mb-6 text-white">
+                        <span className='lg:block hidden'>Delete</span>
+                        <span className='my-auto lg:ml-2 lg:text-lg text-xl'><FaRegTrashCan /></span>
+                      </button>
+                    </div>
+
                   </div>
 
-                  <div className='flex gap-4'>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p>No saved applications found.</p>
+          )}
+        </div>
+
+        <div>
+          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500 lg:mt-0 mt-8">Submitted Applications</h2>
+          {submittedApplications.length > 0 ? (
+            <div className=''>
+              <div className='relative mb-4 rounded-md space-y-8'>
+                {submittedApplications.map((app) => (
+                  <div key={app.id} className=" bg-white/50 border shadow-lg">
+                    <div className='pl-6 pt-5 text-md'>
+                      <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
+                        {app.job ? app.job : "No response"}
+                        <span className='lg:ml-2 text-sm text-gray-500'>
+                          {app.submittedAt ? `(Submitted on: ${new Date(app.submittedAt).toLocaleDateString()})` : ""}
+                        </span>
+                      </h2>
+                      <div className='space-y-[2px] ml-1'>
+                        <p>Name: {app.name ? app.name : "No response"}</p>
+                        <p>Date of Birth: {app.dob ? app.dob : "No response"}</p>
+                        <p>Address: {app.address ? app.address : "No response"}</p>
+                        <p>City: {app.city ? app.city : "No response"}</p>
+                        <p>State / Country: {app.state ? app.state : "No response"}</p>
+                        <p>Zip Code: {app.zip ? app.zip : "No response"}</p>
+                        <p className='mb-5'>Email: {app.email ? app.email : "No response"}</p>
+                      </div>
+                    </div>
+
                     <div>
                       <button onClick={() => handleShowMore(app)} className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] ml-7 mb-6 text-white mt-4">
                         Show More
                       </button>
                     </div>
 
-                    <Link 
-                      href={`/apply?form=${JSON.stringify(app)}`} 
-                      className='border border-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 
-                      hover:bg-indigo-500 hover:text-white mb-6 text-indigo-500'>
-                      Edit Application
-                    </Link>
                   </div>
 
-                </div>
-                
-              ))}
+                ))}
               </div>
             </div>
           ) : (
-            <p>No saved applications found.</p>
+            <p>No submitted applications found.</p>
           )}
+        </div>
 
-          </div>
       </div>
 
       {expandedApp && (
@@ -161,7 +185,7 @@ const MyApps = () => {
               </h2>
 
               <div className="lg:ml-2">
-                <h2 className="font-bold text-xl lg:text-2xl text-indigo-500 lg:ml-10 ml-7 lg:mt-6">Personal Information</h2>
+                <h2 className="font-bold text-xl lg:text-2xl text-indigo-500 lg:ml-10 ml-7 lg:mt-6 mt-8">Personal Information</h2>
                 <div className="space-y-6 grid lg:grid-cols-2 text-white px-7 pb-7 lg:ml-7">
                   <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
                     <span className="ml-1 mt-6 font-semibold">Full Name</span>
@@ -241,6 +265,66 @@ const MyApps = () => {
               </div>
 
               <div className="ml-2">
+                <h2 className="font-bold text-xl lg:text-2xl text-indigo-500 lg:ml-10 ml-7 mt-8">Higher Education</h2>
+                <div className="space-y-4 text-white px-7 pb-7 pt-3 lg:ml-7">
+
+                  <div className="lg:grid grid-cols-2">
+
+                    <div className='grid grid-rows-3'>
+                      <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                        <span className="ml-1 mt-4 font-semibold">Undergraduate Information</span>
+                        <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                          {expandedApp.undergrad || "No response"}
+                        </div>
+                      </div>
+
+                      <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                        <span className="ml-1 mt-7 font-semibold">Undergraduate Major(s)</span>
+                        <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                          {expandedApp.undergradMajor || "No response"}
+                        </div>
+                      </div>
+
+                      <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                        <span className="ml-1 mt-8 font-semibold">Undergraduate Degree(s)</span>
+                        <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                          {expandedApp.undergradDegree || "No response"}
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div className='grid grid-rows-3'>
+
+                      <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-6 lg:mt-0">
+                        <span className="ml-1 mt-4 font-semibold">Graduate Information</span>
+                        <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                          {expandedApp.grad || "No response"}
+                        </div>
+                      </div>
+
+                      <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-2 lg:mt-0">
+                        <span className="ml-1 mt-7 font-semibold">Graduate Major(s)</span>
+                        <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                          {expandedApp.gradMajor || "No response"}
+                        </div>
+                      </div>
+
+                      <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
+                        <span className="ml-1 mt-8 font-semibold">Graduate Degree(s)</span>
+                        <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
+                          {expandedApp.gradDegree || "No response"}
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="ml-2">
                 <h2 className="font-bold text-xl lg:text-2xl text-indigo-500 lg:ml-10 ml-7 mt-8">Previous Experience</h2>
                 <div className="space-y-4 text-white px-7 pb-7 pt-3 lg:ml-7">
                   <div className="flex flex-col">
@@ -255,36 +339,6 @@ const MyApps = () => {
                       <span className="ml-1 mt-8 font-semibold">Work Experience Qualifications</span>
                       <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
                         {expandedApp.workExpQual ? expandedApp.workExpQual : "No response"}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid lg:grid-cols-2 space-y-6">
-                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-6 lg:mr-10">
-                      <span className="ml-1 font-semibold">Undergraduate Education Info.</span>
-                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
-                        {expandedApp.undergrad ? expandedApp.undergrad : "No response"}
-                      </div>
-                    </div>
-
-                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-4 lg:mr-10">
-                      <span className="ml-1 font-semibold">Undergraduate Degree(s)</span>
-                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
-                        {expandedApp.undergradDegree ? expandedApp.undergradDegree : "No response"}
-                      </div>
-                    </div>
-
-                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10">
-                      <span className="ml-1 font-semibold">Graduate Education Info.</span>
-                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
-                        {expandedApp.grad ? expandedApp.grad : "No response"}
-                      </div>
-                    </div>
-
-                    <div className="text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-4 lg:mr-10">
-                      <span className="ml-1 font-semibold">Graduate Degree(s)</span>
-                      <div className="p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400">
-                        {expandedApp.gradDegree ? expandedApp.gradDegree : "No response"}
                       </div>
                     </div>
                   </div>
@@ -353,6 +407,7 @@ const MyApps = () => {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

@@ -17,9 +17,10 @@ import { collection, setDoc, doc, getDoc, addDoc, getDocs, deleteDoc } from "fir
 const tabs = [
   { id: 1, name: 'Personal Information', fields: ['job', 'name', 'dob', 'address', 'city', 'state', 'zip'] },
   { id: 2, name: 'Contact Information', fields: ['email', 'phone', 'title', 'pronoun'] },
-  { id: 3, name: 'Previous Experiences', fields: ['workExp', 'workExpQual', 'undergrad', 'undergradDegree', 'grad', 'gradDegree'] },
-  { id: 4, name: 'Skills / Expertise', fields: ['skills', 'skillsQual'] },
-  { id: 5, name: 'Other', fields: ['other', 'linkedin', 'resume'] },
+  { id: 3, name: 'Higher Education', fields: ['undergrad', 'undergradDegree', 'undergradMajor', 'gradMajor', 'grad', 'gradDegree'] },
+  { id: 4, name: 'Previous Experiences', fields: ['workExp', 'workExpQual'] },
+  { id: 5, name: 'Skills / Expertise', fields: ['skills', 'skillsQual'] },
+  { id: 6, name: 'Other', fields: ['other', 'linkedin', 'resume'] },
 ]
 
 const Apply = () => {
@@ -55,6 +56,9 @@ const Apply = () => {
   const [undergradDegree, setUndergradDegree] = useState('')
   const [grad, setGrad] = useState('')
   const [gradDegree, setGradDegree] = useState('')
+  const [undergradMajor, setUndergradMajor] = useState('')
+  const [gradMajor, setGradMajor] = useState('')
+
 
   const [skills, setSkills] = useState('')
   const [skillsQual, setSkillsQual] = useState('')
@@ -156,8 +160,10 @@ const Apply = () => {
     workExpQual: form?.workExpQual || '',
     undergrad: form?.undergrad || '',
     undergradDegree: form?.undergradDegree || '',
+    undergradMajor: form?.undergradMajor || '',
     grad: form?.grad || '',
     gradDegree: form?.gradDegree || '',
+    gradMajor: form?.gradMajor || '',
     skills: form?.skills || '',
     skillsQual: form?.skillsQual || '',
     other: form?.other || '',
@@ -186,7 +192,7 @@ const Apply = () => {
   const validateFields = () => {
     const newErrors = {};
     Object.keys(formData).forEach(key => {
-      if (!formData[key] && key !== 'title' && key !== 'pronoun' && key !== "id" && key !== "grad" && key !== "gradDegree") {
+      if (!formData[key] && key !== 'title' && key !== 'pronoun' && key !== "id" && key !== "grad" && key !== "gradDegree" && key !== "gradMajor") {
         newErrors[key] = 'No response';
       }
     });
@@ -224,7 +230,11 @@ const Apply = () => {
   }
 
   const onSubmitApp = async () => {
+          
     try {
+
+      const timestamp = new Date().toISOString();
+      
       await addDoc(submittedAppsCollectionRef, {
         job: formData.job,
         name: formData.name,
@@ -241,13 +251,16 @@ const Apply = () => {
         workExpQual: formData.workExpQual,
         undergrad: formData.undergrad,
         undergradDegree: formData.undergradDegree,
+        undergradMajor: formData.undergradMajor,
         grad: formData.grad,
         gradDegree: formData.gradDegree,
+        gradMajor: formData.gradMajor,
         skills: formData.skills,
         skillsQual: formData.skillsQual,
         other: formData.other,
         linkedin: formData.linkedin,
         resume: formData.resume,
+        submittedAt: timestamp,
         uid: auth.currentUser.uid,
       });
     } catch (error) {
@@ -266,6 +279,9 @@ const Apply = () => {
 
   const onSavedApp = async () => {
     try {
+
+      const timestamp = new Date().toISOString();
+
       // Check if the application already exists by its ID
       const existingApp = savedApps.find(app => app.id === formData.id);
   
@@ -288,13 +304,16 @@ const Apply = () => {
           workExpQual: formData.workExpQual,
           undergrad: formData.undergrad,
           undergradDegree: formData.undergradDegree,
+          undergradMajor: formData.undergradMajor,
           grad: formData.grad,
           gradDegree: formData.gradDegree,
+          gradMajor: formData.gradMajor,
           skills: formData.skills,
           skillsQual: formData.skillsQual,
           other: formData.other,
           linkedin: formData.linkedin,
           resume: formData.resume,
+          savedAt: timestamp,
           uid: auth.currentUser.uid,
         });
       } else {
@@ -315,13 +334,16 @@ const Apply = () => {
           workExpQual: formData.workExpQual,
           undergrad: formData.undergrad,
           undergradDegree: formData.undergradDegree,
+          undergradMajor: formData.undergradMajor,
           grad: formData.grad,
           gradDegree: formData.gradDegree,
+          gradMajor: formData.gradMajor,
           skills: formData.skills,
           skillsQual: formData.skillsQual,
           other: formData.other,
           linkedin: formData.linkedin,
           resume: formData.resume,
+          savedAt: timestamp,
           uid: auth.currentUser.uid,
         });
         // Update the formData with the new document ID
@@ -398,8 +420,8 @@ const handleSubmit = async (status) => {
                     </span>
                   </button>
                 ))}
-                <span className='flex flex-row gap-2 mx-auto mt-auto'>
-                  <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex text-md bg-indigo-500 rounded-md px-4 border-2 border-indigo-500 py-2 hover:text-indigo-100 hover:brightness-[1.15] transition ease-linear duration-200 mt-10 group font-medium text-gray-100'>
+                <span className='flex flex-row gap-2 mt-auto mx-auto'>
+                  <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex text-md bg-indigo-500 rounded-md pl-4 pr-3 border-2 border-indigo-500 py-2 hover:text-indigo-100 hover:brightness-[1.15] transition ease-linear duration-200 mt-10 group font-medium text-gray-100'>
                     Review
                     <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear hidden lg:block">
                       <MdKeyboardArrowRight />
@@ -415,18 +437,21 @@ const handleSubmit = async (status) => {
               {/* Personal Information */}
               <div className={`${active === 1 ? "block" : "hidden"} lg:w-4/5 w-full lg:pl-10`}>
                 <div className='flex'>
-                  <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Personal Information</span>
-                  <select
-                    name="job"
-                    className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-lg text-xl font-medium border border-indigo-500/40 lg:mt-0 mt-5 ml-0 lg:ml-5'
-                    onChange={handleChange}
-                    value={formData.job}
-                  >
-                    <option value="" disabled>Select a job</option>
-                    {jobs.map((job, index) => (
-                      <option key={index} value={job.title}>{job.title}</option>
-                    ))}
-                  </select>
+                  <div className='lg:block flex flex-col'>
+                    <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Personal Information</span>
+                    <select
+                      name="job"
+                      className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-lg lg:text-xl text-md font-medium border border-indigo-500/40 
+                      lg:mt-0 mt-3 ml-0 lg:ml-5'
+                      onChange={handleChange}
+                      value={formData.job}
+                    >
+                      <option value="" disabled>Select a job</option>
+                      {jobs.map((job, index) => (
+                        <option key={index} value={job.title}>{job.title}</option>
+                      ))}
+                    </select>
+                  </div>
                   {errors.job && <span className='ml-2 flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-3 rounded-md text-sm'>
                     <BiError className='my-auto mr-1' />{errors.job}</span>}
                 </div>
@@ -473,6 +498,7 @@ const handleSubmit = async (status) => {
               <div className={`${active === 2 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Contact Information</span>
                 <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-8 pt-6 text-gray-300'>
+                  
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>Email</span>
                     <input name="email" value={formData.email} placeholder='username@email.com' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.email ? 'text-red-500' : 'text-indigo-500'}`} />
@@ -497,10 +523,66 @@ const handleSubmit = async (status) => {
                 </div>
               </div>
 
-              {/* Previous Experiences */}
+              {/* Education */}
               <div className={`${active === 3 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
+                <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Higher Education</span>
+                <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
+                  
+                  <div className='lg:grid lg:grid-cols-2'>
+
+                    <div className='grid lg:grid-rows-3'>
+
+                      <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
+                        <span className='ml-1'>Undergraduate Institution & Graduating Year</span>
+                        <input name="undergrad" value={formData.undergrad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergrad ? 'text-red-500' : 'text-indigo-500'}`} />
+                        {errors.undergrad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergrad}</span>}
+                      </div>
+
+                      <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-3'>
+                        <span className='ml-1'>Undergraduate Major / Field of Study</span>
+                        <input name="undergradMajor" value={formData.undergradMajor} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradMajor ? 'text-red-500' : 'text-indigo-500'}`} />
+                        {errors.undergradMajor && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergradMajor}</span>}
+                      </div>
+
+                      <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-6'>
+                        <span className='ml-1'>Undergraduate Degree(s) Earned</span>
+                        <input name='undergradDegree' placeholder='Doctoral' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
+                        {errors.undergradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergradDegree}</span>}
+                      </div>
+
+                    </div>
+
+                    <div className='grid lg:grid-rows-3'>
+
+                      <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-0'>
+                        <span className='ml-1'>Graduate Institution & Graduating Year (Optional)</span>
+                        <input name="grad" value={formData.grad} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.grad ? 'text-red-500' : 'text-indigo-500'}`} />
+                        {errors.grad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.grad}</span>}
+                      </div>
+
+                      <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-3'>
+                        <span className='ml-1'>Graduate Major / Field of Study (Optional)</span>
+                        <input name="gradMajor" value={formData.gradMajor} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradMajor ? 'text-red-500' : 'text-indigo-500'}`} />
+                        {errors.gradMajor && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.gradMajor}</span>}
+                      </div>
+
+                      <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-1 mt-10 lg:mt-6'>
+                        <span className='ml-1'>Graduate Degree(s) Earned (Optional)</span>
+                        <input name="gradDegree" value={formData.gradDegree} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
+                        {errors.gradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.gradDegree}</span>}
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Previous Experiences */}
+              <div className={`${active === 4 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Previous Experiences</span>
                 <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
+
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>List all your previous <strong>work</strong> experiences</span>
                     <textarea name="workExp" value={formData.workExp} placeholder='Company names, years worked, brief role description, etc.' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExp ? 'text-red-500' : 'text-indigo-500'}`} />
@@ -512,39 +594,12 @@ const handleSubmit = async (status) => {
                     <textarea name="workExpQual" value={formData.workExpQual} placeholder='Short essay about how your experiences have shaped you...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExpQual ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.workExpQual && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.workExpQual}</span>}
                   </div>
-
-                  <div className='grid lg:grid-cols-2'>
-                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                      <span className='ml-1'>Undergraduate Institution / Graduating Year</span>
-                      <input name="undergrad" value={formData.undergrad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergrad ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.undergrad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergrad}</span>}
-                    </div>
-
-                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                      <span className='ml-1'>Degree(s) Earned</span>
-                      <input name="undergradDegree" value={formData.undergradDegree} placeholder='Data Science' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.undergradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergradDegree}</span>}
-                    </div>
-                  </div>
-
-                  <div className='grid lg:grid-cols-2'>
-                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                      <span className='ml-1'>Graduate Institution / Graduating Year (Optional) </span>
-                      <input name="grad" value={formData.grad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.grad ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.grad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.grad}</span>}
-                    </div>
-
-                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
-                      <span className='ml-1'>Degree(s) Earned (Optional)</span>
-                      <input name="gradDegree" value={formData.gradDegree} placeholder='Data Science' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
-                      {errors.gradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.gradDegree}</span>}
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
 
               {/* Skills & Expertise */}
-              <div className={`${active === 4 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
+              <div className={`${active === 5 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Skills & Expertise</span>
                 <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
@@ -562,7 +617,7 @@ const handleSubmit = async (status) => {
               </div>
 
               {/* Other */}
-              <div className={`${active === 5 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
+              <div className={`${active === 6 ? "block" : "hidden"} lg:w-4/5 lg:pl-10`}>
                 <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Other Information</span>
                 <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
@@ -687,56 +742,87 @@ const handleSubmit = async (status) => {
               </div>
             </div>
 
+          
+
+            {/* Education */}
             <div className='ml-2'>
-              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Previous Experience</h2>
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Higher Education</h2>
+              <div className='space-y-4 text-white lg:mr-56 px-7 pb-7 pt-3 lg:ml-7'>
+                <div className='grid lg:grid-cols-2'>
+                  <div className='grid grid-rows-3'>
+                    
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
+                      <span className='ml-1 mt-4 font-semibold'>Undergraduate Institution & Graduating Year</span>
+                      <div placeholder='Example University, YYYY' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                        {submittedApp.undergrad || 'No response'}
+                      </div>
+                    </div>
+
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-6 lg:mt-5'>
+                      <span className='ml-1 font-semibold'>Undergraduate Major / Field of Study</span>
+                      <div placeholder='BioEngineering' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                        {submittedApp.undergradMajor || 'No response'}
+                      </div>
+                    </div>
+
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-6 lg:mt-6'>
+                      <span className='ml-1 font-semibold'>Undergraduate Degree(s) Earned</span>
+                      <div placeholder='Doctoral' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                        {submittedApp.undergradDegree || 'No response'}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='grid grid-rows-3'>
+                    
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 lg:mt-0'>
+                      <span className='ml-1 mt-4 font-semibold'>Graduate Institution & Graduating Year (Optional)</span>
+                      <div placeholder='Post Doc' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                        {submittedApp.grad || 'No response'}
+                      </div>
+                    </div>
+
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-6 lg:mt-5'>
+                      <span className='ml-1 font-semibold'>Graduate Major / Field of Study (Optional)</span>
+                      <div placeholder='Post Doc' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                        {submittedApp.gradMajor || 'No response'}
+                      </div>
+                    </div>
+
+                    <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-8 lg:mt-6'>
+                      <span className='ml-1 font-semibold'>Graduate Degree(s) Earned (Optional)</span>
+                      <div placeholder='Post Doc' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                        {submittedApp.gradDegree || 'No response'}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Previous Experiences */}
+            <div className='ml-2'>
+              <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Previous Experiences</h2>
               <div className='space-y-4 text-white lg:mr-56 px-7 pb-7 pt-3 lg:ml-7'>
                 <div className='flex flex-col'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-4 font-semibold'>Work Experience</span>
-                    <div placeholder='John Doe' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div placeholder='Company names, years worked, brief role description, etc.' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.workExp || 'No response'}
                     </div>
                   </div>
 
-                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
+                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 lg:mt-3'>
                     <span className='ml-1 mt-8 font-semibold'>Work Experience Qualifications</span>
-                    <div placeholder='John Doe' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div placeholder='Short essay about how your experiences have shaped you...' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.workExpQual || 'No response'}
-                    </div>
-                  </div>
-                </div>
-
-                <div className='grid lg:grid-cols-2 space-y-6'>
-                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-6 lg:mr-10'>
-                    <span className='ml-1 font-semibold'>Undergraduate Education Information</span>
-                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.undergrad || 'No response'}
-                    </div>
-                  </div>
-
-                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-4 lg:mr-10'>
-                    <span className='ml-1 font-semibold'>Undergraduate Degree(s)</span>
-                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.undergradDegree || 'No response'}
-                    </div>
-                  </div>
-
-                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
-                    <span className='ml-1 font-semibold'>Graduate Education Information</span>
-                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.grad || 'No response'}
-                    </div>
-                  </div>
-
-                  <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-4 lg:mr-10'>
-                    <span className='ml-1 font-semibold'>Graduate Degree(s)</span>
-                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
-                      {submittedApp.gradDegree || 'No response'}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
 
             <div className='ml-2'>
               <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 mt-8'>Skills / Expertise</h2>

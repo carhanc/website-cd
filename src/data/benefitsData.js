@@ -1,6 +1,6 @@
 const benefits = [
     {
-        "title": "Compensations Package",
+        "title": "Compensation Package",
         "desc": "Receive top-of-the-market salaries and bonuses that reward your hard work and dedication.",
         "img": "compensation.png"
     },

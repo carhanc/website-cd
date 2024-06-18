@@ -83,8 +83,8 @@ const MyApps = () => {
                     <div className='pl-6 pt-5 text-md'>
                       <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
                         {app.job ? app.job : "No response"}
-                        <span className='lg:ml-2 text-sm text-gray-500'>
-                          {app.savedAt ? `(Saved on: ${new Date(app.savedAt).toLocaleDateString()})` : ""}
+                        <span className='lg:ml-2 text-sm text-gray-500 italic font-medium'>
+                          {app.savedAt ? `*Saved on: ${new Date(app.savedAt).toLocaleDateString()}*` : ""}
                         </span>
                       </h2>
                       <div className='space-y-[2px] ml-1'>
@@ -139,8 +139,8 @@ const MyApps = () => {
                     <div className='pl-6 pt-5 text-md'>
                       <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
                         {app.job ? app.job : "No response"}
-                        <span className='lg:ml-2 text-sm text-gray-500'>
-                          {app.submittedAt ? `(Submitted on: ${new Date(app.submittedAt).toLocaleDateString()})` : ""}
+                        <span className='lg:ml-2 text-sm text-gray-500 italic font-medium'>
+                          {app.submittedAt ? `*Submitted on: ${new Date(app.submittedAt).toLocaleDateString()}*` : ""}
                         </span>
                       </h2>
                       <div className='space-y-[2px] ml-1'>

@@ -9,6 +9,7 @@ import Footer from '@/components/footer';
 import jobs from '@/data/jobData';
 import { useSearchParams } from "next/navigation";
 import { useRouter } from 'next/navigation';
+import Select from 'react-select';
 
 import AuthLogic, {fetchUserData} from '@/firebase/authLogic';
 import {auth, db } from '@/firebase/auth';
@@ -188,6 +189,73 @@ const Apply = () => {
       behavior: 'smooth',
     });
   }
+  
+  const jobOptions = jobs.map((job) => ({
+    value: job.title,
+    label: job.title
+  }));
+  
+  const handleSelectChange = (selectedOptions) => {
+    handleChange({
+      target: {
+        name: 'job',
+        value: selectedOptions ? selectedOptions.map(option => option.value) : []
+      }
+    });
+  };
+
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      borderColor: '#e5e7eb',
+      borderWidth: '1px',
+      boxShadow: 'none',
+      '&:hover': {
+        borderColor: '#a5b4fc',
+      },
+      paddingTop: '5px',
+      paddingBottom: '5px',
+      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+      borderRadius: '0.375rem',
+      fontSize: '1rem', // Smaller font size
+      color: '#374151',
+    }),
+    multiValue: (provided) => ({
+      ...provided,
+      backgroundColor: '#a5b4fc',
+      borderRadius: '0.275rem',
+      color: '#fff',
+      fontSize: '.85rem', // Smaller font size
+      textAlign: 'left'
+    }),
+    multiValueLabel: (provided) => ({
+      ...provided,
+      color: '#fff',
+      fontSize: '0.75rem', // Smaller font size
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: '#374151',
+      fontSize: '.95rem', // Smaller font size
+      textAlign: 'left'
+    }),
+    menu: (provided) => ({
+      ...provided,
+      textAlign: 'left', // Left-justified text
+      fontSize: '0.85rem', // Smaller font size
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      textAlign: 'left', // Left-justified text
+      fontSize: '0.85rem', // Smaller font size
+      backgroundColor: state.isSelected ? '#a5b4fc' : provided.backgroundColor,
+      color: state.isSelected ? '#fff' : provided.color,
+      '&:hover': {
+        backgroundColor: '#a5b4fc',
+        color: '#fff',
+      },
+    }),
+  };
 
   const validateFields = () => {
     const newErrors = {};
@@ -437,20 +505,20 @@ const handleSubmit = async (status) => {
               {/* Personal Information */}
               <div className={`${active === 1 ? "block" : "hidden"} lg:w-4/5 w-full lg:pl-10`}>
                 <div className='flex'>
-                  <div className='lg:block flex flex-col'>
-                    <span className='text-xl lg:text-3xl font-bold text-indigo-500/95'>Personal Information</span>
-                    <select
+                  <div className='lg:flex-row flex flex-col'>
+                    <span className='text-xl lg:text-3xl font-bold text-indigo-500/95 my-auto'>Personal Information</span>
+
+                    <Select
                       name="job"
-                      className='bg-indigo-400/30 py-2 px-3 text-indigo-600 focus:ring-indigo-500 focus:outline-none rounded-lg lg:text-xl text-md font-medium border border-indigo-500/40 
-                      lg:mt-0 mt-3 ml-0 lg:ml-5'
-                      onChange={handleChange}
-                      value={formData.job}
-                    >
-                      <option value="" disabled>Select a job</option>
-                      {jobs.map((job, index) => (
-                        <option key={index} value={job.title}>{job.title}</option>
-                      ))}
-                    </select>
+                      className='lg:mt-0 mt-3 ml-0 lg:ml-5 text-black rounded-lg border-indigo-400 border-[1.5px] text-lg'
+                      styles={customStyles}
+                      value={jobOptions.filter(option => formData.job.includes(option.value))}
+                      onChange={handleSelectChange}
+                      options={jobOptions}
+                      placeholder="Select up to Three Jobs"
+                      isMulti
+                    />
+
                   </div>
                   {errors.job && <span className='ml-2 flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-3 rounded-md text-sm'>
                     <BiError className='my-auto mr-1' />{errors.job}</span>}
@@ -458,37 +526,37 @@ const handleSubmit = async (status) => {
                 <div className='grid grid-cols-1 lg:grid-cols-2 lg:mr-32 lg:pt-12 pt-10'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>Full Name</span>
-                    <input name="name" value={formData.name} placeholder='John Doe' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.name ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <input name="name" value={formData.name} placeholder='John Doe' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.name ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.name && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.name}</span>}
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex mt-10 lg:mt-0 flex-col'>
                     <span className='ml-1'>Date of Birth</span>
-                    <input name="dob" value={formData.dob} placeholder='MM/DD/YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.dob ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <input name="dob" value={formData.dob} placeholder='MM/DD/YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.dob ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.dob && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.dob}</span>}
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>Address</span>
-                    <input name="address" value={formData.address} placeholder='123 Example Ave' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.address ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <input name="address" value={formData.address} placeholder='123 Example Ave' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.address ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.address && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.address}</span>}
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10'>
                     <span className='ml-1'>City</span>
-                    <input name="city" value={formData.city} placeholder='Los Angeles' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.city ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <input name="city" value={formData.city} placeholder='Los Angeles' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.city ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.city && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.city}</span>}
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>State/Country</span>
-                    <input name="state" value={formData.state} placeholder='California, USA' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.state ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <input name="state" value={formData.state} placeholder='California, USA' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.state ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.state && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.state}</span>}
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10'>
                     <span className='ml-1'>Zip Code</span>
-                    <input name="zip" value={formData.zip} placeholder='12345' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.zip ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <input name="zip" value={formData.zip} placeholder='12345' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.zip ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.zip && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.zip}</span>}
                   </div>
                 </div>
@@ -501,24 +569,24 @@ const handleSubmit = async (status) => {
                   
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>Email</span>
-                    <input name="email" value={formData.email} placeholder='username@email.com' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.email ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <input name="email" value={formData.email} placeholder='username@email.com' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.email ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.email && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.email}</span>}
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-0'>
                     <span className='ml-1'>Phone Number</span>
-                    <input name="phone" value={formData.phone} placeholder='1234587890' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.phone ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <input name="phone" value={formData.phone} placeholder='1234587890' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.phone ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.phone && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.phone}</span>}
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>Title (optional)</span>
-                    <input name="title" value={formData.title} placeholder='Mr., Mrs., etc.' onChange={handleChange} className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
+                    <input name="title" value={formData.title} placeholder='Mr., Mrs., etc.' onChange={handleChange} className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10'>
                     <span className='ml-1'>Pronouns (optional)</span>
-                    <input name="pronoun" value={formData.pronoun} placeholder='They/them' onChange={handleChange} className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
+                    <input name="pronoun" value={formData.pronoun} placeholder='They/them' onChange={handleChange} className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none text-indigo-500' />
                   </div>
                 </div>
               </div>
@@ -534,19 +602,19 @@ const handleSubmit = async (status) => {
 
                       <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                         <span className='ml-1'>Undergraduate Institution & Graduating Year</span>
-                        <input name="undergrad" value={formData.undergrad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergrad ? 'text-red-500' : 'text-indigo-500'}`} />
+                        <input name="undergrad" value={formData.undergrad} placeholder='Example University, YYYY' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergrad ? 'text-red-500' : 'text-indigo-500'}`} />
                         {errors.undergrad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergrad}</span>}
                       </div>
 
                       <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-3'>
                         <span className='ml-1'>Undergraduate Major / Field of Study</span>
-                        <input name="undergradMajor" value={formData.undergradMajor} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradMajor ? 'text-red-500' : 'text-indigo-500'}`} />
+                        <input name="undergradMajor" value={formData.undergradMajor} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradMajor ? 'text-red-500' : 'text-indigo-500'}`} />
                         {errors.undergradMajor && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergradMajor}</span>}
                       </div>
 
                       <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-6'>
                         <span className='ml-1'>Undergraduate Degree(s) Earned</span>
-                        <input name='undergradDegree' placeholder='Doctoral' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
+                        <input name='undergradDegree' placeholder='Doctoral' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.undergradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
                         {errors.undergradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.undergradDegree}</span>}
                       </div>
 
@@ -556,19 +624,19 @@ const handleSubmit = async (status) => {
 
                       <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-0'>
                         <span className='ml-1'>Graduate Institution & Graduating Year (Optional)</span>
-                        <input name="grad" value={formData.grad} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.grad ? 'text-red-500' : 'text-indigo-500'}`} />
+                        <input name="grad" value={formData.grad} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.grad ? 'text-red-500' : 'text-indigo-500'}`} />
                         {errors.grad && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.grad}</span>}
                       </div>
 
                       <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-10 lg:mt-3'>
                         <span className='ml-1'>Graduate Major / Field of Study (Optional)</span>
-                        <input name="gradMajor" value={formData.gradMajor} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradMajor ? 'text-red-500' : 'text-indigo-500'}`} />
+                        <input name="gradMajor" value={formData.gradMajor} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradMajor ? 'text-red-500' : 'text-indigo-500'}`} />
                         {errors.gradMajor && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.gradMajor}</span>}
                       </div>
 
                       <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-1 mt-10 lg:mt-6'>
                         <span className='ml-1'>Graduate Degree(s) Earned (Optional)</span>
-                        <input name="gradDegree" value={formData.gradDegree} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
+                        <input name="gradDegree" value={formData.gradDegree} placeholder='Post Doc' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.gradDegree ? 'text-red-500' : 'text-indigo-500'}`} />
                         {errors.gradDegree && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.gradDegree}</span>}
                       </div>
 
@@ -585,13 +653,13 @@ const handleSubmit = async (status) => {
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>List all your previous <strong>work</strong> experiences</span>
-                    <textarea name="workExp" value={formData.workExp} placeholder='Company names, years worked, brief role description, etc.' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExp ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <textarea name="workExp" value={formData.workExp} placeholder='Company names, years worked, brief role description, etc.' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExp ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.workExp && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.workExp}</span>}
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>Why do these experiences qualify you for this position?</span>
-                    <textarea name="workExpQual" value={formData.workExpQual} placeholder='Short essay about how your experiences have shaped you...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExpQual ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <textarea name="workExpQual" value={formData.workExpQual} placeholder='Short essay about how your experiences have shaped you...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.workExpQual ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.workExpQual && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.workExpQual}</span>}
                   </div>
                   
@@ -604,13 +672,13 @@ const handleSubmit = async (status) => {
                 <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>What do you consider to be your top <strong>five</strong> professional skills and why?</span>
-                    <textarea name="skills" value={formData.skills} placeholder='List top five skills...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.skills ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <textarea name="skills" value={formData.skills} placeholder='List top five skills...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.skills ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.skills && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.skills}</span>}
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                     <span className='ml-1'>Why do these skills equip you to succeed at DataVoyagers?</span>
-                    <textarea name="skillsQual" value={formData.skillsQual} placeholder='Elaborate on your unique skillset... How does it help DataVoyagers?' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.skillsQual ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <textarea name="skillsQual" value={formData.skillsQual} placeholder='Elaborate on your unique skillset... How does it help DataVoyagers?' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.skillsQual ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.skillsQual && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.skillsQual}</span>}
                   </div>
                 </div>
@@ -622,19 +690,19 @@ const handleSubmit = async (status) => {
                 <div className='grid lg:mr-32 lg:pt-8 md:pt-12 pt-6 text-gray-300'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1'>Is there anything else you would like us to know about you?</span>
-                    <textarea name="other" value={formData.other} placeholder='Why you are the best fit, gaps in your résume, unusual details...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.other ? 'text-red-500' : 'text-indigo-500'}`} />
+                    <textarea name="other" value={formData.other} placeholder='Why you are the best fit, gaps in your résume, unusual details...' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.other ? 'text-red-500' : 'text-indigo-500'}`} />
                     {errors.other && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.other}</span>}
                   </div>
 
                   <div className='grid lg:grid-cols-2 mt-10 lg:space-y-0 md:space-y-0 space-y-10'>
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1'>Link to LinkedIn Profile</span>
-                      <input name="linkedin" value={formData.linkedin} placeholder='linkedin.com/in/username' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.linkedin ? 'text-red-500' : 'text-indigo-500'}`} />
+                      <input name="linkedin" value={formData.linkedin} placeholder='linkedin.com/in/username' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.linkedin ? 'text-red-500' : 'text-indigo-500'}`} />
                       {errors.linkedin && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.linkedin}</span>}
                     </div>
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1'>Link to Résume</span>
-                      <input name="resume" value={formData.resume} placeholder='www.example.com/resume' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 placeholder:text-indigo-400 mt-3 outline-none ${errors.resume ? 'text-red-500' : 'text-indigo-500'}`} />
+                      <input name="resume" value={formData.resume} placeholder='www.example.com/resume' onChange={handleChange} className={`p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 placeholder:text-indigo-400 mt-3 outline-none ${errors.resume ? 'text-red-500' : 'text-indigo-500'}`} />
                       {errors.resume && <span className='flex text-red-500 bg-red-100 w-fit px-2 border-dashed border border-red-500 my-2 rounded-md text-sm'><BiError className='my-auto mr-1' />{errors.resume}</span>}
                     </div>
                   </div>
@@ -660,49 +728,49 @@ const handleSubmit = async (status) => {
         <div className='bg-indigo-200/25 m-5 lg:m-10 lg:p-10 rounded-lg lg:block border-2 border-indigo-400/90'>
           <div className='text-white'>
             <h1 className='lg:flex-none flex flex-col items-center font-extrabold text-xl lg:text-2xl mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row md:ml-7'>Review Your Application: 
-              <h1 className='border-2 border-indigo-700/90 px-2 rounded-md border-dashed text-xl lg:text-2xl text-indigo-700/90 text-center lg:ml-2 w-fit'>{submittedApp.job}</h1>
+              <h1 className='border-2 border-indigo-700/90 px-2 rounded-md border-dashed text-xl lg:text-2xl text-indigo-700/90 text-center lg:ml-2 w-fit'>{submittedApp.job[0] ? submittedApp.job[0] : "No response"}{submittedApp.job[1] ? "," : ""} {submittedApp.job[1]}{submittedApp.job[2] ? "," : ""} {submittedApp.job[2]}</h1>
             </h1>
             <div className='lg:ml-2'>
               <h2 className='font-bold text-xl lg:text-2xl text-indigo-500 ml-7 lg:mt-6'>Personal Information</h2>
               <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 px-7 pb-7 lg:ml-7'>
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1 mt-6 font-semibold'>Full Name</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.name || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Date of Birth</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.dob || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Address</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.address || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>City</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.city || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>State/Country</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.state || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Zip Code</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none'>
                     {submittedApp.zip || 'No response'}
                   </div>
                 </div>
@@ -714,28 +782,28 @@ const handleSubmit = async (status) => {
               <div className='space-y-6 grid lg:grid-cols-2 text-white lg:mr-56 px-7 pb-7 lg:ml-7'>
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                   <span className='ml-1 mt-6 font-semibold'>Email</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.email || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Phone</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.phone || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Title</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.title || 'No response'}
                   </div>
                 </div>
 
                 <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col mt-10 lg:mr-10'>
                   <span className='ml-1 font-semibold'>Pronouns</span>
-                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                  <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                     {submittedApp.pronoun || 'No response'}
                   </div>
                 </div>
@@ -753,21 +821,21 @@ const handleSubmit = async (status) => {
                     
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1 mt-4 font-semibold'>Undergraduate Institution & Graduating Year</span>
-                      <div placeholder='Example University, YYYY' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div placeholder='Example University, YYYY' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.undergrad || 'No response'}
                       </div>
                     </div>
 
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-6 lg:mt-5'>
                       <span className='ml-1 font-semibold'>Undergraduate Major / Field of Study</span>
-                      <div placeholder='BioEngineering' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div placeholder='BioEngineering' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.undergradMajor || 'No response'}
                       </div>
                     </div>
 
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-6 lg:mt-6'>
                       <span className='ml-1 font-semibold'>Undergraduate Degree(s) Earned</span>
-                      <div placeholder='Doctoral' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div placeholder='Doctoral' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.undergradDegree || 'No response'}
                       </div>
                     </div>
@@ -777,21 +845,21 @@ const handleSubmit = async (status) => {
                     
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 lg:mt-0'>
                       <span className='ml-1 mt-4 font-semibold'>Graduate Institution & Graduating Year (Optional)</span>
-                      <div placeholder='Post Doc' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div placeholder='Post Doc' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.grad || 'No response'}
                       </div>
                     </div>
 
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-6 lg:mt-5'>
                       <span className='ml-1 font-semibold'>Graduate Major / Field of Study (Optional)</span>
-                      <div placeholder='Post Doc' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div placeholder='Post Doc' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.gradMajor || 'No response'}
                       </div>
                     </div>
 
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mt-8 lg:mt-6'>
                       <span className='ml-1 font-semibold'>Graduate Degree(s) Earned (Optional)</span>
-                      <div placeholder='Post Doc' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div placeholder='Post Doc' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.gradDegree || 'No response'}
                       </div>
                     </div>
@@ -808,14 +876,14 @@ const handleSubmit = async (status) => {
                 <div className='flex flex-col'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-4 font-semibold'>Work Experience</span>
-                    <div placeholder='Company names, years worked, brief role description, etc.' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div placeholder='Company names, years worked, brief role description, etc.' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.workExp || 'No response'}
                     </div>
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 lg:mt-3'>
                     <span className='ml-1 mt-8 font-semibold'>Work Experience Qualifications</span>
-                    <div placeholder='Short essay about how your experiences have shaped you...' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div placeholder='Short essay about how your experiences have shaped you...' className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.workExpQual || 'No response'}
                     </div>
                   </div>
@@ -830,14 +898,14 @@ const handleSubmit = async (status) => {
                 <div className='flex flex-col'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-4 font-semibold'>Skills Acquired</span>
-                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.skills || 'No response'}
                     </div>
                   </div>
 
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                     <span className='ml-1 mt-8 font-semibold'>Skills Qualifications</span>
-                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                       {submittedApp.skillsQual || 'No response'}
                     </div>
                   </div>
@@ -851,7 +919,7 @@ const handleSubmit = async (status) => {
                 <div className='flex flex-col'>
                   <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10 mb-2'>
                     <span className='ml-1 mt-4 font-semibold'>Additional Information</span>
-                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none'>
+                    <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none'>
                       {submittedApp.other || 'No response'}
                     </div>
                   </div>
@@ -859,14 +927,14 @@ const handleSubmit = async (status) => {
                   <div className='grid lg:grid-cols-2'>
                     <div className='text-indigo-500 font-medium text-sm lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1 mt-4 font-semibold'>LinkedIn</span>
-                      <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.linkedin ? <Link target='_blank' href={submittedApp.linkedin}>{submittedApp.linkedin}</Link> : 'No response'}
                       </div>
                     </div>
 
                     <div className='text-indigo-500 text-md lg:text-lg flex flex-col lg:mr-10'>
                       <span className='ml-1 mt-4 font-semibold'>Resume</span>
-                      <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/25 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
+                      <div className='p-4 text-sm lg:text-md rounded-lg bg-indigo-400/20 text-indigo-500/80 mt-3 outline-none text-indigo-400'>
                         {submittedApp.resume ? <Link target='_blank' href={submittedApp.resume}>{submittedApp.resume}</Link> : 'No response'}
                       </div>
                     </div>

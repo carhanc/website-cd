@@ -138,7 +138,7 @@ const MyApps = () => {
                   <div key={app.id} className=" bg-white/50 border shadow-lg">
                     <div className='pl-6 pt-5 text-md'>
                       <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
-                        {app.job ? app.job : "No response"}
+                        {app.job[0] ? app.job[0] : "No response"}{app.job[1] ? "," : ""} {app.job[1]}{app.job[2] ? "," : ""} {app.job[2]}
                         <span className='lg:ml-2 text-sm text-gray-500 italic font-medium'>
                           {app.submittedAt ? `*Submitted on: ${new Date(app.submittedAt).toLocaleDateString()}*` : ""}
                         </span>
@@ -180,7 +180,7 @@ const MyApps = () => {
               <h2 className="lg:flex-none flex flex-col items-center font-extrabold text-xl lg:text-2xl lg:mb-12 text-indigo-700 lg:text-left md:text-left text-center lg:pt-0 pt-7 lg:flex lg:flex-row md:flex-row md:ml-7">
                 Review Your Application:
                 <h2 className="border-2 border-indigo-700/90 px-2 rounded-md border-dashed text-lg lg:text-2xl text-indigo-700/90 text-center lg:ml-2 w-fit">
-                  {expandedApp.job ? expandedApp.job : "No response"}
+                  {expandedApp.job[0] ? expandedApp.job[0] : "No response"}{expandedApp.job[1] ? "," : ""} {expandedApp.job[1]}{expandedApp.job[2] ? "," : ""} {expandedApp.job[2]}
                 </h2>
               </h2>
 

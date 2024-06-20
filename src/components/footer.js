@@ -17,10 +17,10 @@ const navigation = {
     { name: "Application", href: "/apply" },
     { name: "My Applications", href: "/myapps" },
   ],
-  legal: [
-    { name: "Privacy", href: "/" },
-    { name: "Terms", href: "/" },
-  ],
+  // legal: [
+  //   { name: "Privacy", href: "/" },
+  //   { name: "Terms", href: "/" },
+  // ],
   social: [
     {
       name: "Facebook",
@@ -121,7 +121,7 @@ export default function Footer() {
                   ))}
                 </ul>
               </div>
-              <div className="mt-10 md:mt-0">
+              {/* <div className="mt-10 md:mt-0">
                 <h3 className="text-md font-semibold leading-6 text-indigo-700">
                   Legal
                 </h3>
@@ -137,7 +137,7 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

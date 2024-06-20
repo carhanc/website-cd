@@ -12,10 +12,10 @@ const JobCard = ({ job }) => {
 
   return (
 
-      <div className="bg-white/50 p-5 rounded-md hover:bg-indigo-100 transition ease-linear duration-150 shadow-md text-indigo-800">
+      <div className="bg-white/50 p-5 rounded-md hover:bg-indigo-100 transition ease-linear duration-150 shadow-2xl text-indigo-800">
         <h3 className="text-lg font-semibold mb-1">{job.title}</h3>
         <p className="text-sm text-black overflow-ellipsis overflow-hidden h-fit mb-1">{job.desc}</p>
-        <p className="text-sm text-indigo-500 font-medium lg:mt-0 mt-2">{job.pay}</p>
+        <p className="text-sm text-indigo-600 font-medium lg:mt-0 mt-2">{job.pay}</p>
 
           <p className="text-sm text-gray-600 font-medium mt-1"><span className='font-bold'>Type:</span> {job.type}</p>
           <p className="text-sm text-gray-600 font-medium mt-1"><span className='font-bold'>Experience:</span> {job.experience}</p>
@@ -45,7 +45,7 @@ const JobCard = ({ job }) => {
           </>
         )}
         <div className='flex justify-between'>
-          <button onClick={toggleExpanded} className='w-fit hover:text-indigo-500 ease-linear duration-200'>{isExpanded ? 'Show Less' : 'Show More'}</button>
+          <button onClick={toggleExpanded} className='w-fit hover:underline transition ease-linear duration-200'>{isExpanded ? 'Show Less' : 'Show More'}</button>
           <Link href={`/apply?selectedJob=${job.title}`} className='px-2 py-1 border rounded-md border-indigo-500 hover:text-white hover:bg-indigo-500 transition ease-linear duration-300'>Apply &rarr;</Link>
         </div> 
         </div>

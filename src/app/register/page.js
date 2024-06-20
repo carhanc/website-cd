@@ -67,8 +67,8 @@ const RegisterPage = () => {
   return (
     <div className="bg-indigo-300/60 h-screen">
       <Nav />
-      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:mt-8 scale-90 md:mb-10 lg:mb-0 mb-5 pb-5">
-        <div className="bg-indigo-100 p-8 rounded-lg shadow-lg max-w-sm w-full pb-4">
+      <div className="flex items-center justify-center lg:mt-20 lg:scale-100 md:mt-8 scale-90 md:mb-10 lg:mb-12 mb-5">
+        <div className="bg-indigo-100 p-8 rounded-lg shadow-lg max-w-sm w-full">
           <div className="flex justify-center mb-6">
             <span className="inline-block bg-indigo-200 rounded-full p-3">
               <svg

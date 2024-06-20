@@ -168,7 +168,7 @@ const Page = () => {
         </div>
         <div className='flex justify-center'>
         </div>
-        <div className='px-10 py-8 pb-10 lg:px-32 grid lg:grid-cols-2 h-full gap-10 bg-indigo-50'>
+        <div className='px-10 py-8 pb-10 lg:px-32 grid lg:grid-cols-2 h-full gap-8 bg-indigo-50'>
           {filteredJobs.map((job, index) => (
             <JobCard key={index} job={job} />
           ))}

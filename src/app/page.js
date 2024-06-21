@@ -15,6 +15,7 @@ import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/solid';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Rect from "../../public/rect.jpg";
 
 
 
@@ -40,33 +41,61 @@ const Home = () => {
 
   return (
 
+    // Hero Section
     <div>
       <Nav />
       <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-100 to-indigo-300 lg:mb-0 lg:px-32 lg:py-20 p-10">
-        <div className="flex flex-col lg:text-left">
-          <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-3xl inline">
-            Join the data deluge. Where <span className="inline text-indigo-400">curiosity</span> meets <span className="inline text-indigo-800">innovation</span>.
-          </p>
-        </div>
-        <div className="flex lg:my-3 space-x-2">
-          <Link
-            className="rounded-md border-indigo-500 bg-indigo-500 text-white border w-fit px-4 py-2 hover:brightness-[1.15] transition ease-linear duration-300 flex flex-row group text-md lg:text-md"
-            href="/apply"
-          >
-            Apply
-            <MdKeyboardArrowRight className="my-auto scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
-          </Link>
-          <Link
-            className="hover:bg-indigo-500 hover:text-white rounded-md z-40 border-indigo-500 text-indigo-600 border w-fit px-4 py-2 transition ease-linear duration-300 flex flex-row group text-md lg:text-md"
-            href="/positions"
-          >
-            View Open Positions
-          </Link>
+
+        <div className="flex justify-between">
+
+          <div className="my-auto">
+            <div className="flex lg:text-left lg:mb-0 mb-2">
+              <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline">
+                Join the data deluge. Where <span className="inline text-indigo-400">curiosity</span> meets <span className="inline text-indigo-800">innovation</span>.
+              </p>
+            </div>
+
+            <div className="flex lg:my-3 space-x-2 w-fit">
+              <Link
+                className="rounded-md border-indigo-500 bg-indigo-500 text-white border w-fit lg:px-4 lg:py-2 md:px-3 px-3 py-1 md:text-md hover:brightness-[1.15] transition ease-linear 
+                duration-300 flex flex-row group text-md lg:text-md my-auto"
+                href="/apply"
+              >
+                Apply
+                <MdKeyboardArrowRight className="my-auto scale-[1.25] ml-1 group-hover:translate-x-1 ease-linear duration-150" />
+              </Link>
+              <Link
+                className="hover:bg-indigo-500 hover:text-white rounded-md z-40 border-indigo-500 text-indigo-600 border w-fit lg:px-4 lg:py-2 md:px-3 px-3 py-1 md:text-md hover:brightness-[1.15] transition ease-linear duration-300 flex flex-row group text-md lg:text-md my-auto"
+                href="/positions"
+              >
+                View Open Positions
+              </Link>
+            </div>
+          </div>
+          
+          <div className="lg:block hidden">
+            <Image src={Rect} alt="DataVoyagers" className="object-cover rounded-lg" width={300} height={300} />
+          </div>
 
         </div>
+
       </main>
 
+      {/* About Section */}
+      <div className="bg-indigo-100/50 border-b-2 border-indigo-300 lg:px-32 p-10">
+        <h1 className="text-2xl font-bold mb-8 text-indigo-800">About</h1>
+        <p className="text-lg mb-6 text-gray-700">
+          DataVoyagers is committed to harnessing the power of data to drive innovation and solve real-world problems. Our mission is to empower businesses and individuals with cutting-edge data solutions that unlock new opportunities and create meaningful impact.
+        </p>
+        <p className="text-lg mb-6 text-gray-700">
+          We specialize in data analytics, machine learning, and artificial intelligence, providing comprehensive services from data collection and processing to advanced predictive modeling. Our team of experts is dedicated to delivering high-quality, customized solutions that meet the unique needs of our clients.
+        </p>
+        <p className="text-lg mb-6 text-gray-700">
+          At DataVoyagers, we believe in the transformative power of data and are passionate about helping our clients navigate the complexities of the digital age. Join us on a journey to explore the limitless possibilities of data-driven innovation.
+        </p>
+      </div>
 
+      {/* // Benefits Section */}
       <div className="bg-indigo-50">
         <div className="lg:mb-0 mb-4 lg:px-32 p-10">
           <h1 className="text-2xl font-bold mb-8 text-indigo-800">Benefits</h1>
@@ -108,6 +137,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* // Culture Section
       <div id='culture' className="px-10 xl:px-12 py-10 bg-white">
         <h1 className="text-grey-900 lg:mb-10 md:mb-10 mb-6 lg:text-3xl text-[25px] font-extrabold text-indigo-500 mt-10">
           The Voyager Culture
@@ -128,7 +158,7 @@ const Home = () => {
           <div className="p-4 h-full">
             <div className="bg-indigo-900 rounded-lg overflow-hidden">
               <Image src={innovation} className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" />
-              {/* <Image src="/path/to/innovation.jpg" alt="Innovation" className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" width={500} height={500}/> */}
+              <Image src="/path/to/innovation.jpg" alt="Innovation" className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" width={500} height={500}/>
             </div>
             <div className="my-auto mt-4">
               <h1 className="text-indigo-400 text-2xl font-bold mb-5">Innovation at Every Turn</h1>
@@ -150,7 +180,7 @@ const Home = () => {
             <div className="bg-blue-900/10 rounded-lg overflow-hidden">
               <Image src={innovation} className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" />
 
-              {/* <Image src="/path/to/promotion.jpg" alt="Empowerment" className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" width={500} height={500}/> */}
+              <Image src="/path/to/promotion.jpg" alt="Empowerment" className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" width={500} height={500}/>
             </div>
             <div className="my-auto mt-4">
               <h1 className="text-indigo-400 text-2xl font-bold mb-5">Empowerment and Growth</h1>
@@ -161,7 +191,7 @@ const Home = () => {
           <div className="p-4 h-full">
             <div className="bg-blue-900/10 rounded-lg overflow-hidden">
 
-              {/* <Image src="/path/to/bowling.jpg" alt="Work-Life Harmony" className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" width={500} height={500} /> */}
+              <Image src="/path/to/bowling.jpg" alt="Work-Life Harmony" className="object-cover max-h-72 rounded-lg hover:scale-110 duration-200" width={500} height={500} />
             </div>
             <div className="my-auto mt-4">
               <h1 className="text-indigo-400 text-2xl font-bold mb-5">Work-Life Harmony</h1>
@@ -169,7 +199,8 @@ const Home = () => {
             </div>
           </div>
         </Carousel>
-      </div>
+      </div> */}
+
       <Footer />
     </div>
   );

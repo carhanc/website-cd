@@ -50,7 +50,7 @@ const Home = () => {
   return (
     <div>
       <Nav />
-      <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-100 to-indigo-300 lg:mb-0 mb-4 lg:px-32 lg:py-20 p-10">
+      <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-100 to-indigo-300 lg:mb-0 lg:px-32 lg:py-20 p-10">
           <div className="flex flex-col lg:text-left">
             <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-3xl inline">
               Join the data deluge. Where <span className="inline text-indigo-400">curiosity</span> meets <span className="inline text-indigo-800">innovation</span>.

@@ -1,44 +1,56 @@
-const benefits = [
+const sections = [
     {
-        "title": "Compensation Package",
-        "desc": "Receive top-of-the-market salaries and bonuses that reward your hard work and dedication.",
-        "img": "compensation.png"
+      title: 'Health and wellness',
+      icon: '+',
+      caption: 'Keeping Voyagers healthy is our priority.',
+      benefits: [
+        'Medical, dental, and vision insurance for employees and dependents',
+        'Employee assistance programs focused on mental health',
+        'Workplace accommodations for physical or mental health concerns',
+        'Onsite wellness centers',
+        'Access to mental health apps',
+        'Second medical opinion for you and your loved ones',
+        'Medical advocacy program for transgender employees',
+        'Support programs including menopause benefit',
+      ],
     },
     {
-        "title": "Comprehensive Health Coverage",
-        "desc": "Premium health, dental, and vision insurance plans designed to cover you and your entire family.",
-        "img": "health.png"
+      title: 'Financial wellbeing',
+      icon: '💵',
+      caption: 'Providing compensation and programs that give our employees financial peace of mind.',
+      benefits: [
+        'Competitive compensation',
+        'Regular bonus and equity refresh opportunities',
+        'Generous 401(k) and regional retirement plans',
+        'Annual cross-company pay equity analysis and adjustments',
+        'Student loan reimbursement',
+        '1-on-1 financial coaching',
+      ],
     },
     {
-        "title": "Remote and Hybrid Work Options",
-        "desc": "Embrace the flexibility of working from anywhere, ensuring you have the balance you need to thrive.",
-        "img": "hybrid.png"
+      title: 'Flexibility and time off',
+      icon: '🕒',
+      caption: 'The time you need to recharge, and the flexibility to get your best work done.',
+      benefits: [
+        'Paid time off, including vacation, bereavement, jury duty, sick leave, parental leave, disability, and holidays',
+        'Hybrid work model with remote work opportunities also available',
+        'Four “work from anywhere” weeks per year',
+        'Part-time work and job-sharing options',
+      ],
     },
     {
-        "title": "Generous Paid Time Off",
-        "desc": "Recharge with our flexible paid time off policy, including vacation days, personal days, and holidays.",
-        "img": "vacation.png"
+      title: 'Family support and care',
+      icon: '👪',
+      caption: 'How we support your loved ones.',
+      benefits: [
+        'Fertility and growing family support',
+        'Parental leave and baby bonding leave',
+        'Caregiver leave',
+        'Elder care and support',
+        'Backup childcare',
+        'Survivor income benefit',
+      ],
     },
-    {
-        "title": "Professional Development",
-        "desc": "Grow your career with us through continuous learning opportunities, including workshops, courses, and conferences.",
-        "img": "workshop.png"
-    },
-    {
-        "title": "Equity and Performance Bonuses",
-        "desc": "Share in our success with stock options and performance-based bonuses that reflect your contributions.",
-        "img": "bonus.png"
-    },
-    {
-        "title": "Innovative Work Environment",
-        "desc": "Work with cutting-edge technologies and methodologies that keep you engaged and inspired.",
-        "img": "idea.png"
-    },
-    {
-        "title": "Supportive Team Culture",
-        "desc": "Join a community of supportive colleagues and leaders who value collaboration, creativity, and diversity.",
-        "img": "team.png"
-    },
-  ]
+  ];
   
-  export default benefits;
+  export default sections;

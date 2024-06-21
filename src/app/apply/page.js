@@ -196,12 +196,14 @@ const Apply = () => {
   }));
   
   const handleSelectChange = (selectedOptions) => {
-    handleChange({
-      target: {
-        name: 'job',
-        value: selectedOptions ? selectedOptions.map(option => option.value) : []
-      }
-    });
+    if (selectedOptions && selectedOptions.length <= 3) {
+      handleChange({
+        target: {
+          name: 'job',
+          value: selectedOptions.map(option => option.value)
+        }
+      });
+    }
   };
 
   const customStyles = {
@@ -213,8 +215,6 @@ const Apply = () => {
       '&:hover': {
         borderColor: '#a5b4fc',
       },
-      paddingTop: '5px',
-      paddingBottom: '5px',
       backgroundColor: 'rgba(255, 255, 255, 0.5)',
       borderRadius: '0.375rem',
       fontSize: '1rem', // Smaller font size
@@ -222,7 +222,7 @@ const Apply = () => {
     }),
     multiValue: (provided) => ({
       ...provided,
-      backgroundColor: '#a5b4fc',
+      backgroundColor: '#667eea',
       borderRadius: '0.275rem',
       color: '#fff',
       fontSize: '.85rem', // Smaller font size
@@ -510,7 +510,7 @@ const handleSubmit = async (status) => {
 
                     <Select
                       name="job"
-                      className='lg:mt-0 mt-3 ml-0 lg:ml-5 text-black rounded-lg border-indigo-400 border-[1.5px] text-lg'
+                      className='lg:mt-0 mt-3 ml-0 lg:ml-5 text-black rounded-lg border-indigo-400 border-2 text-lg'
                       styles={customStyles}
                       value={jobOptions.filter(option => formData.job.includes(option.value))}
                       onChange={handleSelectChange}

@@ -17,7 +17,7 @@ const JobCard = ({ job }) => {
         <p className="text-sm text-black overflow-ellipsis overflow-hidden h-fit mb-1">{job.desc}</p>
         <p className="text-sm text-indigo-600 font-medium lg:mt-0 mt-2">{job.pay}</p>
 
-          <p className="text-sm text-gray-600 font-medium mt-1"><span className='font-bold'>Type:</span> {job.type}</p>
+          <p className="text-sm text-gray-600 font-medium mt-1"><span className='font-bold'>Location:</span> {job.location}</p>
           <p className="text-sm text-gray-600 font-medium mt-1"><span className='font-bold'>Experience:</span> {job.experience}</p>
         {/* Toggle between truncated and full description */}
         {!isExpanded ? (

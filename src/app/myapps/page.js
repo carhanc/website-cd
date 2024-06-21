@@ -105,8 +105,8 @@ const MyApps = () => {
                         </button>
                       </div>
 
-                      <Link 
-                        href={`/apply?form=${JSON.stringify(app)}`} 
+                      <Link
+                        href={`/apply?form=${JSON.stringify(app)}`}
                         className='border border-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 
                         hover:bg-indigo-500 hover:text-white mb-6 text-indigo-500 flex flex-row'>
                         <span className='lg:block hidden'>Edit Application</span>

@@ -2,57 +2,32 @@
 
 import React, { useEffect, useState } from 'react';
 import Nav from "../../components/nav";
-import { auth, db } from '@/firebase/auth';
-import { getDocs, collection, query, where, deleteDoc, doc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import { db } from "@/firebase/auth";
 import Link from 'next/link';
 import { FaPencil } from "react-icons/fa6";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Footer from '@/components/footer';
 
-const MyApps = () => {
+const AdminApps = () => {
   const [submittedApplications, setSubmittedApplications] = useState([]);
-  const [savedApplications, setSavedApplications] = useState([]);
   const [expandedApp, setExpandedApp] = useState(null); // State for expanded application
-  const [authLevel, setAuthLevel] = useState(null);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const user = auth.currentUser;
-        if (user) {
-          const userDocRef = doc(db, 'userDatabase', user.uid);
-          const userDoc = await getDoc(userDocRef);
-          if (userDoc.exists()) {
-            const userData = userDoc.data();
-            setAuthLevel(userData.authLevel);
-
-            if (userData.authLevel === "admin") {
-              router.push("/adminapps");
-              return;
-            }
-
-            // Fetch submitted applications
-            const submittedQuery = query(collection(db, "submittedApplications"), where("uid", "==", user.uid));
-            const submittedSnapshot = await getDocs(submittedQuery);
-            const submittedApps = submittedSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setSubmittedApplications(submittedApps);
-
-            // Fetch saved applications
-            const savedQuery = query(collection(db, "savedApplications"), where("uid", "==", user.uid));
-            const savedSnapshot = await getDocs(savedQuery);
-            const savedApps = savedSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setSavedApplications(savedApps);
-          }
-        }
+        // Fetch all submitted applications
+        const submittedQuery = collection(db, "submittedApplications");
+        const submittedSnapshot = await getDocs(submittedQuery);
+        const submittedApps = submittedSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setSubmittedApplications(submittedApps);
       } catch (error) {
         console.error("Error fetching applications: ", error);
       }
     };
 
     fetchApplications();
-  }, [router]);
+  }, []);
 
   const handleShowMore = (app) => {
     setExpandedApp(app);
@@ -64,8 +39,8 @@ const MyApps = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "savedApplications", id));
-      setSavedApplications(savedApplications.filter(app => app.id !== id));
+      await deleteDoc(doc(db, "submittedApplications", id));
+      setSubmittedApplications(submittedApplications.filter(app => app.id !== id));
     } catch (error) {
       console.error("Error deleting application: ", error);
     }
@@ -77,74 +52,16 @@ const MyApps = () => {
       <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">
         <div className="flex flex-col lg:text-left">
           <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline">
-            My Applications
+            Submitted Applications
           </p>
           <p className="lg:mx-0 lg:pb-4 pb-2 text-xl lg:text-xl inline ">
-            View and manage your submitted and saved applications here.
+            View and manage all submitted applications here.
           </p>
         </div>
       </main>
 
-      <div className="lg:px-32 lg:py-10 lg:grid lg:grid-cols-2 gap-24 p-8 xl:my-7 my-4">
-
+      <div className="lg:px-32 lg:py-10 lg:grid lg:grid-cols-2 gap-24 p-8">
         <div>
-          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500">Saved Applications</h2>
-          {savedApplications.length > 0 ? (
-            <div className='gap-4'>
-              <div className='relative mb-4 rounded-md space-y-4'>
-                {savedApplications.map((app) => (
-                  <div key={app.id} className="shadow-xl bg-white/50 border rounded-lg">
-                    <div className='pl-6 pt-5 text-md'>
-                      <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
-                        {app.job[0] ? app.job[0] : "No response"}{app.job[1] ? "," : ""} {app.job[1]}{app.job[2] ? "," : ""} {app.job[2]}
-                        <span className='lg:ml-2 text-sm text-gray-500 italic font-medium'>
-                          {app.savedAt ? `*Saved on: ${new Date(app.savedAt).toLocaleDateString()}*` : ""}
-                        </span>
-                      </h2>
-                      <div className='space-y-[2px] ml-1'>
-                        <p>Name: {app.name ? app.name : "No response"}</p>
-                        <p>Date of Birth: {app.dob ? app.dob : "No response"}</p>
-                        <p>Address: {app.address ? app.address : "No response"}</p>
-                        <p>City: {app.city ? app.city : "No response"}</p>
-                        <p>State / Country: {app.state ? app.state : "No response"}</p>
-                        <p>Zip Code: {app.zip ? app.zip : "No response"}</p>
-                        <p>Email: {app.email ? app.email : "No response"}</p>
-                      </div>
-                    </div>
-
-                    <div className='flex gap-4'>
-                      <div>
-                        <button onClick={() => handleShowMore(app)} className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] ml-7 mb-6 text-white mt-4">
-                          Show More
-                        </button>
-                      </div>
-
-                      <Link
-                        href={`/apply?form=${JSON.stringify(app)}`}
-                        className='border border-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 
-                        hover:bg-indigo-500 hover:text-white mb-6 text-indigo-500 flex flex-row'>
-                        <span className='lg:block hidden'>Edit Application</span>
-                        <span className='my-auto lg:ml-2 lg:text-lg text-xl'><FaPencil /></span>
-                      </Link>
-
-                      <button onClick={() => handleDelete(app.id)} className="text-red-500 lg:flex lg:flex-row px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-90 mb-6 bg-red-100 border border-red-500">
-                        <span className='lg:block hidden'>Delete</span>
-                        <span className='my-auto lg:ml-2 lg:text-lg text-xl'><FaRegTrashCan /></span>
-                      </button>
-                    </div>
-
-                  </div>
-
-                ))}
-              </div>
-            </div>
-          ) : (
-            <p className='ml-1'>No saved applications found.</p>
-          )}
-        </div>
-
-        <div>
-          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500 lg:mt-0 mt-8">Submitted Applications</h2>
           {submittedApplications.length > 0 ? (
             <div className=''>
               <div className='relative mb-4 rounded-md space-y-4'>
@@ -168,9 +85,16 @@ const MyApps = () => {
                       </div>
                     </div>
 
-                    <div>
-                      <button onClick={() => handleShowMore(app)} className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] ml-7 mb-6 text-white mt-4">
-                        Show More
+                    <div className='flex gap-4'>
+                      <div>
+                        <button onClick={() => handleShowMore(app)} className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] ml-7 mb-6 text-white mt-4">
+                          Show More
+                        </button>
+                      </div>
+
+                      <button onClick={() => handleDelete(app.id)} className="text-red-500 lg:flex lg:flex-row px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-90 mb-6 bg-red-100 border border-red-500">
+                        <span className='lg:block hidden'>Delete</span>
+                        <span className='my-auto lg:ml-2 lg:text-lg text-xl'><FaRegTrashCan /></span>
                       </button>
                     </div>
 
@@ -180,10 +104,9 @@ const MyApps = () => {
               </div>
             </div>
           ) : (
-            <p className='ml-1'>No submitted applications found.</p>
+            <p>No submitted applications found.</p>
           )}
         </div>
-
       </div>
 
       {expandedApp && (
@@ -432,4 +355,4 @@ const MyApps = () => {
   );
 };
 
-export default MyApps;
+export default AdminApps;

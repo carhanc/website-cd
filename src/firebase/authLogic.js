@@ -68,9 +68,16 @@ export const AuthLogic = () => {
           {dropdownOpen && (
             <div className="right-4 fixed mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
               <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                <Link href="/myapps" className="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-500" role="menuitem">
-                  My Applications
-                </Link>
+                {userData?.authLevel !== "admin" && (
+                  <Link href="/myapps" className="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-500" role="menuitem">
+                    My Applications
+                  </Link>
+                )}
+                {userData?.authLevel === "admin" && (
+                  <Link href="/adminapps" className="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-500" role="menuitem">
+                    Admin Panel
+                  </Link>
+                )}
                 <Link href='/' onClick={signOutUser} className="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-500" role="menuitem">
                   Logout
                 </Link>
@@ -84,7 +91,6 @@ export const AuthLogic = () => {
             Sign Up
           </Link>
         </span>
-        
       )}
     </div>
   );

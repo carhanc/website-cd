@@ -18,6 +18,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({});
+  const [adminCode, setAdminCode] = useState("");
 
   const validateFields = () => {
     let errors = {};
@@ -39,6 +40,10 @@ const RegisterPage = () => {
       errors.password = "Password must be at least 6 characters.";
     }
 
+    if (adminCode && adminCode !== "adminDV") {
+      errors.adminCode = "Admin code doesn't exist.";
+    }
+
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -50,12 +55,15 @@ const RegisterPage = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      const authLevel = adminCode === "adminDV" ? "admin" : "user";
+
       const userCollectionRef = collection(db, "userDatabase");
       const userDocRef = doc(userCollectionRef, user.uid);
       await setDoc(userDocRef, {
         name,
         email,
         phone,
+        authLevel,
       });
       console.log("User Added");
       router.push("/");
@@ -171,7 +179,22 @@ const RegisterPage = () => {
               />
               {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
             </div>
-
+            <div className="mb-4">
+              <label
+                htmlFor="adminCode"
+                className="block text-gray-700 text-sm font-semibold mb-2"
+              >
+                Admin Code (if any)
+              </label>
+              <input
+                type="text"
+                id="adminCode"
+                className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 placeholder:text-gray-500 focus:ring-blue-500 focus:outline-none bg-indigo-200/60"
+                placeholder="Enter admin code if you have one"
+                onChange={(e) => setAdminCode(e.target.value)}
+              />
+              {errors.adminCode && <p className="text-red-500 text-xs mt-1">{errors.adminCode}</p>}
+            </div>
             <button
               type="submit"
               className="w-full bg-indigo-500 text-white px-4 py-2 mt-2 rounded-lg hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 duration-150 ease-linear"

@@ -22,16 +22,16 @@ const MyApps = () => {
       try {
         const user = auth.currentUser;
         if (user) {
-          const userDocRef = doc(db, 'userDatabase', user.uid);
-          const userDoc = await getDoc(userDocRef);
-          if (userDoc.exists()) {
-            const userData = userDoc.data();
-            setAuthLevel(userData.authLevel);
+          // const userDocRef = doc(db, 'userDatabase', user.uid);
+          // const userDoc = await getDoc(userDocRef);
+          // if (userDoc.exists()) {
+          //   const userData = userDoc.data();
+          //   setAuthLevel(userData.authLevel);
 
-            if (userData.authLevel === "admin") {
-              router.push("/adminapps");
-              return;
-            }
+          //   if (userData.authLevel === "admin") {
+          //     router.push("/adminapps");
+          //     return;
+          //   }
 
             // Fetch submitted applications
             const submittedQuery = query(collection(db, "submittedApplications"), where("uid", "==", user.uid));
@@ -44,7 +44,7 @@ const MyApps = () => {
             const savedSnapshot = await getDocs(savedQuery);
             const savedApps = savedSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setSavedApplications(savedApps);
-          }
+          // }
         }
       } catch (error) {
         console.error("Error fetching applications: ", error);
@@ -52,7 +52,7 @@ const MyApps = () => {
     };
 
     fetchApplications();
-  }, [router]);
+  }, []);
 
   const handleShowMore = (app) => {
     setExpandedApp(app);
@@ -83,7 +83,7 @@ const MyApps = () => {
             View and manage your submitted and saved applications here.
           </p>
         </div>
-      </main>
+      </main> 
 
       <div className="lg:px-32 lg:py-10 lg:grid lg:grid-cols-2 gap-24 p-8 xl:my-7 my-4">
 

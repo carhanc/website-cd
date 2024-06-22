@@ -1,9 +1,11 @@
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/logo.png"
+import { auth, db } from '@/firebase/auth';
+import { doc, getDoc } from "firebase/firestore";
+import logo from "../../public/logo.png";
 
 const navigation = {
-
   about: [
     { name: "Benefits", href: "/#benefits" },
     { name: "Work Culture", href: "/#culture" },
@@ -13,14 +15,6 @@ const navigation = {
     { name: "Mid-level", href: "/positions?type=Mid" },
     { name: "Entry", href: "/positions?type=Entry" },
   ],
-  apply: [
-    { name: "Application", href: "/apply" },
-    { name: "My Applications", href: "/myapps" },
-  ],
-  // legal: [
-  //   { name: "Privacy", href: "/" },
-  //   { name: "Terms", href: "/" },
-  // ],
   social: [
     {
       name: "Facebook",
@@ -48,27 +42,114 @@ const navigation = {
 };
 
 export default function Footer() {
+  const [authLevel, setAuthLevel] = useState(null);
+
+  useEffect(() => {
+    const fetchAuthLevel = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDocRef = doc(db, 'userDatabase', user.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setAuthLevel(userData.authLevel);
+        }
+      }
+    };
+    fetchAuthLevel();
+  }, []);
+
+  const renderApplySection = () => {
+    if (authLevel === "user") {
+      return (
+        <div>
+          <h3 className="text-md font-semibold leading-6 text-indigo-700">
+            Apply
+          </h3>
+          <ul role="list" className="mt-6 space-y-4">
+            <li>
+              <Link
+                href="/apply"
+                className="text-md leading-6 text-indigo-500  duration-200 hover:font-medium"
+              >
+                Application
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/myapps"
+                className="text-md leading-6 text-indigo-500  duration-200 hover:font-medium"
+              >
+                My Applications
+              </Link>
+            </li>
+          </ul>
+        </div>
+      );
+    } else if (authLevel === "admin") {
+      return (
+        <div>
+          <h3 className="text-md font-semibold leading-6 text-indigo-700">
+            Apply
+          </h3>
+          <ul role="list" className="mt-6 space-y-4">
+            <li>
+              <Link
+                href="/apply"
+                className="text-md leading-6 text-indigo-500  duration-200 hover:font-medium"
+              >
+                Application
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/adminpanel"
+                className="text-md leading-6 text-indigo-500  duration-200 hover:font-medium"
+              >
+                Admin Panel
+              </Link>
+            </li>
+          </ul>
+        </div>
+      );
+    } else
+      return (
+        <div>
+          <h3 className="text-md font-semibold leading-6 text-indigo-700">
+            Apply
+          </h3>
+          <ul role="list" className="mt-6 space-y-4">
+            <li>
+              <Link
+                href="/apply"
+                className="text-md leading-6 text-indigo-500  duration-200 hover:font-medium"
+              >
+                Application
+              </Link>
+            </li>
+          </ul>
+        </div>
+      );
+  };
+
   return (
-    <footer
-      className="bg-indigo-100"
-      aria-labelledby="footer-heading"
-    >
+    <footer className="bg-indigo-100" aria-labelledby="footer-heading">
       <div className="mx-auto max-w-7xl px-16 pb-8 pt-16 sm:pt-24 lg:pt-24">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-            <Link href='/' className="space-x-3 flex-row flex text-lg rounded-md 
-                font-semibold cursor-pointer ease-linear duration-300">
-                <Image
-                    className="relative lg:w-9 lg:h-9 h-8 w-8 brightness-125 mt-2"
-                    alt="SciLynk Logo"
-                    placeholder="blur"
-                    draggable="false"
-                    src={logo}
-                />
-                <p className="mt-3 md:block text-indigo-700">DataVoyagers Careers</p>
-            </Link>
+          <Link href='/' className="space-x-3 flex-row flex text-lg rounded-md 
+              font-semibold cursor-pointer ease-linear duration-300">
+            <Image
+              className="relative lg:w-9 lg:h-9 h-8 w-8 brightness-125 mt-2"
+              alt="SciLynk Logo"
+              placeholder="blur"
+              draggable="false"
+              src={logo}
+            />
+            <p className="mt-3 md:block text-indigo-700">DataVoyagers Careers</p>
+          </Link>
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
-            <div>
+              <div>
                 <h3 className="text-md font-semibold leading-6 text-indigo-700">
                   About
                 </h3>
@@ -104,40 +185,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-md font-semibold leading-6 text-indigo-700">
-                  Apply
-                </h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.apply.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-md leading-6 text-indigo-500  duration-200 hover:font-medium"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {/* <div className="mt-10 md:mt-0">
-                <h3 className="text-md font-semibold leading-6 text-indigo-700">
-                  Legal
-                </h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.legal.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-md leading-6 text-indigo-500  duration-200 hover:font-medium"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
+              {renderApplySection()}
             </div>
           </div>
         </div>

@@ -510,12 +510,12 @@ const handleSubmit = async (status) => {
 
                     <Select
                       name="job"
-                      className='lg:mt-0 mt-3 ml-0 lg:ml-5 text-black rounded-lg border-indigo-400 border-2 text-lg'
+                      className='lg:mt-0 mt-3 ml-0 lg:ml-5 text-black rounded-lg border-indigo-400 border-2 text-lg placeholder:text-gray-100'
                       styles={customStyles}
                       value={jobOptions.filter(option => formData.job.includes(option.value))}
                       onChange={handleSelectChange}
                       options={jobOptions}
-                      placeholder="Select up to Three Jobs"
+                      placeholder="Select up to 3 jobs..."
                       isMulti
                     />
 
@@ -717,7 +717,7 @@ const handleSubmit = async (status) => {
         <div className='p-7 rounded-lg m-7 lg:mx-10 mx-5 border-2 border-indigo-400/90 bg-indigo-200/5 space-y-10'>
           <div className='lg:flex'>
             <h1 className='lg:text-2xl text-xl text-indigo-500 font-bold lg:mb-1 mb-3 mr-3'>Thanks for submitting your application!</h1>
-            <Link href='/myapps' className='bg-indigo-500 text-white py-2 px-3 rounded-md'>My Applications</Link>
+            <Link href='/myapps' className='border border-dashed border-indigo-500 text-indigo-500 bg-indigo-100 py-1 px-2 rounded-md my-auto mb-1'>My Applications &rarr;</Link>
           </div>
           <p className='inline text-lg text-indigo-500/85 font-mediums'>The DataVoyagers team is eager to read your application. Feel free to email our recruitment team with any updates to your application using the email <p className='inline underline'> files@careers.datavoyagers.com</p>. Excpect to receive an email from our hiring team within 7-14 business days with an interview and further instructions. We will let you know if we are deciding not to move forward with your application over email. Here is to a new potential voyage! 
             <span className='ml-1 text-xl'>🥂🚀</span></p>

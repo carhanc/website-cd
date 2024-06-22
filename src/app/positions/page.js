@@ -17,7 +17,7 @@ const Page = () => {
   const [titleFilter, setTitleFilter] = useState('');
   const [skillFilter, setSkillFilter] = useState([]);
   const [locationFilter, setLocationFilter] = useState([]);
-  const [experienceFilter, setExperienceFilter] = useState(type ? type : []);
+  const [experienceFilter, setExperienceFilter] = useState([]);
   const [userData, setUserData] = useState(null);
 
   // Get all unique skills, titles, locations, and experiences from jobs data
@@ -57,6 +57,12 @@ const Page = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (type) {
+      setExperienceFilter([{ value: type, label: type }]);
+    }
+  }, [type]);
 
   const customStyles = {
     control: (provided) => ({

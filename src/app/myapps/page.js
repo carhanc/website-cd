@@ -72,7 +72,7 @@ const MyApps = () => {
   };
 
   return (
-    <div className='bg-indigo-100/60'>
+    <div className='bg-white'>
       <Nav />
       <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">
         <div className="flex flex-col lg:text-left">
@@ -85,10 +85,10 @@ const MyApps = () => {
         </div>
       </main> 
 
-      <div className="lg:px-32 lg:py-10 lg:grid lg:grid-cols-2 gap-24 p-8 xl:my-7 my-4">
+      <div className="lg:px-32 lg:py-10 lg:grid lg:grid-cols-2 gap-12 p-8 xl:my-7 my-4">
 
         <div>
-          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500">Saved Applications</h2>
+          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-900">Saved Applications</h2>
           {savedApplications.length > 0 ? (
             <div className='gap-4'>
               <div className='relative mb-4 rounded-md space-y-4'>
@@ -144,7 +144,7 @@ const MyApps = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500 lg:mt-0 mt-8">Submitted Applications</h2>
+          <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-900 lg:mt-0 mt-8">Submitted Applications</h2>
           {submittedApplications.length > 0 ? (
             <div className=''>
               <div className='relative mb-4 rounded-md space-y-4'>

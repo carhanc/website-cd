@@ -77,9 +77,9 @@ const MyApps = () => {
           <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500">Saved Applications</h2>
           {savedApplications.length > 0 ? (
             <div className='gap-4'>
-              <div className='relative mb-4 rounded-md space-y-10'>
+              <div className='relative mb-4 rounded-md space-y-4'>
                 {savedApplications.map((app) => (
-                  <div key={app.id} className="shadow-xl bg-white/50 border">
+                  <div key={app.id} className="shadow-xl bg-white/50 border rounded-lg">
                     <div className='pl-6 pt-5 text-md'>
                       <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
                         {app.job[0] ? app.job[0] : "No response"}{app.job[1] ? "," : ""} {app.job[1]}{app.job[2] ? "," : ""} {app.job[2]}
@@ -113,7 +113,7 @@ const MyApps = () => {
                         <span className='my-auto lg:ml-2 lg:text-lg text-xl'><FaPencil /></span>
                       </Link>
 
-                      <button onClick={() => handleDelete(app.id)} className="bg-red-500 lg:flex lg:flex-row px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-90 mb-6 text-white">
+                      <button onClick={() => handleDelete(app.id)} className="text-red-500 lg:flex lg:flex-row px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-90 mb-6 bg-red-100 border border-red-500">
                         <span className='lg:block hidden'>Delete</span>
                         <span className='my-auto lg:ml-2 lg:text-lg text-xl'><FaRegTrashCan /></span>
                       </button>
@@ -133,9 +133,9 @@ const MyApps = () => {
           <h2 className="text-2xl ml-1 font-bold mb-6 text-indigo-500 lg:mt-0 mt-8">Submitted Applications</h2>
           {submittedApplications.length > 0 ? (
             <div className=''>
-              <div className='relative mb-4 rounded-md space-y-8'>
+              <div className='relative mb-4 rounded-md space-y-4'>
                 {submittedApplications.map((app) => (
-                  <div key={app.id} className=" bg-white/50 border shadow-lg">
+                  <div key={app.id} className=" bg-white/50 border shadow-lg rounded-lg">
                     <div className='pl-6 pt-5 text-md'>
                       <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
                         {app.job[0] ? app.job[0] : "No response"}{app.job[1] ? "," : ""} {app.job[1]}{app.job[2] ? "," : ""} {app.job[2]}

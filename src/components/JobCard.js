@@ -12,7 +12,7 @@ const JobCard = ({ job }) => {
 
   return (
 
-      <div className="bg-white/50 p-5 rounded-md hover:bg-indigo-100/40 transition ease-linear duration-150 shadow-xl text-indigo-800">
+      <div className="bg-white/50 p-5 rounded-md hover:bg-indigo-100/40 transition ease-linear duration-150 shadow-xl text-indigo-800 border-2 border-indigo-50">
         <h3 className="text-lg font-semibold mb-1">{job.title}</h3>
         <p className="text-sm text-black overflow-ellipsis overflow-hidden h-fit mb-1">{job.desc}</p>
         <p className="text-sm text-indigo-600 font-medium lg:mt-0 mt-2">{job.pay}</p>

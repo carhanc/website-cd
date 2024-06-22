@@ -6,6 +6,7 @@ import Link from "next/link";
 import Nav from "../components/nav";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import innovation from "../../public/innovation.jpg"
+import collaboration from "../../public/collaboration.png"
 import sections from "../data/benefitsData"
 import Footer from "@/components/footer";
 import { useState, useEffect } from "react";
@@ -73,30 +74,36 @@ const Home = () => {
             </div>
           </div>
           
-          <div className="lg:block hidden">
+          {/* <div className="lg:block hidden">
             <Image src={Rect} alt="DataVoyagers" className="object-cover rounded-lg" width={300} height={300} />
-          </div>
+          </div> */}
 
         </div>
 
       </main>
 
       {/* About Section */}
-      <div className="bg-indigo-100/50 border-b-2 border-indigo-300 lg:px-32 p-10">
-        <h1 className="text-2xl font-bold mb-8 text-indigo-800">About</h1>
-        <p className="text-lg mb-6 text-gray-700">
-          DataVoyagers is committed to harnessing the power of data to drive innovation and solve real-world problems. Our mission is to empower businesses and individuals with cutting-edge data solutions that unlock new opportunities and create meaningful impact.
-        </p>
-        <p className="text-lg mb-6 text-gray-700">
-          We specialize in data analytics, machine learning, and artificial intelligence, providing comprehensive services from data collection and processing to advanced predictive modeling. Our team of experts is dedicated to delivering high-quality, customized solutions that meet the unique needs of our clients.
-        </p>
-        <p className="text-lg mb-6 text-gray-700">
-          At DataVoyagers, we believe in the transformative power of data and are passionate about helping our clients navigate the complexities of the digital age. Join us on a journey to explore the limitless possibilities of data-driven innovation.
-        </p>
+      <div className="bg-indigo-50 lg:px-32 p-10 flex justify-between" id="about">
+        <div className="lg:w-2/3 my-auto">
+          <h1 className="text-2xl font-bold mb-8 text-indigo-800">About</h1>
+          <p className="text-lg mb-6 text-indigo-900">
+            DataVoyagers is committed to harnessing the power of data to drive innovation and solve real-world problems. Our mission is to empower businesses and individuals with cutting-edge data solutions that unlock new opportunities and create meaningful impact.
+          </p>
+          <p className="text-lg mb-6 text-indigo-900">
+            We specialize in data analytics, machine learning, and artificial intelligence, providing comprehensive services from data collection and processing to advanced predictive modeling. Our team of experts is dedicated to delivering high-quality, customized solutions that meet the unique needs of our clients.
+          </p>
+          <p className="text-lg mb-6 text-indigo-900">
+            At DataVoyagers, we believe in the transformative power of data and are passionate about helping our clients navigate the complexities of the digital age. Join us on a journey to explore the limitless possibilities of data-driven innovation.
+          </p>
+        </div>
+        <div className="lg:block hidden w-1/4 my-auto">
+            <Image src={collaboration} alt="DataVoyagers" className="object-cover" />
+         </div>
+        
       </div>
 
       {/* // Benefits Section */}
-      <div className="bg-indigo-50">
+      <div className="bg-indigo-100/30" id="benefits">
         <div className="lg:mb-0 mb-4 lg:px-32 p-10">
           <h1 className="text-2xl font-bold mb-8 text-indigo-800">Benefits</h1>
           {sections.map((section, index) => (

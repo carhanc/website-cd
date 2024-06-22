@@ -79,7 +79,7 @@ const Nav = () => {
               leaveTo="transform scale-95 opacity-0"
               className="relative"
             >
-              <div className="mb-6 first-letter:sm:hidden h-[157px] py-4">
+              <div className="first-letter:sm:hidden py-4">
                 <div className="mt-2 flex flex-col space-y-4">
                   <Link href="/positions" passHref>
                     <Disclosure.Button
@@ -97,14 +97,16 @@ const Nav = () => {
                       Apply
                     </Disclosure.Button>
                   </Link>
-                  <Link href="/myapps" passHref>
+
+                  {/* <Link href="/myapps" passHref>
                     <Disclosure.Button
                       as="a"
                       className="rounded-md p-2 font-semibold text-indigo-500"
                     >
                       My Applications
                     </Disclosure.Button>
-                  </Link>
+                  </Link> */}
+
                   <AuthLogicMobile />
                 </div>
               </div>

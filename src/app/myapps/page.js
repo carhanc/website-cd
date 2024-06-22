@@ -82,7 +82,7 @@ const MyApps = () => {
                   <div key={app.id} className="shadow-xl bg-white/50 border">
                     <div className='pl-6 pt-5 text-md'>
                       <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
-                        {app.job ? app.job : "No response"}
+                        {app.job[0] ? app.job[0] : "No response"}{app.job[1] ? "," : ""} {app.job[1]}{app.job[2] ? "," : ""} {app.job[2]}
                         <span className='lg:ml-2 text-sm text-gray-500 italic font-medium'>
                           {app.savedAt ? `*Saved on: ${new Date(app.savedAt).toLocaleDateString()}*` : ""}
                         </span>

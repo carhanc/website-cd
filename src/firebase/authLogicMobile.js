@@ -39,13 +39,21 @@ const AuthLogicMobile = () => {
   return (
     <div className='ml-2'>
       {authenticatedUser ? (
-        <Link
+        <div className='flex flex-col'>
+          <Link
+          href="/myapps"
+          className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500 font-semibold mb-3"
+        >
+          My Applications
+        </Link>
+          <Link
           href="/"
           onClick={signOutUser}
-          className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500 font-bold"
+          className="my-auto hover:scale-105 ease-linear duration-150 hover:text-indigo-500 text-indigo-500 font-semibold"
         >
           Logout
         </Link>
+        </div>
       ) : (
         <Link
           href="/register"

@@ -19,7 +19,9 @@ const AdminApps = () => {
         // Fetch all submitted applications
         const submittedQuery = collection(db, "submittedApplications");
         const submittedSnapshot = await getDocs(submittedQuery);
-        const submittedApps = submittedSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const submittedApps = submittedSnapshot.docs
+          .map(doc => ({ id: doc.id, ...doc.data() }))
+          .filter(app => app.id !== "GTPrTuZUZZQrbz2Z7RPv"); // Filter out the specific document
         setSubmittedApplications(submittedApps);
       } catch (error) {
         console.error("Error fetching applications: ", error);
@@ -60,21 +62,21 @@ const AdminApps = () => {
         </div>
       </main>
 
-      <div className="lg:px-32 lg:py-10 lg:grid lg:grid-cols-2 gap-24 p-8">
-        <div>
-          {submittedApplications.length > 0 ? (
+      <div className="lg:px-32 lg:py-10 p-8">
+        <div className="">
+            {submittedApplications.length > 0 ? (
             <div className=''>
-              <div className='relative mb-4 rounded-md space-y-4'>
+                <div className='relative mb-4 rounded-md lg:grid lg:grid-cols-2 gap-6'>
                 {submittedApplications.map((app) => (
-                  <div key={app.id} className=" bg-white/50 border shadow-lg rounded-lg">
+                    <div key={app.id} className="bg-white/50 border shadow-lg rounded-lg">
                     <div className='pl-6 pt-5 text-md'>
-                      <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
+                        <h2 className="text-xl font-bold mb-2 ml-0 text-indigo-800 lg:block flex flex-col">
                         {app.job[0] ? app.job[0] : "No response"}{app.job[1] ? "," : ""} {app.job[1]}{app.job[2] ? "," : ""} {app.job[2]}
                         <span className='lg:ml-2 text-sm text-gray-500 italic font-medium'>
-                          {app.submittedAt ? `*Submitted on: ${new Date(app.submittedAt).toLocaleDateString()}*` : ""}
+                            {app.submittedAt ? `*Submitted on: ${new Date(app.submittedAt).toLocaleDateString()}*` : ""}
                         </span>
-                      </h2>
-                      <div className='space-y-[2px] ml-1'>
+                        </h2>
+                        <div className='space-y-[2px] ml-1'>
                         <p>Name: {app.name ? app.name : "No response"}</p>
                         <p>Date of Birth: {app.dob ? app.dob : "No response"}</p>
                         <p>Address: {app.address ? app.address : "No response"}</p>
@@ -82,30 +84,29 @@ const AdminApps = () => {
                         <p>State / Country: {app.state ? app.state : "No response"}</p>
                         <p>Zip Code: {app.zip ? app.zip : "No response"}</p>
                         <p className='mb-5'>Email: {app.email ? app.email : "No response"}</p>
-                      </div>
+                        </div>
                     </div>
 
                     <div className='flex gap-4'>
-                      <div>
+                        <div>
                         <button onClick={() => handleShowMore(app)} className="bg-indigo-500 px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-[1.15] ml-7 mb-6 text-white mt-4">
-                          Show More
+                            Show More
                         </button>
-                      </div>
+                        </div>
 
-                      <button onClick={() => handleDelete(app.id)} className="text-red-500 lg:flex lg:flex-row px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-90 mb-6 bg-red-100 border border-red-500">
+                        <button onClick={() => handleDelete(app.id)} className="text-red-500 lg:flex lg:flex-row px-3 py-2 rounded-md my-auto ease-linear duration-150 hover:brightness-90 mb-6 bg-red-100 border border-red-500">
                         <span className='lg:block hidden'>Delete</span>
                         <span className='my-auto lg:ml-2 lg:text-lg text-xl'><FaRegTrashCan /></span>
-                      </button>
+                        </button>
                     </div>
 
-                  </div>
-
+                    </div>
                 ))}
-              </div>
+                </div>
             </div>
-          ) : (
+            ) : (
             <p>No submitted applications found.</p>
-          )}
+            )}
         </div>
       </div>
 

@@ -43,7 +43,7 @@ const jobs = [
     "experience": "Senior"
   },
   {
-    "title": "Business Intelligence Analyst",
+    "title": "Business Analyst",
     "pay": "$70,000 - $90,000",
     "skills": ["Data Warehousing", "BI tools (Power BI, Tableau)", "SQL", "Data Modeling"],
     "desc": "Responsible for transforming data into insights that drive business value. This involves analyzing data, generating reports, and creating dashboards.",
@@ -127,8 +127,8 @@ const jobs = [
     "experience": "Entry"
   },
   {
-    "title": "Junior Data Scientist",
-    "pay": "$55,000 - $75,000",
+    "title": "Data Scientist",
+    "pay": "$65,000 - $85,000",
     "skills": ["Python", "R", "Machine Learning", "Statistical Analysis"],
     "desc": "Supports senior data scientists in processing and analyzing large data sets to identify trends, develop charts, and create models.",
     "type": "Full Time",

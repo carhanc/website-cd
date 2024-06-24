@@ -14,7 +14,7 @@ const RegisterPage = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  // const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({});
@@ -29,11 +29,11 @@ const RegisterPage = () => {
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = "Email address is invalid.";
     }
-    if (!phone) {
-      errors.phone = "Phone Number is required.";
-    } else if (phone.length !== 10) {
-      errors.phone = "Phone Number must be 10 digits.";
-    }
+    // if (!phone) {
+    //   errors.phone = "Phone Number is required.";
+    // } else if (phone.length !== 10) {
+    //   errors.phone = "Phone Number must be 10 digits.";
+    // }
     if (!password) {
       errors.password = "Password is required.";
     } else if (password.length < 6) {
@@ -62,7 +62,7 @@ const RegisterPage = () => {
       await setDoc(userDocRef, {
         name,
         email,
-        phone,
+        // phone,
         authLevel,
       });
       console.log("User Added");
@@ -133,7 +133,7 @@ const RegisterPage = () => {
               />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label
                 htmlFor="phone"
                 className="text-gray-700 text-sm font-semibold mb-2 flex"
@@ -149,7 +149,7 @@ const RegisterPage = () => {
                 onChange={(e) => setPhone(e.target.value)}
               />
               {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
-            </div>
+            </div> */}
             <div className="mb-4 relative">
               <label
                 htmlFor="password"

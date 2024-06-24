@@ -7,11 +7,13 @@ import { auth } from "@/firebase/auth";
 import Nav from "@/components/nav";
 import Link from "next/link";
 import Footer from "@/components/footer";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const SignInPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSignIn = async () => {
     if (!email || !password) {
@@ -74,14 +76,24 @@ const SignInPage = () => {
               />
             </div>
             <div className="mb-4">
-              <label
+            <label
                 htmlFor="password"
-                className="block text-gray-700 text-sm font-semibold mb-2"
+                className="text-gray-700 text-sm font-semibold mb-2 flex"
+                onClick={() => setPasswordVisible(!passwordVisible)}
               >
-                Password *
+                Password 
+
+                <div className="ml-2 cursor-pointer">
+                  {passwordVisible ? (
+                    <IoEyeOutline className="h-5 w-5 text-gray-700" />
+                  ) : (
+                    <IoEyeOffOutline className="h-5 w-5 text-gray-700" />
+                  )}
+                </div>
+
               </label>
               <input
-                type="password"
+                type={passwordVisible ? "text" : "password"}
                 id="password"
                 className="form-input w-full px-4 py-2 border rounded-lg text-gray-700 placeholder:text-gray-500 focus:ring-blue-500 focus:outline-none bg-indigo-200/60"
                 required

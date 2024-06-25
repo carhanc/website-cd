@@ -11,9 +11,11 @@ import { useSearchParams } from 'next/navigation';
 import Select from 'react-select';
 
 const Page = () => {
+  // Get the type of job from the URL query parameters
   const searchParams = useSearchParams();
   let type = searchParams.get("type");
 
+  // REACT HOOKS AND STATE MANAGEMENT FOR FILTERING JOBS
   const [titleFilter, setTitleFilter] = useState('');
   const [skillFilter, setSkillFilter] = useState([]);
   const [locationFilter, setLocationFilter] = useState([]);
@@ -34,7 +36,7 @@ const Page = () => {
     setExperienceFilter([]);
   };
 
-  // Filter jobs based on the filters inputted on the frontend
+  // Filter jobs based on the filters inputted on the frontend using array methods
   const filteredJobs = jobs.filter(job => {
     return (
       (titleFilter ? job.title.toLowerCase().includes(titleFilter.toLowerCase()) : true) &&
@@ -119,6 +121,7 @@ const Page = () => {
     <div className=''>
       <div className=' bg-indigo-100/60'>
         <Nav />
+        {/* CSS FLEXBOX AND GRID LAYOUTS FOR RESPONSIVE DESIGN ACROSS ALL PLATFORMS */}
         <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">
           <div className="flex flex-col lg:text-left">
             <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline">

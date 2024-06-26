@@ -16,8 +16,7 @@ import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/solid';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Rect from "../../public/rect.jpg";
-
+import Typewriter from 'typewriter-effect';
 
 
 // JSX Code / HTML returning the Landing Page with inline Tailwind CSS
@@ -51,9 +50,29 @@ const Home = () => {
 
           <div className="my-auto">
             <div className="flex lg:text-left lg:mb-0 mb-2">
-              <p className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline">
-                Join the data deluge. Where <span className="inline text-indigo-400">curiosity</span> meets <span className="inline text-indigo-800">innovation</span>.
-              </p>
+              <div className="font-bold lg:mx-0 lg:pb-4 pb-2 text-2xl lg:text-3xl inline lg:flex gap-2">
+                Join the data deluge. 
+                <Typewriter
+                  options={{
+                    autoStart: true,
+                    loop: true,
+                    delay: 75,
+                  }}
+                  onInit={(typewriter) => {
+                    typewriter
+                      .typeString('Where <span className="inline text-indigo-300">analytics </span>transform<span className="inline text-indigo-800"> ideas</span>.')
+                      .pauseFor(2500)
+                      .deleteAll(30)
+                      .typeString('Where insights <span className="inline text-indigo-300">fuel</span> innovation.')
+                      .pauseFor(2500)
+                      .deleteAll(30)
+                      .typeString('Where data <span className="inline text-indigo-300">drives</span> discovery.')
+                      .deleteAll(30)
+                      .start();
+                  }}
+                />
+                {/* Where <span className="inline text-indigo-500">curiosity</span> meets <span className="inline text-indigo-800">innovation</span>. */}
+              </div>
             </div>
 
             <div className="flex lg:my-3 space-x-2 w-fit">

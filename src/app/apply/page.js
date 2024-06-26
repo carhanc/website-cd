@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Nav from "../../components/nav";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { BiError } from "react-icons/bi";
@@ -25,12 +25,19 @@ const tabs = [
 ]
 
 const Apply = () => {
-  const searchParams = useSearchParams();
-  let selectedJob = searchParams.get("selectedJob");
-  // let form = searchParams.get("form") ? JSON.parse(decodeURIComponent(searchParams.get("form"))) : {};
+  // const searchParams = useSearchParams();
+  // let selectedJob = searchParams.get("selectedJob");
+  // let form = JSON.parse(searchParams.get("form"));
 
+  
+  const SearchParamsComponent = () => {
+    const searchParams = useSearchParams();
+    let selectedJob = searchParams.get("selectedJob");
+    let form = JSON.parse(searchParams.get("form"));
+    // Here you would return or manage these search parameters as needed for your component
+    return { form, selectedJob };
+  };
 
-  let form = JSON.parse(searchParams.get("form"));
   const router = useRouter()
 
 
@@ -453,6 +460,9 @@ const handleSubmit = async (status) => {
   return (
     <div className=''>
       <Nav />
+      <Suspense fallback={<div>Loading...</div>}> {/* Provide a fallback UI during loading */}
+        <SearchParamsComponent />
+      </Suspense>
       {/* CONDITIONAL RENDERING FOR THE DIFFERENT APPLICATION STATUSES */}
       {!submitted && !finalSubmit && (
         <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">

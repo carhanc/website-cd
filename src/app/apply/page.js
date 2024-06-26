@@ -257,6 +257,7 @@ const Apply = () => {
     }),
   };
 
+  // CUSTOM VALIDATION FUNCTION TO VALIDATE FIELDS
   const validateFields = () => {
     const newErrors = {};
     Object.keys(formData).forEach(key => {
@@ -452,7 +453,7 @@ const handleSubmit = async (status) => {
   return (
     <div className=''>
       <Nav />
-      
+      {/* CONDITIONAL RENDERING FOR THE DIFFERENT APPLICATION STATUSES */}
       {!submitted && !finalSubmit && (
         <main className="lg:flex flex-col text-indigo-900 bg-gradient-to-r from-indigo-300 to-indigo-200 lg:mb-0 lg:px-32 lg:py-20 p-10">
           <div className="flex flex-col lg:text-left">

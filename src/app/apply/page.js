@@ -489,6 +489,11 @@ const handleSubmit = async (status) => {
                   </button>
                 ))}
                 <span className='flex flex-row gap-2 mt-auto mx-auto'>
+
+                  <button onClick={() => {handleSave("save");}} className='flex my-auto items-center text-md rounded-md px-3 border-2 border-indigo-500 py-2 text-indigo-500 hover:text-gray-100 hover:bg-indigo-500 transition ease-linear duration-200 mt-10 group font-medium'>
+                    Save For Later
+                  </button>
+
                   <button onClick={() => { handleSubmit("edit"); scrollUp(); }} className='flex text-md bg-indigo-500 rounded-md pl-4 pr-3 border-2 border-indigo-500 py-2 hover:text-indigo-100 hover:brightness-[1.15] transition ease-linear duration-200 mt-10 group font-medium text-gray-100'>
                     Review
                     <span className="text-md lg:text-2xl group-hover:translate-x-1 transition duration-150 ease-linear hidden lg:block">
@@ -496,9 +501,6 @@ const handleSubmit = async (status) => {
                     </span>
                   </button>
 
-                  <button onClick={() => {handleSave("save");}} className='flex my-auto items-center text-md rounded-md px-4 border-2 border-indigo-500 py-2 text-indigo-500 hover:text-gray-100 hover:bg-indigo-500 transition ease-linear duration-200 mt-10 group font-medium'>
-                    Save for Later
-                  </button>
                 </span>
               </div>
 

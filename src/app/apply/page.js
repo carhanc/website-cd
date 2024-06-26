@@ -27,7 +27,7 @@ const tabs = [
 const Apply = () => {
   const searchParams = useSearchParams();
   let selectedJob = searchParams.get("selectedJob");
-  // let form = searchParams.get("form") ? JSON.parse(decodeURIComponent(searchParams.get("form"))) : {};
+  selectedJob = selectedJob ? selectedJob.split(",") : []; // Ensure selectedJob is an array
 
 
   let form = JSON.parse(searchParams.get("form"));
@@ -38,7 +38,7 @@ const Apply = () => {
 
   const [active, setActive] = useState(1)
 
-  const [job, setJob] = useState('')
+  const [job, setJob] = useState([])
   const [name, setName] = useState('')
   const [dob, setDob] = useState('')
   const [address, setAddress] = useState('')
@@ -146,7 +146,7 @@ const Apply = () => {
 
   const [formData, setFormData] = useState({
     id: form?.id || '',
-    job: form?.job || selectedJob || "",
+    job: form?.job || selectedJob || [],
     name: form?.name || '',
     dob: form?.dob || '',
     address: form?.address || '',

@@ -111,7 +111,7 @@ const SignInPage = () => {
             </button>
             <div className="mt-4 text-center">
               <Link href="/register" className="text-indigo-500 hover:underline">
-                  Don't have an account? Register
+                  Don&apos;t have an account? Register
               </Link>
             </div>
           </div>

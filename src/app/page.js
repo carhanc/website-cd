@@ -60,13 +60,14 @@ const Home = () => {
                   }}
                   onInit={(typewriter) => {
                     typewriter
-                      .typeString('Where <span className="inline text-indigo-300">analytics </span>transform<span className="inline text-indigo-800"> ideas</span>.')
-                      .pauseFor(2500)
-                      .deleteAll(30)
                       .typeString('Where insights <span className="inline text-indigo-300">fuel</span> innovation.')
                       .pauseFor(2500)
                       .deleteAll(30)
+                      .typeString('Where <span className="inline text-indigo-300">statistics </span>shape<span className="inline text-indigo-800"> success</span>.')
+                      .pauseFor(2500)
+                      .deleteAll(30)
                       .typeString('Where data <span className="inline text-indigo-300">drives</span> discovery.')
+                      .pauseFor(2500)
                       .deleteAll(30)
                       .start();
                   }}

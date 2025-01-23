@@ -24,14 +24,18 @@ const tabs = [
   { id: 6, name: 'Other', fields: ['other', 'linkedin', 'resume'] },
 ]
 
+export const dynamic = "force-dynamic";
+
 const Apply = () => {
   const searchParams = useSearchParams();
   let selectedJob = searchParams.get("selectedJob");
   selectedJob = selectedJob ? selectedJob.split(",") : []; // Ensure selectedJob is an array
 
 
-  let form = searchParams.get("form") ? JSON.parse(searchParams.get("form")) : null;
+let form = searchParams.get("form") ? JSON.parse(searchParams.get("form")) : null;
   const router = useRouter()
+
+  
 
 
   // States storing the user's input for each field and the status mode of the form (edit, review, submit)

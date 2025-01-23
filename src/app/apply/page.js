@@ -30,7 +30,7 @@ const Apply = () => {
   selectedJob = selectedJob ? selectedJob.split(",") : []; // Ensure selectedJob is an array
 
 
-  let form = JSON.parse(searchParams.get("form"));
+  let form = searchParams.get("form") ? JSON.parse(searchParams.get("form")) : null;
   const router = useRouter()
 
 

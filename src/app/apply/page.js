@@ -1,4 +1,5 @@
 "use client"
+export const dynamic = "force-dynamic";
 
 import React, { useState, useEffect, Suspense } from 'react';
 import Nav from "../../components/nav";
@@ -23,8 +24,6 @@ const tabs = [
   { id: 5, name: 'Skills / Expertise', fields: ['skills', 'skillsQual'] },
   { id: 6, name: 'Other', fields: ['other', 'linkedin', 'resume'] },
 ]
-
-export const dynamic = "force-dynamic";
 
 const Apply = () => {
   const searchParams = useSearchParams();

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Nav from "../../components/nav";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { BiError } from "react-icons/bi";
@@ -450,6 +450,7 @@ const handleSubmit = async (status) => {
 };
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className=''>
       <Nav />
       
@@ -970,6 +971,7 @@ const handleSubmit = async (status) => {
       </div>}
       <Footer />
     </div>
+    </Suspense>
   );
 }
 

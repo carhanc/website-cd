@@ -68,7 +68,7 @@ const MyApps = () => {
       setSavedApplications(savedApplications.filter(app => app.id !== id));
     } catch (error) {
       console.error("Error deleting application: ", error);
-    }
+    } 
   };
 
   return (

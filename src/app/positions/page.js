@@ -9,6 +9,13 @@ import AuthLogic, { fetchUserData } from '@/firebase/authLogic';
 import { auth } from '@/firebase/auth';
 import { useSearchParams } from 'next/navigation';
 import Select from 'react-select';
+import { Suspense } from 'react'
+ 
+function Search() {
+  const searchParams = useSearchParams()
+ 
+  return <input placeholder="Search..." />
+}
 
 const Page = () => {
   // Get the type of job from the URL query parameters
@@ -118,6 +125,7 @@ const Page = () => {
   };
 
   return (
+    <Suspense>
     <div className=''>
       <div className=' bg-indigo-100/60'>
         <Nav />
@@ -185,6 +193,7 @@ const Page = () => {
       </div>
       <Footer />
     </div>
+    </Suspense>
   )
 }
 
